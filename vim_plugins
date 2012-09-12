@@ -1,0 +1,88 @@
+"プラグインに関する設定
+"管理にはNeoBundle
+"rtpに追加は~/.vimrcでやること
+
+filetype off
+filetype plugin indent off
+
+call neobundle#rc(expand('~/.vim/bundle/'))
+"プラグイン管理
+NeoBundle 'Shougo/neobundle.vim'
+
+"Unite
+NeoBundle 'Shougo/unite.vim'
+NeoBundle 'Shougo/vimfiler'
+NeoBundle 'Shougo/unite-build'
+NeoBundle 'osyo-manga/unite-quickfix'
+
+"補完
+NeoBundle 'Shougo/neocomplcache'
+NeoBundle 'Shougo/neocomplcache-snippets-complete'
+NeoBundle 'mattn/zencoding-vim'
+NeoBundle 'teramako/jscomplete-vim'
+
+"シンタックスとか
+NeoBundle 'othree/html5.vim'
+NeoBundle 'hail2u/vim-css3-syntax'
+
+"編集系
+NeoBundle 'matchit.zip'
+NeoBundle 'tpope/vim-surround'
+
+"便利なの
+NeoBundle 'Shougo/vimshell'
+NeoBundle 'Shougo/vinarise'
+NeoBundle 'thinca/vim-quickrun'
+NeoBundle 'sudo.vim'
+NeoBundle 'thinca/vim-ref'
+NeoBundle 'vimpager'
+NeoBundle 'Shougo/vimproc'
+NeoBundle 'mattn/calendar-vim'
+NeoBundle 'mattn/webapi-vim'
+NeoBundle 'project.tar.gz'
+"要python
+NeoBundle 'sjl/gundo.vim'
+
+"インデント
+NeoBundle 'pangloss/vim-javascript'
+
+"タグ管理
+NeoBundleLazy 'int3/vim-taglist-plus'
+NeoBundle 'majutsushi/tagbar'
+
+"Git系
+NeoBundle 'tpope/vim-fugitive'
+NeoBundle 'mattn/gist-vim'
+
+"ヘルプ
+NeoBundle 'vim-jp/vimdoc-ja'
+
+"変換
+"使いこなせる気がしない
+NeoBundleLazy 'tyru/eskk.vim'
+
+"ジョーク系
+NeoBundle 'matrix.vim'
+NeoBundle 'HJKL'
+NeoBundle 'mattn/hahhah-vim'
+"要python
+NeoBundle 'sudoku_game'
+
+"NeoComplCache
+let g:neocomplcache_enable_at_startup=1
+"スニペット
+imap <C-k> <Plug>(neocomplcache_snippets_expand)
+smap <C-k> <Plug>(neocomplcache_snippets_expand)
+
+imap <expr><Tab> neocomplcache#sources#snippets_complete#expandable() ? "\<Plug>(neocomplcache_snippets_expand)" : pumvisible() ? "\<C-n>" : "\<Tab>"
+smap <expr><Tab> neocomplcache#sources#snippets_complete#expandable() ? "\<Plug>(neocomplcache_snippets_expand)" : pumvisible() ? "\<C-n>" : "\<Tab>"
+"Hahhah.vim
+if(has('vim_starting'))
+ set statusline+=%{g:HahHah()}
+endif
+
+"tagbar
+let g:tagbar_iconchars=['>','v']
+nmap <F2> :TagbarToggle<CR>
+
+" vim: set filetype=vim :
