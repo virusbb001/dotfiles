@@ -1,4 +1,4 @@
-"こっちは共通の設定を使う
+"共通の設定を使う
 set nocompatible
 
 scriptencoding utf-8
@@ -24,7 +24,7 @@ syntax enable
 
 "エンコード関連
 set encoding=utf-8
-set fileencodings=ucs-bom,utf-8,iso-2022-jp,cp932,euc-jp,default
+set fileencodings=ucs-bom,utf-8,iso-2022-jp,sjis,cp932,euc-jp,default
 
 "<Tab>関連
 set tabstop=4
