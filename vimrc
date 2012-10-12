@@ -19,6 +19,7 @@ set statusline=%f[B-No.%n]%r%y\|%{(&fenc!=''?&fenc:&enc).'\|'.&ff.'\|'}%m
 set statusline+=%=
 "右
 set statusline+=%l,%c%V%5P
+
 set ruler
 syntax enable
 
@@ -89,7 +90,7 @@ if &encoding == 'utf-8'
 endif
 "マウスを無効に
 set mouse=
-set nohidden
+set hidden
 "set smarttab
 "set showmatch
 "colorscheme elflord
