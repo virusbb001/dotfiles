@@ -66,10 +66,14 @@ imap <C-b> <Left>
 "insertモードに<C-p><C-n>は補完につかう
 
 "どうしても我慢できなければq:を
-cmap <C-p> <Up>
-cmap <C-n> <Down>
-cmap <C-f> <Right>
-cmap <C-b> <Left>
+"cmap <C-p> <Up>
+"cmap <C-n> <Down>
+"cmap <C-f> <Right>
+"cmap <C-b> <Left>
+cmap <C-k> <Up>
+cmap <C-j> <Down>
+cmap <C-l> <Right>
+cmap <C-h> <Left>
 
 "インデント
 set autoindent
