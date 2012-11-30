@@ -17,7 +17,6 @@ NeoBundle 'osyo-manga/unite-quickfix'
 
 "補完
 NeoBundle 'Shougo/neocomplcache'
-"NeoBundle 'Shougo/neocomplcache-snippets-complete'
 NeoBundle 'Shougo/neosnippet'
 NeoBundle 'mattn/zencoding-vim'
 NeoBundle 'teramako/jscomplete-vim'
