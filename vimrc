@@ -104,4 +104,12 @@ set hidden
 augroup VirusDropboxAuto
  autocmd!
  autocmd FileType perl,cgi compiler perl
+ autocmd BufNewFile,BufReadPost * call s:vimrc_local(expand('<afile>:p:h'))
 augroup END
+
+function! s:vimrc_local(loc)
+ let files = findfile('.vimrc.local',escape(a:loc,' ').';',-1)
+ for i in reverse(filter(files, 'filereadable(v:val)'))
+  source `=i`
+ endfor
+endfunction
