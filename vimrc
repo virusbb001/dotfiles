@@ -25,7 +25,8 @@ syntax enable
 
 "エンコード関連
 set encoding=utf-8
-set fileencodings=ucs-bom,utf-8,iso-2022-jp,sjis,cp932,euc-jp,default
+set fileencoding=utf-8
+set fileencodings=ucs-bom,utf-8,iso-2022-jp,sjis,cp932,euc-jp
 
 "<Tab>関連
 set tabstop=4
@@ -95,6 +96,7 @@ endif
 "マウスを無効に
 set mouse=
 set hidden
+set completeopt-=preview
 "set smarttab
 "set showmatch
 "colorscheme elflord
