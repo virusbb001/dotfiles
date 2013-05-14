@@ -41,7 +41,7 @@ setopt magic_equal_subst
 setopt auto_cd
 
 #キーをvim風に
-#bindkey -v
+bindkey -v
 
 
 autoload history-search-end
@@ -50,4 +50,25 @@ zle -N history-beginning-search-forward-end history-search-end
 bindkey "" history-beginning-search-backward-end
 bindkey "" history-beginning-search-forward-end
 
+#core生成
+ulimit -c unlimited
+
 bindkey -a 'q' push-line
+
+#TERMがLinuxだったらLANGをCに
+case "$TERM" in
+ "linux" ) LANG=C ;;
+ * ) LANG=ja_JP.UTF-8 ;;
+esac
+
+#ls
+if ls --color -d . >/dev/null 2>&1; then
+ GNU_LS=1
+ alias ls='ls --color -F'
+elif ls -G -d . >/dev/null 2>&1; then
+ BSD_LS=1
+ alias ls='ls -G -F'
+else
+ SOLARIS_LS=1
+fi
+
