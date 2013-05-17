@@ -25,8 +25,10 @@ syntax enable
 
 "エンコード関連
 set encoding=utf-8
+"保存
 set fileencoding=utf-8
-set fileencodings=ucs-bom,utf-8,iso-2022-jp,sjis,cp932,euc-jp
+"開く
+set fileencodings=ucs-bom,iso-2022-jp,cp932,euc-jp,default,latin
 
 "<Tab>関連
 set tabstop=4
