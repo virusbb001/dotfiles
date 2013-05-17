@@ -7,7 +7,7 @@ filetype plugin indent off
 
 call neobundle#rc(expand('~/.vim/bundle/'))
 "プラグイン管理
-NeoBundle 'Shougo/neobundle.vim'
+NeoBundleFetch 'Shougo/neobundle.vim', '', 'default'
 
 "Unite
 NeoBundle 'Shougo/unite.vim'
@@ -41,7 +41,15 @@ NeoBundle 'mattn/calendar-vim'
 NeoBundle 'mattn/webapi-vim'
 NeoBundle 'project.tar.gz'
 "要python
-NeoBundle 'sjl/gundo.vim'
+NeoBundleLazy 'sjl/gundo.vim'
+"if ( has('python') )
+  call neobundle#config('sjl/gundo.vim',{
+     \ 'autoload' : {
+     \  'commands' : 'GundoToggle'
+     \ }
+     \})
+"endif
+
 
 "vim-ref
 NeoBundle 'thinca/vim-ref'

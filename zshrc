@@ -1,3 +1,8 @@
+#
+
+# autoload 
+# -z でzsh-styleで関数をload
+# 
 #補完機能強化
 autoload -U compinit
 compinit
@@ -43,7 +48,6 @@ setopt auto_cd
 #キーをvim風に
 bindkey -v
 
-
 autoload history-search-end
 zle -N history-beginning-search-backward-end history-search-end
 zle -N history-beginning-search-forward-end history-search-end
@@ -71,4 +75,7 @@ elif ls -G -d . >/dev/null 2>&1; then
 else
  SOLARIS_LS=1
 fi
+
+# git
+autoload -Uz VCS_INFO_get_data_git;
 
