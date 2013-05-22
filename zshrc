@@ -21,7 +21,8 @@ HISTSIZE=100000
 #保存する履歴
 SAVEHIST=100000
 #待機文字列
-PS1="zsh@${USER}@%M:%~%(!.#.$)> "
+#未定義時のみ代入
+PS1="${USER}@%M:%~%(!.#.$)> "
 #いろいろ便利になる
 setopt prompt_subst
 #TABで候補切り替える
@@ -76,6 +77,5 @@ else
  SOLARIS_LS=1
 fi
 
-# git
-autoload -Uz VCS_INFO_get_data_git;
+export EDITOR=vim
 

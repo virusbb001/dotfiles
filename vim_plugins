@@ -2,9 +2,6 @@
 "管理にはNeoBundle
 "rtpに追加は~/.vimrcでやること
 
-filetype off
-filetype plugin indent off
-
 "プロトコル
  let g:neobundle#types#git#default_protocol="https"
 
@@ -44,14 +41,14 @@ NeoBundle 'mattn/calendar-vim'
 NeoBundle 'mattn/webapi-vim'
 NeoBundle 'project.tar.gz'
 "要python
-NeoBundleLazy 'sjl/gundo.vim'
-"if ( has('python') )
-  call neobundle#config('sjl/gundo.vim',{
-     \ 'autoload' : {
-     \  'commands' : 'GundoToggle'
-     \ }
-     \})
-"endif
+if ( has('python') )
+ NeoBundleLazy 'sjl/gundo.vim'
+ call neobundle#config('gundo.vim',{
+    \ 'autoload' : {
+    \  'commands' : 'GundoToggle'
+    \ }
+    \})
+endif
 
 
 "vim-ref
@@ -78,7 +75,19 @@ NeoBundle 'mattn/hahhah-vim'
 "要python
 NeoBundle 'sudoku_game'
 
-NeoBundleLazy 'h1mesuke/vim-alignta'
+NeoBundleLazy 'h1mesuke/vim-alignta',{
+   \ 'autoload' : {
+   \  'comands' : ['Alignta','Align']
+   \ }
+   \}
+
+" Tags
+NeoBundleLazy 'tsukkee/unite-tag',{
+   \ 'autoload' : {
+   \  'unite_sources' : 'tag'
+   \ }
+   \}
+
 
 NeoBundle 'kana/vim-textobj-user'
 NeoBundle 'h1mesuke/textobj-wiw',{
@@ -106,17 +115,19 @@ NeoBundleLazy 'teramako/jscomplete-vim',{
    \ }
 
 NeoBundleLazy 'pangloss/vim-javascript',{
- \ 'autoload' : {
- \  'filetypes' : 'javascript' ,
- \ }
- \}
+   \ 'autoload' : {
+   \  'filetypes' : 'javascript' ,
+   \ }
+   \}
 
 "CSS 
 NeoBundleLazy 'hail2u/vim-css3-syntax',{
- \ 'autoload' : {
- \  'filetypes' : 'css' ,
- \ },
- \}
+   \ 'autoload' : {
+   \  'filetypes' : 'css' ,
+   \ },
+   \}
+
+filetype plugin indent on
 
 "NeoComplCache
 "let g:neocomplcache_enable_at_startup=1
@@ -135,9 +146,10 @@ endif
 let g:tagbar_iconchars=['>','v']
 nmap <F2> :TagbarToggle<CR>
 
+"VimFiler
+nmap <F3> :VimFiler -toggle -buffer-name=virusVimFiler -split<CR>
+
 "vim-ref
-let g:ref_use_vimproc=1
-let g:ref_refe_version=2
 
 
 " vim: set filetype=vim :
