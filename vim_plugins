@@ -71,7 +71,6 @@ NeoBundleLazy 'tyru/eskk.vim'
 
 NeoBundle 'matrix.vim'
 NeoBundle 'HJKL'
-NeoBundle 'mattn/hahhah-vim'
 "要python
 NeoBundle 'sudoku_game'
 
@@ -130,17 +129,10 @@ NeoBundleLazy 'hail2u/vim-css3-syntax',{
 filetype plugin indent on
 
 "NeoComplCache
-"let g:neocomplcache_enable_at_startup=1
+let g:neocomplcache_enable_at_startup=1
 "スニペット
 "imap <C-k> <Plug>(neocomplcache_snippets_expand)
 "smap <C-k> <Plug>(neocomplcache_snippets_expand)
-
-imap <expr><Tab> neocomplcache#sources#snippets_complete#expandable() ? "\<Plug>(neocomplcache_snippets_expand)" : pumvisible() ? "\<C-n>" : "\<Tab>"
-smap <expr><Tab> neocomplcache#sources#snippets_complete#expandable() ? "\<Plug>(neocomplcache_snippets_expand)" : pumvisible() ? "\<C-n>" : "\<Tab>"
-"Hahhah.vim
-if(has('vim_starting'))
- "set statusline+=%{g:HahHah()}
-endif
 
 "tagbar
 let g:tagbar_iconchars=['>','v']

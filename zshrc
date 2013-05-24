@@ -15,14 +15,17 @@ colors
 zmodload -i zsh/mathfunc
 
 #履歴ファイル
-HISTFILE=$HOME/.zsh_history
+if test -e $HISTFILE ; then 
+ HISTFILE=$HOME/.zsh_history
+fi
 #履歴
 HISTSIZE=100000
 #保存する履歴
 SAVEHIST=100000
+export HISTFILE HISTSIZE SAVEHIST
 #待機文字列
-#未定義時のみ代入
-PS1="${USER}@%M:%~%(!.#.$)> "
+#PS1="${USER}@%M:%~%(!.#.$)> "
+PROMPT='%n@%M:%~%(!.#.$)> '
 #いろいろ便利になる
 setopt prompt_subst
 #TABで候補切り替える
@@ -64,6 +67,7 @@ bindkey -a 'q' push-line
 case "$TERM" in
  "linux" ) LANG=C ;;
 esac
+export LANG
 
 #ls
 if ls --color -d . >/dev/null 2>&1; then

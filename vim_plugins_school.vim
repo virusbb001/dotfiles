@@ -6,6 +6,8 @@ call neobundle#rc(expand('~/.vim/bundle/'))
 
 NeoBundleFetch 'Shougo/neobundle.vim'
 
+NeoBundle 'Shougo/neocomplcache'
+
 NeoBundle 'Shougo/unite.vim'
 NeoBundle 'Shougo/vimproc',{
    \ 'build':{
@@ -25,8 +27,17 @@ NeoBundle 'h1mesuke/textobj-wiw',{
    \ 'depends' : 'kana/vim-textobj-user' ,
    \ }
 
+" Tags
+NeoBundleLazy 'tsukkee/unite-tag',{
+   \ 'autoload' : {
+   \  'unite_sources' : 'tag'
+   \ }
+   \}
+
 "VimFiler
 nmap <F3> :VimFiler -toggle -buffer-name=virusVimFiler -split<CR>
+
+let g:neocomplcache_enable_at_startup=1
 
 filetype on
 filetype plugin indent on
