@@ -1,4 +1,4 @@
 HowToUse
  git clone https://github.com/virusbb001/dotfiles.git dotfiles
- echo "source ~/dotfiles/vimrc" >> ~/.vimrc
- echo "source ~/dotfiles/zshrc" >> ~/.zshrc
+ echo "source /path/to/dotfiles/zshrc" >> ~/.zshrc
+ cp /path/to/dotfiles/dot_vimrc ~/.vimrc
