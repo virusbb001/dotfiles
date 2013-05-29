@@ -14,6 +14,7 @@ NeoBundle 'Shougo/unite.vim'
 NeoBundle 'Shougo/vimfiler'
 NeoBundle 'Shougo/unite-build'
 NeoBundle 'osyo-manga/unite-quickfix'
+NeoBundle 'h1mesuke/unite-outline'
 
 "補完
 NeoBundle 'Shougo/neocomplcache'
