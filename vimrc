@@ -24,6 +24,7 @@ set ruler
 syntax enable
 
 "エンコード関連
+let &termencoding = &encoding
 set encoding=utf-8
 "保存
 set fileencoding=utf-8
@@ -98,6 +99,10 @@ set completeopt-=preview
 "set showmatch
 "colorscheme elflord
 "autocmd FileType make setlocal noexpandtab
+"
+if has('vim_starting')
+ let &runtimepath.=',' . expand('$VIMRUNTIME')
+endif
 
 "自動コマンド
 augroup VirusDropboxAuto
@@ -106,6 +111,8 @@ augroup VirusDropboxAuto
  autocmd BufNewFile,BufReadPost * call s:vimrc_local(expand('<afile>:p:h'))
 augroup END
 
+"file name:.vimrc.local
+"
 function! s:vimrc_local(loc)
  let files = findfile('.vimrc.local',escape(a:loc,' ').';',-1)
  for i in reverse(filter(files, 'filereadable(v:val)'))

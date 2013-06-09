@@ -19,6 +19,7 @@ NeoBundle 'h1mesuke/unite-outline'
 "補完
 NeoBundle 'Shougo/neocomplcache'
 NeoBundle 'Shougo/neosnippet'
+NeoBundle 'honza/vim-snippets'
 
 "編集系
 NeoBundle 'matchit.zip'
@@ -72,6 +73,7 @@ NeoBundleLazy 'tyru/eskk.vim'
 
 NeoBundle 'matrix.vim'
 NeoBundle 'HJKL'
+NeoBundle 'deris/vim-duzzle'
 "要python
 NeoBundle 'sudoku_game'
 
@@ -131,9 +133,19 @@ filetype plugin indent on
 
 "NeoComplCache
 let g:neocomplcache_enable_at_startup=1
+let g:neocomplcache_force_overwrite_completefunc=1
+
 "スニペット
-"imap <C-k> <Plug>(neocomplcache_snippets_expand)
-"smap <C-k> <Plug>(neocomplcache_snippets_expand)
+let g:neosnippet#enable_snipmate_compatibility=1
+let g:neosnippet#snippets_directory='~/.vim/bundle/vim-snippets/snippets'
+
+imap <expr><TAB> neosnippet#expandable_or_jumpable() ? 
+   \ "\<Plug>(neosnippet_expand_or_jump)"
+   \: pumvisible() ? "\<C-n>" : "\<TAB>"
+
+smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
+   \ "\<Plug>(neosnippet_expand_or_jump)"
+   \: "\<TAB>"
 
 "tagbar
 let g:tagbar_iconchars=['>','v']
