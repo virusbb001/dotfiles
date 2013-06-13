@@ -68,12 +68,6 @@ imap <C-f> <Right>
 imap <C-b> <Left>
 "insertモードに<C-p><C-n>は補完につかう
 
-"どうしても我慢できなければq:を
-cmap <C-k> <Up>
-cmap <C-j> <Down>
-cmap <C-l> <Right>
-cmap <C-h> <Left>
-
 "インデント
 set autoindent
 "set smartindent
