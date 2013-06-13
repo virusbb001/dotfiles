@@ -20,6 +20,8 @@ NeoBundle 'Shougo/vimproc',{
 
 NeoBundle 'Shougo/vimfiler'
 
+NeoBundle 'Shougo/vimshell'
+
 NeoBundle 'vim-jp/vimdoc-ja'
 
 NeoBundle 'kana/vim-textobj-user'
@@ -31,6 +33,12 @@ NeoBundle 'h1mesuke/textobj-wiw',{
 NeoBundleLazy 'tsukkee/unite-tag',{
    \ 'autoload' : {
    \  'unite_sources' : 'tag'
+   \ }
+   \}
+
+NeoBundleLazy 'h1mesuke/vim-alignta',{
+   \ 'autoload' : {
+   \  'commands' : ['Alignta','Align']
    \ }
    \}
 

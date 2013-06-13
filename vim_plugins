@@ -71,6 +71,8 @@ NeoBundle 'vim-jp/vimdoc-ja'
 "使いこなせる気がしない
 NeoBundleLazy 'tyru/eskk.vim'
 
+" NeoBundle 'suan/vim-instant-markdown'
+
 NeoBundle 'matrix.vim'
 NeoBundle 'HJKL'
 NeoBundle 'deris/vim-duzzle'
@@ -79,7 +81,7 @@ NeoBundle 'sudoku_game'
 
 NeoBundleLazy 'h1mesuke/vim-alignta',{
    \ 'autoload' : {
-   \  'comands' : ['Alignta','Align']
+   \  'commands' : ['Alignta','Align']
    \ }
    \}
 
