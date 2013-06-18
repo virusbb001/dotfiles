@@ -1,5 +1,3 @@
-#
-
 # autoload 
 # -z でzsh-styleで関数をload
 # 
@@ -15,14 +13,16 @@ colors
 zmodload -i zsh/mathfunc
 
 #履歴ファイル
-if test -e $HISTFILE ; then 
+if [ -z "$HISTFILE" ]; then
  HISTFILE=$HOME/.zsh_history
 fi
 #履歴
 HISTSIZE=100000
 #保存する履歴
 SAVEHIST=100000
+
 export HISTFILE HISTSIZE SAVEHIST
+
 #待機文字列
 #PS1="${USER}@%M:%~%(!.#.$)> "
 PROMPT='%n@%M:%~%(!.#.$)> '
@@ -66,13 +66,18 @@ bindkey -a 'q' push-line
 #TERMがLinuxだったらLANGをCに
 case "$TERM" in
  "linux" ) LANG=C ;;
+ * ) 
+  if [ -z "$LANG" ]; then
+   LANG="ja_JP.UTF-8"
+  fi ;;
 esac
 export LANG
 
 #ls
+unalias ls >/dev/null 2>&1
 if ls --color -d . >/dev/null 2>&1; then
  GNU_LS=1
- alias ls='ls --color -F'
+ alias ls='ls --color=auto -vCF'
 elif ls -G -d . >/dev/null 2>&1; then
  BSD_LS=1
  alias ls='ls -G -F'
