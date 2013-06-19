@@ -5,3 +5,7 @@ path=(
  $HOME/local/bin(N-/)
  $path
  )
+
+if [ -z "$LANG" ] ; then
+ LANG="ja_JP.UTF-8"
+fi
