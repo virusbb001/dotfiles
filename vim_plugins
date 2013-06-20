@@ -26,7 +26,11 @@ NeoBundle 'matchit.zip'
 NeoBundle 'tpope/vim-surround'
 
 NeoBundle 'Shougo/vimshell'
-NeoBundleLazy 'Shougo/vinarise'
+NeoBundleLazy 'Shougo/vinarise',{
+   \ 'autoload' : {
+   \  'commands' : 'Vinarise',
+   \ }
+   \}
 NeoBundle 'thinca/vim-quickrun'
 NeoBundle 'sudo.vim'
 NeoBundle 'vimpager'

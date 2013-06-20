@@ -1,13 +1,23 @@
 # autoload 
 # -z でzsh-styleで関数をload
-# 
+# -U エイリアス展開をしない
 #補完機能強化
 autoload -U compinit
-compinit
+#警告なしにすべての発見したファイルを使用
+compinit -u
 
 #色設定
 autoload -U colors
 colors
+
+# run-help
+unalias run-help >/dev/null 2>&1
+autoload -Uz run-help
+
+#vcs_info
+autoload -Uz vcs_info
+zstyle ':vcs_info:*' enable git
+zstyle ':vcs_info:git:*' check-for-changes true
 
 #数値処理関数
 zmodload -i zsh/mathfunc
@@ -25,9 +35,38 @@ export HISTFILE HISTSIZE SAVEHIST
 
 #待機文字列
 #PS1="${USER}@%M:%~%(!.#.$)> "
-PROMPT='%n@%M:%~%(!.#.$)> '
-#いろいろ便利になる
+#%(!.#.$):
+# %(x.x_is_true.x_is_false)
+# !は特権かどうか
+# $' 'はprintの引数のように処理する
+local p_rhost="%M"
+local zle_vi_mode="|   |"
+if [[ -n "${REMOTEHOST}${SSH_CONNECTION}" ]]; then
+ p_rhost="%F{yellow}%M%f"
+else
+ p_rhost="%F{green}%M%f"
+fi
+PROMPT=$'[%~]\n%n@${p_rhost}${zle_vi_mode}%(!.#.$) > '
+# viキーバインドの時モードをPROMPTに出力
+# zle-line-initとzle-keymap-selectは特別な名前(zshzle)
+function zle-line-init zle-keymap-select {
+ case $KEYMAP in
+  vicmd)
+   zle_vi_mode="|NOR|"
+   ;;
+  #bindkey -v時はmainとviinsは同じ
+  main|viins)
+   zle_vi_mode="|INS|" ;;
+ esac
+ zle reset-prompt
+}
+
+zle -N zle-line-init
+zle -N zle-keymap-select
+
+#PROMPT拡張
 setopt prompt_subst
+
 #TABで候補切り替える
 setopt auto_menu
 #補完候補のカーソル選択を有効に
@@ -61,7 +100,7 @@ bindkey "" history-beginning-search-forward-end
 #core生成
 ulimit -c unlimited
 
-bindkey -a 'q' push-line
+# bindkey -a 'q' push-line
 
 #TERMがLinuxだったらLANGをCに
 case "$TERM" in
@@ -85,5 +124,4 @@ else
  SOLARIS_LS=1
 fi
 
-export EDITOR=vim
 
