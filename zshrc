@@ -57,6 +57,9 @@ function zle-line-init zle-keymap-select {
   #bindkey -v時はmainとviinsは同じ
   main|viins)
    zle_vi_mode="|INS|" ;;
+  command)
+   zle_vi_mode="|CMD|" ;;
+
  esac
  zle reset-prompt
 }
@@ -88,6 +91,9 @@ setopt magic_equal_subst
 #自動でcd
 setopt auto_cd
 
+
+### キー設定 ###
+
 #キーをvim風に
 bindkey -v
 
@@ -100,7 +106,11 @@ bindkey "" history-beginning-search-forward-end
 #core生成
 ulimit -c unlimited
 
-# bindkey -a 'q' push-line
+# vicmd時(-a)にqでpush-line
+#qは本来マクロ
+bindkey -a 'q' push-line
+
+bindkey -a 'K' run-help
 
 #TERMがLinuxだったらLANGをCに
 case "$TERM" in
