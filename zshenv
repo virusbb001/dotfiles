@@ -11,6 +11,10 @@ fpath=(
  $fpath
 )
 
+manpath=(
+ $manpath
+)
+
 if [ -z "$LANG" ] ; then
  LANG="ja_JP.UTF-8"
 fi
