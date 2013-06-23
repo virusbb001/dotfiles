@@ -76,22 +76,28 @@ function zle-line-init zle-keymap-select {
  esac
  zle reset-prompt
 }
-
 zle -N zle-line-init
 zle -N zle-keymap-select
 
+#PROMPT拡張
+setopt prompt_subst
+#PROMPT内で%文字から始まる置換機能を有効に
+setopt prompt_percent
+
+# 右プロンプトに関する設定
 #右のプロンプトにvscの情報を表示
 function _update_vcs_info_msg(){
  psvar=()
  vcs_info
  [[ -n "$vcs_info_msg_0_" ]] && psvar[1]="$vcs_info_msg_0_"
 }
-
 add-zsh-hook precmd _update_vcs_info_msg
 # %Nvでpsvar[N]を出力
 # %N(x.t.f)の.はtの文字列に含まれなければなんでも良い(%でエスケープできる)
 # Nは括弧の直前でも直後でも良い
 RPROMPT="%1(v|%1v|)"
+#実行後は右プロンプト消去
+setopt transient_rprompt
 
 #タイトル設定
 case "${TERM}" in
@@ -108,8 +114,6 @@ case "${TERM}" in
   ;;
 esac
 
-#PROMPT拡張
-setopt prompt_subst
 #TABで候補切り替える
 setopt auto_menu
 #cd時に自動でpush
@@ -124,9 +128,18 @@ setopt list_packed
 setopt magic_equal_subst
 #自動でcd
 setopt auto_cd
+#間違えていると思われても訂正しない
+setopt nocorrect
+#曖昧な補完でもビープ音を鳴らさない
+setopt nolist_beep
+#EOF(^D)を入力されてもログアウトしない
+setopt ignore_eof
 
 #補完候補をメニューから選択
-zstyle ':completion:*:default' menu select=1
+zstyle ':completion:*:default' menu select
+
+# rm以外は*.o,*.classを補完候補に出さない
+zstyle ':completion:*:*:(^rm):*:*files' ignored-patterns '*?.o' '*?.class'
 
 ### キー設定 ###
 
@@ -152,10 +165,18 @@ bindkey -a 'K' run-help
 case "$TERM" in
  "linux" ) LANG=C ;;
  * ) 
-  if [ -z "$LANG" ]; then
-   LANG="ja_JP.UTF-8"
-  fi ;;
+  ;;
 esac
+#ttyがconsoleかttyv[0-9]だったらCに
+case `tty` in
+ /dev/console|/dev/ttyv[0-9])
+  LANG=C
+ ;;
+ * )
+ ;;
+esac
+
+
 export LANG
 
 #ls
