@@ -57,7 +57,7 @@ if [[ -n "${REMOTEHOST}${SSH_CONNECTION}" ]]; then
 else
  p_rhost="%F{green}%M%f"
 fi
-PROMPT=$'[%~]\n%n@${p_rhost}${zle_vi_mode}%(!.#.$) > '
+PROMPT=$'[%~]\n%(!|%F{red}|)%n%(!|%f|)@${p_rhost}${zle_vi_mode}%(!.#.$) > '
 # viキーバインドの時モードをPROMPTに出力
 # zle-line-initとzle-keymap-selectは特別な名前(zshzle)
 function zle-line-init zle-keymap-select {
