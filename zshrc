@@ -87,7 +87,9 @@ setopt prompt_percent
 # 右プロンプトに関する設定
 #右のプロンプトにvscの情報を表示
 function _update_vcs_info_msg(){
+ #psvar初期化
  psvar=()
+ #$vcs_info_msg_N_に情報代入
  vcs_info
  [[ -n "$vcs_info_msg_0_" ]] && psvar[1]="$vcs_info_msg_0_"
 }
@@ -134,6 +136,10 @@ setopt nocorrect
 setopt nolist_beep
 #EOF(^D)を入力されてもログアウトしない
 setopt ignore_eof
+#シェルエディタにおけるフロー制御を無効に
+setopt no_flow_control
+# 対話環境でも#以降をコメントに
+setopt interactive_comments
 
 #補完候補をメニューから選択
 zstyle ':completion:*:default' menu select
@@ -142,7 +148,6 @@ zstyle ':completion:*:default' menu select
 zstyle ':completion:*:*:(^rm):*:*files' ignored-patterns '*?.o' '*?.class'
 
 ### キー設定 ###
-
 #キーをvim風に
 bindkey -v
 
@@ -158,7 +163,7 @@ ulimit -c unlimited
 # vicmd時(-a)にqでpush-line
 #qは本来マクロ
 bindkey -a 'q' push-line
-
+# run-help
 bindkey -a 'K' run-help
 
 #TERMがLinuxだったらLANGをCに

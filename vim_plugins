@@ -75,7 +75,7 @@ NeoBundle 'vim-jp/vimdoc-ja'
 "使いこなせる気がしない
 NeoBundleLazy 'tyru/eskk.vim'
 
-" NeoBundle 'suan/vim-instant-markdown'
+NeoBundleLazy 'suan/vim-instant-markdown'
 
 NeoBundle 'matrix.vim'
 NeoBundle 'HJKL'
