@@ -7,7 +7,7 @@ path=(
  )
 
 fpath=(
- $HOME/dotfiles/zsh-completions(N-/)
+ $HOME/dotfiles/zsh-completions/src(N-/)
  /usr/local/share/zsh/site-functions(N-/)
  $fpath
 )
