@@ -140,6 +140,8 @@ setopt ignore_eof
 setopt no_flow_control
 # 対話環境でも#以降をコメントに
 setopt interactive_comments
+#終了時にジョブ確認
+setopt checkjobs
 
 #補完候補をメニューから選択
 zstyle ':completion:*:default' menu select
