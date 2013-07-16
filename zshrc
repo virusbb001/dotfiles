@@ -144,10 +144,12 @@ setopt interactive_comments
 setopt checkjobs
 
 #補完候補をメニューから選択
+#  :completion:function:completer:command:argument:tag
+#  らしい (zshcompsysのCONFIGRATIONで検索すれば多分出てくる)
 zstyle ':completion:*:default' menu select
 
-# rm以外は*.o,*.classを補完候補に出さない
-zstyle ':completion:*:*:(^rm):*:*files' ignored-patterns '*?.o' '*?.class'
+# rm以外は*.oを補完候補に出さない
+zstyle ':completion:*:*:^(rm):*:*files' ignored-patterns '*.o'
 
 ### キー設定 ###
 #キーをvim風に

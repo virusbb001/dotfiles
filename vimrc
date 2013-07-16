@@ -27,7 +27,9 @@ syntax enable
 let &termencoding = &encoding
 set encoding=utf-8
 "保存
-set fileencoding=utf-8
+if ( &modifiable )
+ set fileencoding=utf-8
+endif
 "開く
 set fileencodings=ucs-bom,utf-8,iso-2022-jp,cp932,euc-jp,default,latin
 
