@@ -142,6 +142,8 @@ setopt no_flow_control
 setopt interactive_comments
 #終了時にジョブ確認
 setopt checkjobs
+#数値でのソート順を1,10,2,20から1,2,10,20へ(数字通りに表示)
+setopt numeric_glob_sort
 
 #補完候補をメニューから選択
 #  :completion:function:completer:command:argument:tag
@@ -184,8 +186,6 @@ case `tty` in
  * )
  ;;
 esac
-
-
 export LANG
 
 #ls
@@ -199,5 +199,3 @@ elif ls -G -d . >/dev/null 2>&1; then
 else
  SOLARIS_LS=1
 fi
-
-

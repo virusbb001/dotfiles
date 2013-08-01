@@ -111,9 +111,19 @@ NeoBundleLazy 'othree/html5.vim',{
 
 NeoBundleLazy 'mattn/zencoding-vim',{
    \  'autoload' : {
-   \   'filetypes' : 'html' ,
+   \   'filetypes' : [ 'html','xml' ,'svg' , 'css'],
    \  }
    \ }
+let g:user_zen_settings={
+   \ 'indentation' : ' ',
+   \ 'php' : {
+   \  'extends' : 'html',
+   \  'filters' : 'c',
+   \ },
+   \ 'xml' : {
+   \  'extends' : 'html',
+   \ },
+   \}
 
 "Javascript
 NeoBundleLazy 'teramako/jscomplete-vim',{
@@ -132,9 +142,15 @@ NeoBundleLazy 'pangloss/vim-javascript',{
 NeoBundleLazy 'hail2u/vim-css3-syntax',{
    \ 'autoload' : {
    \  'filetypes' : 'css' ,
-   \ },
+   \ }
    \}
 
+"svg
+NeoBundleLazy 'svg.vim',{
+   \ 'autoload' : {
+   \  'filetypes' : 'svg' ,
+   \ }
+   \}
 filetype plugin indent on
 
 "NeoComplCache
