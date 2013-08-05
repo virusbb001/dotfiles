@@ -172,22 +172,6 @@ bindkey -a 'q' push-line
 # run-help
 bindkey -a 'K' run-help
 
-#TERMがLinuxだったらLANGをCに
-case "$TERM" in
- "linux" ) LANG=C ;;
- * ) 
-  ;;
-esac
-#ttyがconsoleかttyv[0-9]だったらCに
-case `tty` in
- /dev/console|/dev/ttyv[0-9])
-  LANG=C
- ;;
- * )
- ;;
-esac
-export LANG
-
 #ls
 unalias ls >/dev/null 2>&1
 if ls --color -d . >/dev/null 2>&1; then

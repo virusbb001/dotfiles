@@ -1,3 +1,7 @@
+# このファイル読み込み前に設定しておくべきこと
+# LANGの変数
+#
+#
 typeset -U path fpath manpath
 path=(
  $HOME/bin(N-/)
@@ -18,8 +22,26 @@ manpath=(
  $manpath
 )
 
+# LANGが特に指定されてなければ
 if [ -z "$LANG" ] ; then
  LANG="ja_JP.UTF-8"
 fi
+
+#TERMがLinuxだったらLANGをCに
+case "$TERM" in
+ "linux" ) LANG=C ;;
+ * ) 
+  ;;
+esac
+#ttyがconsoleかttyv[0-9]だったらCに
+case `tty` in
+ /dev/console|/dev/ttyv[0-9])
+  LANG=C
+ ;;
+ * )
+ ;;
+esac
+
+export LANG
 
 export EDITOR=vim
