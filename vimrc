@@ -105,6 +105,9 @@ augroup VirusDropboxAuto
  autocmd!
  autocmd FileType perl,cgi compiler perl
  autocmd BufNewFile,BufReadPost * call s:vimrc_local(expand('<afile>:p:h'))
+ autocmd FileType html compiler tidy
+ " gnu-emacs yesでエラーメッセージをそれっぽく
+ autocmd FileType html setlocal makeprg=tidy\ -quiet\ -errors\ -raw\ --gnu-emacs\ yes\ \"%\"
 augroup END
 
 "file name:.vimrc.local
