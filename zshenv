@@ -45,3 +45,5 @@ esac
 export LANG
 
 export EDITOR=vim
+
+export GOOGLE_CHROME_OPTION="--allow-file-access-from-files"
