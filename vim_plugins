@@ -77,6 +77,8 @@ NeoBundleLazy 'tyru/eskk.vim'
 
 NeoBundleLazy 'suan/vim-instant-markdown'
 
+NeoBundle 'terryma/vim-multiple-cursors'
+
 NeoBundle 'matrix.vim'
 NeoBundle 'HJKL'
 NeoBundle 'deris/vim-duzzle'
@@ -105,20 +107,22 @@ NeoBundle 'h1mesuke/textobj-wiw',{
 "HTML
 NeoBundleLazy 'othree/html5.vim',{
    \  'autoload' : {
-   \   'filetypes' : 'html' ,
+   \   'filetypes' : ['html', 'php'] ,
    \  } ,
    \ }
 
-NeoBundleLazy 'mattn/zencoding-vim',{
+NeoBundleLazy 'mattn/emmet-vim',{
    \  'autoload' : {
-   \   'filetypes' : [ 'html','xml' ,'svg' , 'css'],
-   \  }
+   \   'filetypes' : ['html', 'xml' , 'svg' , 'css', 'php'],
+   \   'mappings' : ['<C-y>'],
+   \  },
    \ }
-let g:user_zen_settings={
+let g:user_emmet_settings={
+   \ 'lang' : 'ja',
    \ 'indentation' : ' ',
    \ 'php' : {
    \  'extends' : 'html',
-   \  'filters' : 'c',
+   \  'filters' : 'html,c',
    \ },
    \ 'xml' : {
    \  'extends' : 'html',
@@ -132,7 +136,13 @@ NeoBundleLazy 'teramako/jscomplete-vim',{
    \  }
    \ }
 
-NeoBundleLazy 'pangloss/vim-javascript',{
+"NeoBundleLazy 'pangloss/vim-javascript',{
+"   \ 'autoload' : {
+"   \  'filetypes' : 'javascript' ,
+"   \ }
+"   \}
+""Javascript indent
+NeoBundleLazy 'jiangmiao/simple-javascript-indenter',{
    \ 'autoload' : {
    \  'filetypes' : 'javascript' ,
    \ }
