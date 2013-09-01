@@ -4,22 +4,22 @@
 #
 typeset -U path fpath manpath
 path=(
- $HOME/bin(N-/)
- #個人的にソースから入れたものは$HOME/localに
- $HOME/local/bin(N-/)
- # phpenv(デフォルト)
- $HOME/.phpenv/bin(N-/)
- $path
- )
+$HOME/bin(N-/)
+#個人的にソースから入れたものは$HOME/localに
+$HOME/local/bin(N-/)
+# phpenv(デフォルト)
+$HOME/.phpenv/bin(N-/)
+$path
+)
 
 fpath=(
- $HOME/dotfiles/zsh-completions/src(N-/)
- /usr/local/share/zsh/site-functions(N-/)
- $fpath
+$HOME/dotfiles/zsh-completions/src(N-/)
+/usr/local/share/zsh/site-functions(N-/)
+$fpath
 )
 
 manpath=(
- $manpath
+$manpath
 )
 
 # LANGが特に指定されてなければ
@@ -30,20 +30,29 @@ fi
 #TERMがLinuxだったらLANGをCに
 case "$TERM" in
  "linux" ) LANG=C ;;
- * ) 
-  ;;
+* ) 
+ ;;
 esac
 #ttyがconsoleかttyv[0-9]だったらCに
 case `tty` in
  /dev/console|/dev/ttyv[0-9])
   LANG=C
- ;;
+  ;;
  * )
- ;;
+  ;;
 esac
 
 export LANG
 
 export EDITOR=vim
 
-export GOOGLE_CHROME_OPTION="--allow-file-access-from-files"
+# chrome のオプション
+typeset -xU google_chrome_option
+google_chrome_option=(
+# ローカルファイルへのアクセスを許可
+"--allow-file-access-from-files"
+# Same origin policyを無効に
+"--disable-web-security"
+)
+
+# export GOOGLE_CHROME_OPTION="--allow-file-access-from-files"
