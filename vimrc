@@ -41,6 +41,7 @@ set expandtab
 "折りたたみ関連
 set foldcolumn=4
 set foldmethod=indent
+set foldlevel=10000
 
 "UNDO関連
 set undolevels=1000

@@ -75,7 +75,10 @@ NeoBundle 'vim-jp/vimdoc-ja'
 "使いこなせる気がしない
 NeoBundleLazy 'tyru/eskk.vim'
 
-NeoBundleLazy 'suan/vim-instant-markdown'
+NeoBundle 'suan/vim-instant-markdown'
+" 更新する時間を減らす
+let g:instant_markdown_slow=1
+
 
 NeoBundle 'terryma/vim-multiple-cursors'
 
