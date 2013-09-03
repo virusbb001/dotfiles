@@ -3,9 +3,32 @@
 "rtpに追加は~/.vimrcでやること
 
 "プロトコル
- let g:neobundle#types#git#default_protocol="https"
+let g:neobundle#types#git#default_protocol="https"
 
-call neobundle#rc(expand('~/.vim/bundle/'))
+" neobundleインストール先
+let s:neobundle_dir=expand('~/.vim/bundle')
+
+"Load neobundle
+" Shougo/shougo-s-github/vim/.vimrc
+
+if !isdirectory(s:neobundle_dir)
+ if !exists("*mkdir")
+  echohl WarningMsg
+  echomsg 'mkdirできません'
+  echomsg '作成して:'.s:neobundle_dir
+  echohl None
+  finish
+ endif
+ mkdir(s:neobundle_dir,"p")
+endif
+
+if !isdirectory(s:neobundle_dir.'/neobundle.vim')
+ execute '!git clone https://github.com/Shougo/neobundle.vim.git' s:neobundle_dir.'/neobundle.vim'
+endif
+execute 'set runtimepath^=' . s:neobundle_dir.'/neobundle.vim'
+
+
+call neobundle#rc(s:neobundle_dir)
 "プラグイン管理
 NeoBundleFetch 'Shougo/neobundle.vim', '', 'default'
 
