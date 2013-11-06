@@ -52,7 +52,8 @@ if has('persistent_undo')
 endif
 
 "検索
-set noignorecase
+set ignorecase
+set smartcase
 set incsearch
 set wrapscan
 
@@ -108,7 +109,7 @@ augroup VirusDropboxAuto
  autocmd BufNewFile,BufReadPost * call s:vimrc_local(expand('<afile>:p:h'))
  autocmd FileType html compiler tidy
  " gnu-emacs yesでエラーメッセージをそれっぽく
- autocmd FileType html setlocal makeprg=tidy\ -quiet\ -errors\ -raw\ --gnu-emacs\ yes\ \"%\"
+ autocmd FileType html setlocal makeprg=tidy\ -quiet\ -errors\ -raw\ -xml\ --gnu-emacs\ yes\ \"%\"
 augroup END
 
 "file name:.vimrc.local
