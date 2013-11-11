@@ -98,7 +98,7 @@ NeoBundle 'vim-jp/vimdoc-ja'
 "使いこなせる気がしない
 NeoBundleLazy 'tyru/eskk.vim'
 
-NeoBundle 'suan/vim-instant-markdown'
+NeoBundleLazy 'suan/vim-instant-markdown'
 " 更新する時間を減らす
 let g:instant_markdown_slow=1
 
@@ -110,6 +110,9 @@ NeoBundle 'HJKL'
 NeoBundle 'deris/vim-duzzle'
 "要python
 NeoBundle 'sudoku_game'
+
+"vim scouter
+NeoBundle 'thinca/vim-scouter'
 
 NeoBundleLazy 'h1mesuke/vim-alignta',{
    \ 'autoload' : {
@@ -124,8 +127,6 @@ NeoBundleLazy 'tsukkee/unite-tag',{
    \ }
    \}
 
-
-NeoBundle 'kana/vim-textobj-user'
 NeoBundle 'h1mesuke/textobj-wiw',{
    \ 'depends' : 'kana/vim-textobj-user' ,
    \ }
@@ -143,6 +144,8 @@ NeoBundleLazy 'mattn/emmet-vim',{
    \   'mappings' : ['<C-y>'],
    \  },
    \ }
+" 閉じタグを省略しない typeを省略しない
+let g:emmet_html5=0
 let g:user_emmet_settings={
    \ 'lang' : 'ja',
    \ 'indentation' : ' ',
@@ -156,11 +159,12 @@ let g:user_emmet_settings={
    \}
 
 "Javascript
-NeoBundleLazy 'teramako/jscomplete-vim',{
-   \ 'autoload' : {
-   \   'filetypes' : 'javascript' ,
-   \  }
-   \ }
+"Deleted
+"NeoBundleLazy 'teramako/jscomplete-vim',{
+"   \ 'autoload' : {
+"   \   'filetypes' : 'javascript' ,
+"   \  }
+"   \ }
 
 "NeoBundleLazy 'pangloss/vim-javascript',{
 "   \ 'autoload' : {
@@ -210,7 +214,7 @@ let g:tagbar_iconchars=['>','v']
 nmap <F2> :TagbarToggle<CR>
 
 "VimFiler
-nmap <F3> :VimFiler -toggle -buffer-name=virusVimFiler -split<CR>
+nmap <F3> :VimFiler -explorer -toggle -buffer-name=explorer -split -no-quit<CR>
 
 "vim-ref
 
