@@ -10,6 +10,7 @@ $HOME/local/bin(N-/)
 # phpenv(デフォルト)
 $HOME/.phpenv/bin(N-/)
 $path
+$ECLIPSE_HOME(N-/)
 )
 
 fpath=(
@@ -33,6 +34,7 @@ case "$TERM" in
 * ) 
  ;;
 esac
+
 #ttyがconsoleかttyv[0-9]だったらCに
 case `tty` in
  /dev/console|/dev/ttyv[0-9])
@@ -52,7 +54,5 @@ google_chrome_option=(
 # ローカルファイルへのアクセスを許可
 "--allow-file-access-from-files"
 # Same origin policyを無効に
-"--disable-web-security"
+# "--disable-web-security"
 )
-
-# export GOOGLE_CHROME_OPTION="--allow-file-access-from-files"
