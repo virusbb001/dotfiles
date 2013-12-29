@@ -140,7 +140,7 @@ NeoBundleLazy 'othree/html5.vim',{
 
 NeoBundleLazy 'mattn/emmet-vim',{
    \  'autoload' : {
-   \   'filetypes' : ['html', 'xml' , 'svg' , 'css', 'php'],
+   \   'filetypes' : ['html', 'xml' , 'svg' , 'css', 'php', 'scss'],
    \   'mappings' : ['<C-y>'],
    \  },
    \ }
@@ -159,13 +159,6 @@ let g:user_emmet_settings={
    \}
 
 "Javascript
-"Deleted
-"NeoBundleLazy 'teramako/jscomplete-vim',{
-"   \ 'autoload' : {
-"   \   'filetypes' : 'javascript' ,
-"   \  }
-"   \ }
-
 "NeoBundleLazy 'pangloss/vim-javascript',{
 "   \ 'autoload' : {
 "   \  'filetypes' : 'javascript' ,
@@ -185,12 +178,25 @@ NeoBundleLazy 'hail2u/vim-css3-syntax',{
    \ }
    \}
 
+" scss
+NeoBundleLazy 'cakebaker/scss-syntax.vim',{
+   \ 'autoload' : {
+   \  'filetypes' : 'scss' ,
+   \ }
+   \}
 "svg
 NeoBundleLazy 'svg.vim',{
    \ 'autoload' : {
    \  'filetypes' : 'svg' ,
    \ }
    \}
+
+" template
+NeoBundle 'mattn/sonictemplate-vim'
+
+"構文エラーチェック
+NeoBundle 'scrooloose/syntastic'
+
 filetype plugin indent on
 
 "NeoComplCache
