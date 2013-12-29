@@ -66,12 +66,6 @@ set notimeout
 set ttimeout
 set timeoutlen=100
 map Q gQ
-"左右のみ
-"上下はノーマルモードにもどれ
-imap <C-f> <Right>
-imap <C-b> <Left>
-"insertモードに<C-p><C-n>は補完につかう
-
 "インデント
 set autoindent
 "set smartindent
@@ -101,6 +95,17 @@ set completeopt-=preview
 if has('vim_starting')
  let &runtimepath.=',' . expand('$VIMRUNTIME')
 endif
+
+"キー設定
+" 括弧補完
+imap ( ()<Esc>i
+imap { {}<Esc>i
+" 挿入モードで左右移動禁止
+inoremap <Left> <Nop>
+inoremap <Right> <Nop>
+inoremap <Up> <Nop>
+inoremap <Down> <Nop>
+
 
 "自動コマンド
 augroup VirusDropboxAuto
