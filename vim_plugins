@@ -40,8 +40,14 @@ NeoBundle 'osyo-manga/unite-quickfix'
 NeoBundle 'h1mesuke/unite-outline'
 
 "補完
-NeoBundle 'Shougo/neocomplcache'
+"7.3.885以上かつLuaが有効ならNeocompleteを使う
+if ( v:version>703 || (v:version == 703 && has('patch885')) ) && has('lua')
+ NeoBundle 'Shougo/neocomplete'
+else
+ NeoBundle 'Shougo/neocomplcache'
+endif
 NeoBundle 'Shougo/neosnippet'
+NeoBundle 'Shougo/neosnippet-snippets'
 NeoBundle 'honza/vim-snippets'
 
 "編集系
@@ -198,6 +204,9 @@ NeoBundle 'mattn/sonictemplate-vim'
 NeoBundle 'scrooloose/syntastic'
 
 filetype plugin indent on
+
+"NeoComplete
+let g:neocomplete#enable_at_startup=1
 
 "NeoComplCache
 let g:neocomplcache_enable_at_startup=1
