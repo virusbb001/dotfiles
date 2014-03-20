@@ -111,6 +111,7 @@ inoremap <Down> <Nop>
 augroup VirusDropboxAuto
  autocmd!
  autocmd FileType perl,cgi compiler perl
+ autocmd BufRead,BufNewFile *.gradle set filetype=groovy
  autocmd BufNewFile,BufReadPost * call s:vimrc_local(expand('<afile>:p:h'))
  autocmd FileType html compiler tidy
  " gnu-emacs yesでエラーメッセージをそれっぽく
