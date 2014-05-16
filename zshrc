@@ -29,7 +29,8 @@ zstyle ':vcs_info:git:*' check-for-changes true
 #数値処理関数
 zmodload -i zsh/mathfunc
 
-#履歴ファイル
+### 履歴 ###
+#履歴ファイルが未定義なら
 if [ -z "$HISTFILE" ]; then
  HISTFILE=$HOME/.zsh_history
 fi
