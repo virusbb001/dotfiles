@@ -46,7 +46,12 @@ esac
 
 export LANG
 
-export EDITOR=vim
+# エディタ
+if [ -z "$EDITOR" -o $(which vim>/dev/null)] ; then
+ EDITOR=vim
+fi
+
+export EDITOR
 
 # chrome のオプション
 typeset -xU google_chrome_option
