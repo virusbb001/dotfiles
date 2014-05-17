@@ -7,8 +7,6 @@ path=(
 $HOME/bin(N-/)
 #個人的にソースから入れたものは$HOME/localに
 $HOME/local/bin(N-/)
-# phpenv(デフォルト)
-$HOME/.phpenv/bin(N-/)
 $path
 $ECLIPSE_HOME(N-/)
 )
