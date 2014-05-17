@@ -47,7 +47,7 @@ esac
 export LANG
 
 # エディタ
-if [ -z "$EDITOR" -o $(which vim>/dev/null)] ; then
+if [[ -z "$EDITOR" ]] && which vim>/dev/null ; then
  EDITOR=vim
 fi
 
