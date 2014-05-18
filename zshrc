@@ -1,3 +1,10 @@
+# envに書けないpath設定
+
+path=(
+$HOME/.rbenv/bin(N-/)
+$path
+)
+
 # autoload 
 # -z でzsh-styleで関数をload
 # -U エイリアス展開をしない
@@ -185,9 +192,9 @@ else
  SOLARIS_LS=1
 fi
 
-# envに書けないpath設定
+# ruby
 
-path=(
-$HOME/.rbenv/bin(N-/)
-$path
-)
+if which rbenv >/dev/null 2>&1; then
+ eval "$(rbenv init -)"
+fi
+
