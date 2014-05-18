@@ -184,3 +184,10 @@ elif ls -G -d . >/dev/null 2>&1; then
 else
  SOLARIS_LS=1
 fi
+
+# envに書けないpath設定
+
+path=(
+$HOME/.rbenv/bin(N-/)
+$path
+)
