@@ -1,6 +1,5 @@
 "プラグインに関する設定
 "管理にはNeoBundle
-"rtpに追加は~/.vimrcでやること
 
 "プロトコル
 let g:neobundle#types#git#default_protocol="https"
