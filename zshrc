@@ -2,6 +2,8 @@
 
 path=(
 $HOME/.rbenv/bin(N-/)
+#nodebrew
+$HOME/.nodebrew/current/bin(N-/)
 $path
 )
 
@@ -34,7 +36,7 @@ zstyle ':vcs_info:*' enable git hg svn
 zstyle ':vcs_info:git:*' check-for-changes true
 
 #数値処理関数
-zmodload -i zsh/mathfunc
+zmodload zsh/mathfunc
 
 ### 履歴 ###
 #履歴ファイルが未定義なら
@@ -69,17 +71,17 @@ PROMPT=$'[%~]\n%(!|%F{red}|)%n%(!|%f|)@${p_rhost}${zle_vi_mode}%(!.#.$) > '
 # viキーバインドの時モードをPROMPTに出力
 # zle-line-initとzle-keymap-selectは特別な名前(zshzle)
 function zle-line-init zle-keymap-select {
- case $KEYMAP in
-  vicmd)
-   zle_vi_mode="|NOR|"
-   ;;
+case $KEYMAP in
+ vicmd)
+  zle_vi_mode="|NOR|"
+  ;;
   #bindkey -v時はmainとviinsは同じ
   main|viins)
-   zle_vi_mode="|INS|" ;;
-  command)
-   zle_vi_mode="|CMD|" ;;
-  *)
-   zle_vi_mode="|XXX|" ;;
+  zle_vi_mode="|INS|" ;;
+ command)
+  zle_vi_mode="|CMD|" ;;
+ *)
+  zle_vi_mode="|XXX|" ;;
 
  esac
  zle reset-prompt
@@ -95,11 +97,11 @@ setopt prompt_percent
 # 右プロンプトに関する設定
 #右のプロンプトにvscの情報を表示
 function _update_vcs_info_msg(){
- #psvar初期化
- psvar=()
- #$vcs_info_msg_N_に情報代入
- vcs_info
- [[ -n "$vcs_info_msg_0_" ]] && psvar[1]="$vcs_info_msg_0_"
+#psvar初期化
+psvar=()
+#$vcs_info_msg_N_に情報代入
+vcs_info
+[[ -n "$vcs_info_msg_0_" ]] && psvar[1]="$vcs_info_msg_0_"
 }
 add-zsh-hook precmd _update_vcs_info_msg
 # %Nvでpsvar[N]を出力
@@ -192,10 +194,19 @@ else
  SOLARIS_LS=1
 fi
 
-# ruby
-
+# rbenv
 if which rbenv >/dev/null 2>&1; then
  eval "$(rbenv init -)"
  rbenv --version
 fi
 
+# nodebrew
+if which nodebrew >/dev/null 2>&1; then
+ echo "nodebrew"
+fi
+
+# perlbrew
+if [ -f ${PERLBREW_ROOT:-"${HOME}/perl5/perlbrew"}/etc/bashrc ]; then
+ source ${PERLBREW_ROOT:-"${HOME}/perl5/perlbrew"}/etc/bashrc
+ perlbrew version
+fi
