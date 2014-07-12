@@ -1,7 +1,6 @@
 # このファイル読み込み前に設定しておくべきこと
 # LANGの変数
 #
-#
 typeset -U path fpath manpath
 path=(
 $HOME/bin(N-/)
