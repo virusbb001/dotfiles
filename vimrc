@@ -126,3 +126,10 @@ function! s:vimrc_local(loc)
   source `=i`
  endfor
 endfunction
+
+" markdown syntax
+" see markdown syntax file or http://mattn.kaoriya.net/software/vim/20140523124903.htm
+let g:markdown_fenced_languages = [
+   \ 'javascript',
+   \ 'js=javascript',
+   \]
