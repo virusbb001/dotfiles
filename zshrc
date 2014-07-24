@@ -202,11 +202,17 @@ fi
 
 # nodebrew
 if which nodebrew >/dev/null 2>&1; then
- echo "nodebrew"
+ nodebrew |head -n 1
 fi
 
 # perlbrew
 if [ -f ${PERLBREW_ROOT:-"${HOME}/perl5/perlbrew"}/etc/bashrc ]; then
  source ${PERLBREW_ROOT:-"${HOME}/perl5/perlbrew"}/etc/bashrc
  perlbrew version
+fi
+
+# homebrew
+if which brew >/dev/null 2>&1; then
+ echo -n "brew "
+ brew --version
 fi
