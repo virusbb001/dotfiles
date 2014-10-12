@@ -73,6 +73,7 @@ set shiftwidth=1
 
 "その他
 set modeline
+set modelines=5
 set noinsertmode
 set backspace=2
 set whichwrap=b,s,h,l,<,>,[,]
