@@ -58,3 +58,15 @@ google_chrome_option=(
 # Same origin policyを無効に
 # "--disable-web-security"
 )
+
+case "${OSTYPE}" in
+ # Mac用
+ darwin*)
+ if [ -e "$HOME/dotfiles/zsh/darwin.zsh" ] ; then
+  source ~/dotfiles/zsh/darwin.zsh
+ fi
+ ;;
+ # Linux用
+ linux*)
+ ;;
+esac
