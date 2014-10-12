@@ -27,7 +27,7 @@ endif
 execute 'set runtimepath^=' . s:neobundle_dir.'/neobundle.vim'
 
 
-call neobundle#rc(s:neobundle_dir)
+call neobundle#begin(s:neobundle_dir)
 "プラグイン管理
 NeoBundleFetch 'Shougo/neobundle.vim', '', 'default'
 
@@ -202,6 +202,15 @@ NeoBundle 'mattn/sonictemplate-vim'
 "構文エラーチェック
 NeoBundle 'scrooloose/syntastic'
 
+"Editor config
+NeoBundle 'editorconfig/editorconfig-vim'
+
+call neobundle#end()
+
+if !has('vim_starting')
+  call neobundle#call_hook('on_source')
+endif
+
 filetype plugin indent on
 
 "NeoComplete
@@ -233,4 +242,4 @@ nmap <F3> :VimFiler -explorer -toggle -buffer-name=explorer -split -no-quit<CR>
 "vim-ref
 
 
-" vim: set filetype=vim :
+" vim:set filetype=vim:
