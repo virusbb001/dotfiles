@@ -24,8 +24,11 @@ set ruler
 syntax enable
 
 "エンコード関連
-let &termencoding = &encoding
-set encoding=utf-8
+"termencodingがなければ設定
+if &termencoding == 0
+ let &termencoding = &encoding
+ set encoding=utf-8
+endif
 "保存
 if ( &modifiable )
  set fileencoding=utf-8
@@ -133,4 +136,5 @@ endfunction
 let g:markdown_fenced_languages = [
    \ 'javascript',
    \ 'js=javascript',
+   \ 'cpp',
    \]
