@@ -18,7 +18,7 @@ if !isdirectory(s:neobundle_dir)
   echohl None
   finish
  endif
- mkdir(s:neobundle_dir,"p")
+ call mkdir(s:neobundle_dir,"p")
 endif
 
 if !isdirectory(s:neobundle_dir.'/neobundle.vim')
