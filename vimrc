@@ -1,4 +1,5 @@
-"共通の設定を使う
+"共通の設定
+
 set nocompatible
 
 scriptencoding utf-8
@@ -101,9 +102,6 @@ if has('vim_starting')
 endif
 
 "キー設定
-" 括弧補完
-imap ( ()<Esc>i
-imap { {}<Esc>i
 " 挿入モードで左右移動禁止
 inoremap <Left> <Nop>
 inoremap <Right> <Nop>
@@ -120,6 +118,8 @@ augroup VirusDropboxAuto
  autocmd FileType html compiler tidy
  " gnu-emacs yesでエラーメッセージをそれっぽく
  autocmd FileType html setlocal makeprg=tidy\ -quiet\ -errors\ -raw\ -xml\ --gnu-emacs\ yes\ \"%\"
+ " rubyの時インデントを2に
+ autocmd BufRead,BufNewFile *.rb setlocal shiftwidth=2 tabstop=2 expandtab
 augroup END
 
 "file name:.vimrc.local
@@ -137,4 +137,5 @@ let g:markdown_fenced_languages = [
    \ 'javascript',
    \ 'js=javascript',
    \ 'cpp',
+   \ 'ruby',
    \]
