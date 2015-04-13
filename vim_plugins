@@ -24,8 +24,9 @@ endif
 if !isdirectory(s:neobundle_dir.'/neobundle.vim')
  execute '!git clone https://github.com/Shougo/neobundle.vim.git' s:neobundle_dir.'/neobundle.vim'
 endif
-execute 'set runtimepath^=' . s:neobundle_dir.'/neobundle.vim'
-
+if has('vim_starting')
+ execute 'set runtimepath+=' . s:neobundle_dir.'/neobundle.vim'
+endif
 
 call neobundle#begin(s:neobundle_dir)
 "プラグイン管理
