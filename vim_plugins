@@ -195,7 +195,12 @@ NeoBundleLazy 'svg.vim',{
    \  'filetypes' : 'svg' ,
    \ }
    \}
-
+"slim
+NeoBundleLazy 'slim-template/vim-slim',{
+   \ 'autoload' : {
+   \  'filetypes' : 'slim' ,
+   \ }
+   \}
 " template
 NeoBundle 'mattn/sonictemplate-vim'
 
