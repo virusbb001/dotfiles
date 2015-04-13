@@ -42,9 +42,9 @@ NeoBundle 'h1mesuke/unite-outline'
 "補完
 "7.3.885以上かつLuaが有効ならNeocompleteを使う
 if ( v:version>703 || (v:version == 703 && has('patch885')) ) && has('lua')
- NeoBundle 'Shougo/neocomplete'
+ NeoBundleLazy 'Shougo/neocomplete'
 else
- NeoBundle 'Shougo/neocomplcache'
+ NeoBundleLazy 'Shougo/neocomplcache'
 endif
 NeoBundle 'Shougo/neosnippet'
 NeoBundle 'Shougo/neosnippet-snippets'
