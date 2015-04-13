@@ -205,7 +205,7 @@ NeoBundleLazy 'slim-template/vim-slim',{
 NeoBundle 'mattn/sonictemplate-vim'
 
 "構文エラーチェック
-NeoBundle 'scrooloose/syntastic'
+NeoBundleLazy 'scrooloose/syntastic'
 
 "Editor config
 NeoBundle 'editorconfig/editorconfig-vim'
