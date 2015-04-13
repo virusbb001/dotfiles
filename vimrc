@@ -120,6 +120,7 @@ augroup VirusDropboxAuto
  autocmd FileType html setlocal makeprg=tidy\ -quiet\ -errors\ -raw\ -xml\ --gnu-emacs\ yes\ \"%\"
  " rubyの時インデントを2に
  autocmd BufRead,BufNewFile *.rb setlocal shiftwidth=2 tabstop=2 expandtab
+ autocmd FileType mkd setlocal noexpandtab
 augroup END
 
 "file name:.vimrc.local
