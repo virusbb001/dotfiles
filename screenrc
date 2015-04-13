@@ -1,0 +1,42 @@
+#最初にメッセージを表示するか
+startup_message off
+#スクロールバッファ
+defscrollback 20000
+#自動でdetach
+autodetach on
+#別画面機能
+altscreen off
+
+#<C-t>+tでC-tを送信
+escape t
+#^T^[を無効
+bind 
+#defencoding utf8
+defutf8 on
+#デフォルトの漢字の文字コード
+defkanji UTF-8
+#デフォルトで折り返し
+defwrap on
+
+#caption
+#caption always "%{= Rk} %?%F%{b kr}%? %?%h%:%t (screen@ubuntu #%n)%? %{-}"
+caption always "%{= Rk}%?%F%{=b kr}%? %?%t (screen@%H#%n)%?"
+#hardstatus
+hardstatus alwayslastline "%{= Gk} %-Lw%40L>%{b kg} %n %t %{-}%+Lw%-040=%{b km} %l %{.b} %Y/%m/%d %c:%s"
+#hardstatus alwayslastline ""
+
+#ビジュアルベル
+vbell off
+vbell_msg "Bell "
+
+#マルチユーザ
+multiuser on
+#アクティブでないウィンドウのベル
+bell_msg "Bell window %n"
+
+defbce on
+
+shelltitle '% |zsh'
+
+#256色表示
+term xterm-256color
