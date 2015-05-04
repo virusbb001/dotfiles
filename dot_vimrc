@@ -1,12 +1,7 @@
-" .vimrc本体
-"
+" .vimrc
+
 if filereadable(expand("~/dotfiles/vimrc"))
  source ~/dotfiles/vimrc
-endif
-
-if has('vim_starting')
- "NeoBundleへのパス
- set rtp+=~/.vim/bundle/neobundle.vim/
 endif
 
 if filereadable(expand("~/dotfiles/vim_plugins"))
