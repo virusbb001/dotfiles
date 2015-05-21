@@ -1,6 +1,9 @@
 # envに書けないpath設定
 
+echo "read dotfiles/zshrc"
+
 path=(
+$HOME/.rbenv/shims(N-/)
 $HOME/.rbenv/bin(N-/)
 #nodebrew
 $HOME/.nodebrew/current/bin(N-/)
@@ -193,6 +196,8 @@ elif ls -G -d . >/dev/null 2>&1; then
 else
  SOLARIS_LS=1
 fi
+
+## version/package manager
 
 # rbenv
 if which rbenv >/dev/null 2>&1; then
