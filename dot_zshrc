@@ -1,0 +1,7 @@
+#!/bin/sh
+
+DOTFILES_PATH="$HOME/dotfiles"
+
+if [[ ! -f "$DOTFILES_PATH/dot_zshrc" ]]; then
+ source "$DOTFILES_PATH/dot_zshrc"
+fi
