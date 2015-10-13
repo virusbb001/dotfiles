@@ -149,11 +149,14 @@ NeoBundleLazy 'mattn/emmet-vim',{
    \   'filetypes' : ['html', 'markdown', 'xml' , 'svg' , 'css', 'php', 'scss', 'erb', 'eruby', 'slim'],
    \  },
    \ }
-" 閉じタグを省略しない typeを省略しない
-let g:emmet_html5=0
+let g:emmet_html5=1
 let g:user_emmet_settings={
-   \ 'lang' : 'ja',
-   \ 'indentation' : ' ',
+   \ 'variables' : {
+   \    'lang' : 'ja',
+   \ },
+   \ 'html' : {
+   \    'empty_element_suffix' : ' />',
+   \ },
    \ 'php' : {
    \  'extends' : 'html',
    \  'filters' : 'html,c',
