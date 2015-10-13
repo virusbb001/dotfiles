@@ -56,7 +56,7 @@ google_chrome_option=(
 # ローカルファイルへのアクセスを許可
 "--allow-file-access-from-files"
 # Same origin policyを無効に
-# "--disable-web-security"
+"--disable-web-security"
 )
 
 case "${OSTYPE}" in
