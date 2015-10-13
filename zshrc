@@ -221,3 +221,11 @@ if which brew >/dev/null 2>&1; then
  echo -n "brew "
  brew --version
 fi
+
+# phpbrew
+if which phpbrew >/dev/null 2>&1; then
+ source ~/.phpbrew/bashrc
+ if which brew >/dev/null 2>&1; then
+  phpbrew lookup-prefix homebrew
+ fi
+fi
