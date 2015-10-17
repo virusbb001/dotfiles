@@ -2,6 +2,6 @@
 
 DOTFILES_PATH="$HOME/dotfiles"
 
-if [[ ! -f "$DOTFILES_PATH/zshrc" ]]; then
+if [[ -f "$DOTFILES_PATH/zshrc" ]]; then
  source "$DOTFILES_PATH/zshrc"
 fi
