@@ -2,6 +2,8 @@
 
 echo "read dotfiles/zshrc"
 
+source ~/dotfiles/zsh/show_version.zsh
+
 path=(
 $HOME/.rbenv/shims(N-/)
 $HOME/.rbenv/bin(N-/)
@@ -114,21 +116,6 @@ RPROMPT="%1(v|%1v|)"
 #実行後は右プロンプト消去
 setopt transient_rprompt
 
-#タイトル設定
-case "${TERM}" in
- kterm*|xterm*)
-  _set_command_title_precmd(){
-   echo -ne "\033]2;zsh\007"
-  }
-  _set_command_title_preexec(){
-   echo -ne "\033]2;${1%% *}\007"
-  }
-  #複数登録
-  add-zsh-hook precmd _set_command_title_precmd
-  add-zsh-hook preexec _set_command_title_preexec
-  ;;
-esac
-
 #TABで候補切り替える
 setopt auto_menu
 #cd時に自動でpush
@@ -197,35 +184,34 @@ else
  SOLARIS_LS=1
 fi
 
-## version/package manager
+#タイトル設定
+case "${TERM}" in
+ kterm*|xterm*)
+  # xterm control sequences
+  # OSC
+  # http://www.xfree86.org/4.7.0/ctlseqs.html
+  # iTerm2 title FAQ
+  # https://www.iterm2.com/faq.html
+  _set_command_title_precmd(){
+   # nをつけないと改行が出力される
+   # tab
+   echo -en "\033];zsh - ready\007"
+   #window
+   echo -en "\033]2;zsh - ready\007"
+  }
+  _set_command_title_preexec(){
+   # 引数1に対し末尾を削除(*はすべての文字)
+   # http://zsh.sourceforge.net/Doc/Release/Expansion.html#Parameter-Expansion
+   echo -ne "\033];${1%% *}\007"
+   echo -ne "\033]2;${1%% *}\007"
+  }
+  #複数登録
+  # プロンプト表示直前
+  add-zsh-hook precmd _set_command_title_precmd
+  # Enterを押してコマンドを実行する直前
+  add-zsh-hook preexec _set_command_title_preexec
+  ;;
+esac
 
-# rbenv
-if which rbenv >/dev/null 2>&1; then
- eval "$(rbenv init -)"
- rbenv --version
-fi
 
-# nodebrew
-if which nodebrew >/dev/null 2>&1; then
- nodebrew |head -n 1
-fi
-
-# perlbrew
-if [ -f ${PERLBREW_ROOT:-"${HOME}/perl5/perlbrew"}/etc/bashrc ]; then
- source ${PERLBREW_ROOT:-"${HOME}/perl5/perlbrew"}/etc/bashrc
- perlbrew version
-fi
-
-# homebrew
-if which brew >/dev/null 2>&1; then
- echo -n "brew "
- brew --version
-fi
-
-# phpbrew
-if which phpbrew >/dev/null 2>&1; then
- source ~/.phpbrew/bashrc
- if which brew >/dev/null 2>&1; then
-  phpbrew lookup-prefix homebrew
- fi
-fi
+show_version
