@@ -45,7 +45,8 @@ set expandtab
 "折りたたみ関連
 set foldcolumn=4
 set foldmethod=indent
-set foldlevel=10000
+" 折りたたみを閉じる
+set foldlevel=-1
 
 "UNDO関連
 set undolevels=1000
@@ -107,7 +108,7 @@ inoremap <Left> <Nop>
 inoremap <Right> <Nop>
 inoremap <Up> <Nop>
 inoremap <Down> <Nop>
-
+noremap <F1> <Nop>
 
 "自動コマンド
 augroup VirusDropboxAuto
