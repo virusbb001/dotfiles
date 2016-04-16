@@ -207,9 +207,9 @@ case "${TERM}" in
   }
   #複数登録
   # プロンプト表示直前
-  add-zsh-hook precmd _set_command_title_precmd
+  # add-zsh-hook precmd _set_command_title_precmd
   # Enterを押してコマンドを実行する直前
-  add-zsh-hook preexec _set_command_title_preexec
+  # add-zsh-hook preexec _set_command_title_preexec
   ;;
 esac
 
