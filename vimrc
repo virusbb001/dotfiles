@@ -1,6 +1,7 @@
 " base_dir
 let s:vim_files_dir = "~/dotfiles/vim/"
 
+" 環境ごとに変えたい
 let s:vim_files=[
    \    {
    \        "load": 1,
@@ -16,26 +17,18 @@ let s:vim_files=[
    \    },
    \]
 
-function! LoadSettingFiles(file_list)
- if type(a:file_list) != type([])
-  echoerr "file_list must be list"
-  return
- endif
+let s:my_load_script="~/dotfiles/vim/my_loader.vim"
 
- for l:file in a:file_list
-  let l:filename=has_key(l:file, 'unbase') ?
-     \ expand(l:filename["filename"]) :
-     \ expand(s:vim_files_dir . l:file["filename"])
-  if filereadable(l:filename)
-   if l:file["load"]
-    execute 'source '.l:filename
-   endif
-  else
-   echohl WarningMsg
-   echo "this file is unreadable: ".l:filename
-   echohl None
-  endif
- endfor
-endf
+if filereadable(expand(s:my_load_script))
+ execute 'source ' . s:my_load_script
+endif
 
-call LoadSettingFiles(s:vim_files)
+if exists("*LoadSettingFiles")
+ call LoadSettingFiles(s:vim_files)
+else
+ echohl WarningMsg
+ echo "LoadSettingFiles is not found"
+ echo "Please check ". s:my_load_script . " is exists"
+ echo "or is there a typo ."
+ echohl None
+endif
