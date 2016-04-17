@@ -23,7 +23,9 @@ function! LoadSettingFiles(file_list)
  endif
 
  for l:file in a:file_list
-  let l:filename=expand(s:vim_files_dir . l:file["filename"])
+  let l:filename=has_key(l:file, 'unbase') ?
+     \ expand(l:filename["filename"]) :
+     \ expand(s:vim_files_dir . l:file["filename"])
   if filereadable(l:filename)
    if l:file["load"]
     execute 'source '.l:filename
