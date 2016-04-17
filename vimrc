@@ -9,7 +9,7 @@ let s:vim_files=[
    \    },
    \    {
    \        "load": 1,
-   \        "filename": "vim_plugins_1.vim"
+   \        "filename": "vim_plug_base.vim"
    \    },
    \    {
    \        "load": 0,
