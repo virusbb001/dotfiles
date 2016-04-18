@@ -3,10 +3,10 @@
 " sh -s ~/.vim/bundle
 set nocompatible               " Be iMproved
 
-set runtimepath^=/Users/virus/.vim/bundle/repos/github.com/Shougo/dein.vim
+set runtimepath^=~/.vim/bundle/repos/github.com/Shougo/dein.vim
 
 " Required:
-call dein#begin(expand('/Users/virus/.vim/bundle'))
+call dein#begin(expand('~/.vim/bundle'))
 
 " Let dein manage dein
 " Required:
@@ -14,6 +14,20 @@ call dein#add('Shougo/dein.vim')
 
 " Add or remove your plugins here:
 call dein#add('vim-jp/vimdoc-ja')
+
+" utils
+call dein#add('sjl/gundo.vim',{
+   \ 'if': "has('python')"
+   \})
+
+" filetype
+call dein#add('nikolavp/sparql.vim', {
+   \ 'on_ft': 'sparql'
+   \})
+
+call dein#add('mattn/emmet-vim',{
+   \ 'on_ft': ['html','css']
+   \})
 
 " You can specify revision/branch/tag.
 " call dein#add('Shougo/vimshell', { 'rev': '3787e5' })
