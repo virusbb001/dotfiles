@@ -1,7 +1,11 @@
 " install command:
 " curl https://raw.githubusercontent.com/Shougo/dein.vim/master/bin/installer.sh |
 " sh -s ~/.vim/bundle
-set nocompatible               " Be iMproved
+
+if &compatible
+ " 既にオプションを設定した後にset nocompatibleすると値が変わる
+ set nocompatible
+endif
 
 set runtimepath^=~/.vim/bundle/repos/github.com/Shougo/dein.vim
 
