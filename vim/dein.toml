@@ -1,0 +1,9 @@
+[[plugins]]
+repo = 'Shougo/dein.vim'
+
+[[plugins]]
+repo = 'sjl/gundo.vim'
+if = "has('python')"
+
+[[plugins]]
+repo = 'vim-jp/vimdoc-ja'

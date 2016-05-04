@@ -1,0 +1,7 @@
+[[plugins]]
+repo = 'nikolavp/sparql.vim'
+on_ft = 'sparql'
+
+[[plugins]]
+repo = 'mattn/emmet-vim'
+on_ft = ['html','css']
