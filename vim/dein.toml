@@ -7,3 +7,13 @@ if = "has('python')"
 
 [[plugins]]
 repo = 'vim-jp/vimdoc-ja'
+
+# filetypes
+[[plugins]]
+repo = 'cespare/vim-toml'
+on_ft = 'toml'
+
+[[plugins]]
+repo = 'nikolavp/sparql.vim'
+on_ft = 'sparql'
+
