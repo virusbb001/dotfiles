@@ -1,10 +1,16 @@
 [[plugins]]
 repo = 'Shougo/dein.vim'
 
+# util
 [[plugins]]
 repo = 'sjl/gundo.vim'
 if = "has('python')"
 
+[[plugins]]
+repo = 'Shougo/vimproc.vim'
+build = 'make'
+
+# help doc
 [[plugins]]
 repo = 'vim-jp/vimdoc-ja'
 
