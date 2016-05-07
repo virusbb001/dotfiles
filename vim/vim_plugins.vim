@@ -2,6 +2,16 @@
 " curl https://raw.githubusercontent.com/Shougo/dein.vim/master/bin/installer.sh |
 " sh -s ~/.vim/bundle
 
+scriptencoding utf-8
+
+if v:version < 704
+ echohl WarningMsg
+ echo "Vim's version is under 7.4"
+ echo "plz upgrade vim m8"
+ echohl None
+ finish
+end
+
 if &compatible
  " 既にオプションを設定した後にset nocompatibleすると値が変わる
  set nocompatible
