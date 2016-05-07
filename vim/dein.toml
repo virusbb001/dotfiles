@@ -17,3 +17,5 @@ on_ft = 'toml'
 repo = 'nikolavp/sparql.vim'
 on_ft = 'sparql'
 
+[[plugins]]
+repo = 'niklasl/vim-rdf'
