@@ -25,3 +25,6 @@ on_ft = 'sparql'
 
 [[plugins]]
 repo = 'niklasl/vim-rdf'
+
+[[plugins]]
+repo = 'tmux-plugins/vim-tmux'
