@@ -19,11 +19,13 @@ endif
 
 set runtimepath^=~/.vim/bundle/repos/github.com/Shougo/dein.vim
 
-let s:dein_dir=expand('~/.vim/bundle')
+let s:dein_dir=expand('~/.vim/dein')
+let s:toml_files=split(glob("<sfile>:p:h/*.toml"),"\n")
 
 if dein#load_state(s:dein_dir)
+ " vim_tomls
  " Required:
- call dein#begin(s:dein_dir)
+ call dein#begin(s:dein_dir,[expand('<sfile>')]+s:toml_files)
 
  call dein#load_toml(expand('~/dotfiles/vim/dein.toml'), {'lazy' : 0})
  call dein#load_toml(expand('~/dotfiles/vim/dein_lazy.toml'), {'lazy' : 1})
