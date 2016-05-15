@@ -4,6 +4,7 @@ echo "read dotfiles/zshrc"
 
 source ~/dotfiles/zsh/show_version.zsh
 
+# PATH
 path=(
 $HOME/.rbenv/shims(N-/)
 $HOME/.rbenv/bin(N-/)
@@ -11,6 +12,15 @@ $HOME/.rbenv/bin(N-/)
 $HOME/.nodebrew/current/bin(N-/)
 $path
 )
+
+if which npm >/dev/null 2>&1; then
+ node_path=(
+ $(npm root -g)
+ $node_path
+ )
+fi
+
+export NODE_PATH
 
 # autoload 
 # -z でzsh-styleで関数をload
