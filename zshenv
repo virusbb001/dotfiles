@@ -1,7 +1,9 @@
 # このファイル読み込み前に設定しておくべきこと
 # LANGの変数
-#
-typeset -U path fpath manpath
+
+# PATH系変数設定
+typeset -T NODE_PATH node_path
+typeset -U path fpath manpath node_path
 path=(
 $HOME/bin(N-/)
 #個人的にソースから入れたものは$HOME/localに
