@@ -13,6 +13,13 @@ build = 'make'
 [[plugins]]
 repo = 'editorconfig/editorconfig-vim'
 
+[[plugins]]
+repo = 'Shougo/Unite.vim'
+
+[[plugins]]
+repo = 'Shougo/vimfiler.vim'
+depends = 'Shougo/Unite.vim'
+
 # help doc
 [[plugins]]
 repo = 'vim-jp/vimdoc-ja'
