@@ -5,3 +5,7 @@ DOTFILES_PATH="$HOME/dotfiles"
 if [[ -f "$DOTFILES_PATH/zshrc" ]]; then
  source "$DOTFILES_PATH/zshrc"
 fi
+
+if [[ -f "$HOME/.zshrc.custom" ]]; then
+ source "$HOME/.zshrc.custom"
+fi
