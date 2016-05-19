@@ -17,7 +17,7 @@ if &compatible
  set nocompatible
 endif
 
-set runtimepath^=~/.vim/bundle/repos/github.com/Shougo/dein.vim
+set runtimepath^=~/.vim/dein/repos/github.com/Shougo/dein.vim
 
 let s:dein_dir=expand('~/.vim/dein')
 let s:toml_files=split(glob("<sfile>:p:h/*.toml"),"\n")
