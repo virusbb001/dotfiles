@@ -1,3 +1,3 @@
 [[plugins]]
 repo = 'mattn/emmet-vim'
-on_ft = ['html','css']
+on_ft = ['html','css','htmldjango']
