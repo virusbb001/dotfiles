@@ -2,6 +2,7 @@ gulp
 gulp-babel
 gulp-eslint
 gulp-mocha
+gulp-plumber
 chai
 babel-preset-es2015
 babel-polyfill
