@@ -3,6 +3,7 @@ gulp-babel
 gulp-eslint
 gulp-mocha
 gulp-plumber
+gulp-sourcemaps
 chai
 babel-preset-es2015
 babel-polyfill
