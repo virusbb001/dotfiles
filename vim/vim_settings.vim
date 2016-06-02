@@ -89,26 +89,18 @@ filetype plugin indent on
 if &encoding == 'utf-8'
  set ambiwidth=double
 endif
+
 "マウスを無効に
 set mouse=
 set hidden
 set completeopt-=preview
-"set smarttab
-"set showmatch
-"colorscheme elflord
-"autocmd FileType make setlocal noexpandtab
-"
+
 if has('vim_starting')
  let &runtimepath.=',' . expand('$VIMRUNTIME')
 endif
 
 "キー設定
-" 挿入モードで左右移動禁止
-inoremap <Left> <Nop>
-inoremap <Right> <Nop>
-inoremap <Up> <Nop>
-inoremap <Down> <Nop>
-noremap <F1> <Nop>
+nmap <F1> <Nop>
 
 "自動コマンド
 augroup VirusDropboxAuto
