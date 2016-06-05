@@ -1,3 +1,7 @@
 [[plugins]]
 repo = 'mattn/emmet-vim'
 on_ft = ['html','css','htmldjango']
+
+[[plugins]]
+repo = 'pangloss/vim-javascript'
+on_ft = ['javascript']
