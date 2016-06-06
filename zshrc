@@ -223,5 +223,9 @@ case "${TERM}" in
   ;;
 esac
 
+if [[ ! -z "$VIRTUAL_ENV" ]] ; then
+ echo "virtualenv"
+ source "$VIRTUAL_ENV/bin/activate"
+fi
 
 show_version
