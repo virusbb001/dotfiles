@@ -1,9 +1,17 @@
 " .vimrc
 
-if filereadable(expand("~/dotfiles/vimrc"))
- source ~/dotfiles/vimrc
-endif
+scriptencoding utf-8
 
-if filereadable(expand("~/dotfiles/vim_plugins"))
- source ~/dotfiles/vim_plugins 
-endif
+let s:vim_files=[
+   \'~/dotfiles/vim/vim_settings.vim',
+   \'~/dotfiles/vim/vim_plugins.vim',
+   \]
+
+for s:file in s:vim_files
+ let s:path = expand(s:file)
+ if filereadable(s:path)
+  execute 'source '.s:path
+ endif
+endfor
+
+" vim: set ft=vim :
