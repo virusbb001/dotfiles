@@ -9,3 +9,8 @@ on_ft = ['javascript']
 [[plugins]]
 repo = 'mxw/vim-jsx'
 on_ft = ['javascript']
+
+[[plugins]]
+repo = 'ternjs/tern_for_vim'
+on_ft = 'javascript'
+build = 'npm install | tee'
