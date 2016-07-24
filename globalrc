@@ -1,2 +1,3 @@
 default:\
-    :tc=native:tc=pygments:
+  :tc=default@/usr/local/etc/gtags.conf:\
+  :tc=pygments@/usr/local/etc/gtags.conf:
