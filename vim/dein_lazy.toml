@@ -1,6 +1,10 @@
+# html/css
+
 [[plugins]]
 repo = 'mattn/emmet-vim'
 on_ft = ['html','css','htmldjango']
+
+# javascript
 
 [[plugins]]
 repo = 'pangloss/vim-javascript'
@@ -14,3 +18,10 @@ on_ft = ['javascript']
 repo = 'ternjs/tern_for_vim'
 on_ft = 'javascript'
 build = 'npm install | tee'
+
+# python
+
+[[plugins]]
+repo = 'davidhalter/jedi-vim'
+on_ft = 'python'
+build = 'git submodule update --init --recursive'
