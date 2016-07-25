@@ -25,3 +25,7 @@ build = 'npm install | tee'
 repo = 'davidhalter/jedi-vim'
 on_ft = 'python'
 build = 'git submodule update --init --recursive'
+
+[[plugins]]
+repo = 'hynek/vim-python-pep8-indent'
+on_ft = 'python'
