@@ -20,7 +20,6 @@ fi
 
 # homebrew
 if which brew >/dev/null 2>&1; then
- echo -n "brew "
  brew --version
 fi
 
