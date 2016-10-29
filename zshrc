@@ -2,7 +2,7 @@
 
 echo "read dotfiles/zshrc"
 
-source ./zsh/show_version.zsh
+source "$(dirname $0)/zsh/show_version.zsh"
 
 # PATH
 path=(
