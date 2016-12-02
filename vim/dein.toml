@@ -41,6 +41,13 @@ repo = 'vim-jp/vimdoc-ja'
 repo = 'cespare/vim-toml'
 on_ft = 'toml'
 
+# colorscheme
+[[plugins]]
+repo = 'sjl/badwolf'
+hook_add = '''
+colorscheme badwolf
+'''
+
 [[plugins]]
 repo = 'nikolavp/sparql.vim'
 on_ft = 'sparql'
