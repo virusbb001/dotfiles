@@ -2,25 +2,42 @@
 
 [[plugins]]
 repo = 'mattn/emmet-vim'
-on_ft = ['html','css','htmldjango']
+on_ft = ['html','css','htmldjango','vue']
+hook_source = '''
+let g:user_emmet_settings = {
+\ 'variables': {
+\  'lang': 'ja',
+\ },
+\ 'vue': {
+\  'filters': 'html',
+\ }
+\}
+'''
 
 # javascript
 
 [[plugins]]
 repo = 'pangloss/vim-javascript'
-on_ft = ['javascript']
+on_ft = ['javascript', 'vue']
+hook_source = '''
+autocmd FileType javascript setlocal indentkeys+=.
+'''
 
 [[plugins]]
 repo = 'mxw/vim-jsx'
-on_ft = ['javascript']
+on_ft = ['javascript', 'vue']
 
 [[plugins]]
 repo = 'ternjs/tern_for_vim'
-on_ft = 'javascript'
+on_ft = ['javascript', 'vue']
 build = 'npm install | tee'
 hook_source = '''
 autocmd FileType javascript setlocal completeopt=menuone,preview
 '''
+
+[[plugins]]
+repo = 'posva/vim-vue'
+on_ft = 'vue'
 
 # python
 
