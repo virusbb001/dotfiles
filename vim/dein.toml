@@ -57,3 +57,17 @@ repo = 'niklasl/vim-rdf'
 
 [[plugins]]
 repo = 'tmux-plugins/vim-tmux'
+
+[[plugins]]
+repo = 'neomake/neomake'
+hook_add = '''
+let g:neomake_javascript_enabled_makers = ['eslint']
+augroup MyNeomakeGroup
+ autocmd!
+ BufWritePost * Neomake
+augroup END
+'''
+
+[[plugins]]
+repo = 'benjie/neomake-local-eslint.vim'
+depends = 'neomake/neomake'
