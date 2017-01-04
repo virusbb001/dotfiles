@@ -5,6 +5,7 @@ scriptencoding utf-8
 let s:vim_files=[
    \'~/dotfiles/vim/vim_settings.vim',
    \'~/dotfiles/vim/vim_plugins.vim',
+   \'~/.vim/local_settings.vim'
    \]
 
 for s:file in s:vim_files
