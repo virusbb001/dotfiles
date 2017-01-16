@@ -71,3 +71,10 @@ augroup END
 [[plugins]]
 repo = 'benjie/neomake-local-eslint.vim'
 depends = 'neomake/neomake'
+
+[[plugins]]
+repo = 'Shougo/context_filetype.vim'
+
+[[plugins]]
+repo = 'osyo-manga/vim-precious'
+depends = 'Shougo/context_filetype.vim'
