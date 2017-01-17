@@ -1,19 +1,14 @@
-" install command:
-" curl https://raw.githubusercontent.com/Shougo/dein.vim/master/bin/installer.sh |
-" sh -s ~/.vim/bundle
-
 scriptencoding utf-8
 
 if v:version < 704
  echohl WarningMsg
  echo "Vim's version is under 7.4"
- echo "plz upgrade vim m8"
+ echo "plz upgrade vim"
  echohl None
  finish
 end
 
 if &compatible
- " 既にオプションを設定した後にset nocompatibleすると値が変わる
  set nocompatible
 endif
 
@@ -21,6 +16,8 @@ set runtimepath^=~/.vim/dein/repos/github.com/Shougo/dein.vim
 
 let s:dein_dir=expand('~/.vim/dein')
 let s:toml_files=split(glob("<sfile>:p:h/*.toml"),"\n")
+
+filetype plugin indent off
 
 if dein#load_state(s:dein_dir)
  " vim_tomls
