@@ -11,7 +11,6 @@ if has("python3")
 endif
 '''
 
-
 [[plugins]]
 repo = 'Shougo/vimproc.vim'
 build = 'make'
@@ -26,9 +25,9 @@ repo = 'Shougo/Unite.vim'
 repo = 'Shougo/vimfiler.vim'
 depends = 'Shougo/Unite.vim'
 hook_add = '''
-call vimfiler#custom#profile('default', 'context', {
-  \ 'safe' : 0,
-  \})
+"call vimfiler#custom#profile('default', 'context', {
+"  \ 'safe' : 0,
+"  \})
    nmap <F3> :VimFiler -simple -winwidth=30 -toggle -buffer-name=explorer -split -no-quit<CR>
 '''
 
@@ -44,9 +43,6 @@ on_ft = 'toml'
 # colorscheme
 [[plugins]]
 repo = 'sjl/badwolf'
-hook_add = '''
-colorscheme badwolf
-'''
 
 [[plugins]]
 repo = 'nikolavp/sparql.vim'
