@@ -123,6 +123,7 @@ add-zsh-hook precmd _update_vcs_info_msg
 # %N(x.t.f)の.はtの文字列に含まれなければなんでも良い(%でエスケープできる)
 # Nは括弧の直前でも直後でも良い
 RPROMPT="%1(v|%1v|)"
+
 #実行後は右プロンプト消去
 setopt transient_rprompt
 
@@ -227,5 +228,3 @@ if [[ ! -z "$VIRTUAL_ENV" ]] ; then
  echo "virtualenv"
  source "$VIRTUAL_ENV/bin/activate"
 fi
-
-show_version
