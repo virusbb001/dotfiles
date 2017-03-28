@@ -12,9 +12,23 @@ if &compatible
  set nocompatible
 endif
 
+" auto install
+let s:dein_dir=expand('~/.vim/dein')
+let s:dein_repo_dir = s:dein_dir . '/repos/github.com/Shougo/dein.vim'
+if !isdirectory(s:dein_repo_dir)
+ " ask install or finish
+ echo 'dein not detected'
+ let s:answer=confirm('Do you wanna install?', "&Yes\n&No")
+ if s:answer == 2
+  echo "OK, don't forget to comment out this script"
+  finish
+ endif
+ call system('git clone https://github.com/Shougo/dein.vim ' . shellescape(s:dein_repo_dir))
+endif
+
+
 set runtimepath^=~/.vim/dein/repos/github.com/Shougo/dein.vim
 
-let s:dein_dir=expand('~/.vim/dein')
 let s:toml_files=split(glob("<sfile>:p:h/*.toml"),"\n")
 
 filetype plugin indent off
