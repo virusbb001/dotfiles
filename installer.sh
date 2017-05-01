@@ -15,6 +15,12 @@ else
  echo ".zshrc already exists. skip"
 fi
 
+if [[ ! -f ~/.zshenv ]]; then
+ install -m 0644 dot_zshenv ~/.zshenv
+else
+ echo ".zshenv already exists. skip"
+fi
+
 if [[ ! -f ~/.tmux.conf ]]; then
  install -m 0644 dot_tmux_conf ~/.tmux.conf
 else
