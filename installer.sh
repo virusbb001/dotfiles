@@ -1,6 +1,5 @@
 #!/bin/sh
 
-# $0 実行スクリプト
 cd `dirname $0`
 
 if [[ ! -f ~/.vimrc ]]; then
