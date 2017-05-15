@@ -1,5 +1,9 @@
 HowToUse
+
+```sh
  git clone https://github.com/virusbb001/dotfiles.git dotfiles
- echo "source /path/to/dotfiles/zshrc" >> ~/.zshrc
- cp /path/to/dotfiles/dot_vimrc ~/.vimrc
- echo "source-file ~/dotfiles/tmux.conf" >> ~/.tmux.conf
+ cd dotfiles
+ git submodule init
+ git submodule update
+ ./installer.sh
+```
