@@ -22,6 +22,9 @@ repo = 'editorconfig/editorconfig-vim'
 repo = 'Shougo/Unite.vim'
 
 [[plugins]]
+repo = 'Shougo/denite.nvim'
+
+[[plugins]]
 repo = 'Shougo/vimfiler.vim'
 depends = 'Shougo/Unite.vim'
 hook_add = '''
@@ -30,6 +33,10 @@ hook_add = '''
 "  \})
    nmap <F3> :VimFiler -simple -winwidth=30 -toggle -buffer-name=explorer -split -no-quit<CR>
 '''
+
+[[plugins]]
+repo = 'Shougo/unite-outline'
+depends = 'Shougo/Unite.vim'
 
 # help doc
 [[plugins]]
