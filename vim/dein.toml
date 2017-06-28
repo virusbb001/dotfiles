@@ -23,6 +23,12 @@ repo = 'Shougo/Unite.vim'
 
 [[plugins]]
 repo = 'Shougo/denite.nvim'
+hook_add = '''
+call denite#custom#option('default', {
+   \ 'mode': 'normal',
+   \ 'direction': 'dynamictop'
+   \})
+'''
 
 [[plugins]]
 repo = 'Shougo/vimfiler.vim'
