@@ -30,6 +30,7 @@ on_ft = ['javascript', 'vue']
 [[plugins]]
 repo = 'ternjs/tern_for_vim'
 on_ft = ['javascript', 'vue']
+if = 'executable("npm")'
 build = 'npm install'
 hook_source = '''
 autocmd FileType javascript setlocal completeopt=menuone,preview
@@ -53,3 +54,9 @@ on_ft = 'python'
 [[plugins]]
 repo = 'jmcantrell/vim-virtualenv'
 on_ft = 'python'
+
+# go
+
+[[plugins]]
+repo = 'fatih/vim-go'
+on_ft = 'go'

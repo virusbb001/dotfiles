@@ -22,6 +22,15 @@ repo = 'editorconfig/editorconfig-vim'
 repo = 'Shougo/Unite.vim'
 
 [[plugins]]
+repo = 'Shougo/denite.nvim'
+hook_add = '''
+call denite#custom#option('default', {
+   \ 'mode': 'normal',
+   \ 'direction': 'dynamictop'
+   \})
+'''
+
+[[plugins]]
 repo = 'Shougo/vimfiler.vim'
 depends = 'Shougo/Unite.vim'
 hook_add = '''
@@ -30,6 +39,10 @@ hook_add = '''
 "  \})
    nmap <F3> :VimFiler -simple -winwidth=30 -toggle -buffer-name=explorer -split -no-quit<CR>
 '''
+
+[[plugins]]
+repo = 'Shougo/unite-outline'
+depends = 'Shougo/Unite.vim'
 
 # help doc
 [[plugins]]
@@ -54,19 +67,22 @@ repo = 'niklasl/vim-rdf'
 [[plugins]]
 repo = 'tmux-plugins/vim-tmux'
 
-[[plugins]]
-repo = 'neomake/neomake'
-hook_add = '''
-let g:neomake_javascript_enabled_makers = ['eslint']
-augroup MyNeomakeGroup
- autocmd!
- autocmd BufWritePost * Neomake
-augroup END
-'''
+# [[plugins]]
+# repo = 'neomake/neomake'
+# hook_add = '''
+# let g:neomake_javascript_enabled_makers = ['eslint']
+# augroup MyNeomakeGroup
+#  autocmd!
+#  autocmd BufWritePost * Neomake
+# augroup END
+# '''
+
+# [[plugins]]
+# repo = 'benjie/neomake-local-eslint.vim'
+# depends = 'neomake/neomake'
 
 [[plugins]]
-repo = 'benjie/neomake-local-eslint.vim'
-depends = 'neomake/neomake'
+repo = 'w0rp/ale'
 
 [[plugins]]
 repo = 'Shougo/context_filetype.vim'

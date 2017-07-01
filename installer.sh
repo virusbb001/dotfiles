@@ -1,6 +1,5 @@
 #!/bin/sh
 
-# $0 実行スクリプト
 cd `dirname $0`
 
 if [[ ! -f ~/.vimrc ]]; then
@@ -13,6 +12,12 @@ if [[ ! -f ~/.zshrc ]]; then
  install -m 0644 dot_zshrc ~/.zshrc
 else
  echo ".zshrc already exists. skip"
+fi
+
+if [[ ! -f ~/.zshenv ]]; then
+ install -m 0644 dot_zshenv ~/.zshenv
+else
+ echo ".zshenv already exists. skip"
 fi
 
 if [[ ! -f ~/.tmux.conf ]]; then
