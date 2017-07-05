@@ -102,6 +102,24 @@ endif
 "キー設定
 nmap <F1> <Nop>
 
+noremap <special> <SID>win_inc_height <C-w>+
+noremap <special> <SID>win_dec_height <C-w>-
+noremap <special> <SID>win_inc_width <C-w>>
+noremap <special> <SID>win_dec_width <C-w><
+
+nmap <special> <SID>win_repeat+ <SID>win_inc_height<SID>win_repeat
+nmap <special> <SID>win_repeat- <SID>win_dec_height<SID>win_repeat
+nmap <special> <SID>win_repeat> <SID>win_inc_width<SID>win_repeat
+nmap <special> <SID>win_repeat< <SID>win_dec_width<SID>win_repeat
+
+nnoremap <special> <SID>win_repeat <C-w>
+
+nmap <special> <C-w>+ <SID>win_repeat+
+nmap <special> <C-w>- <SID>win_repeat-
+nmap <special> <C-w>> <SID>win_repeat>
+nmap <special> <C-w>< <SID>win_repeat<
+
+
 "自動コマンド
 augroup VirusDropboxAuto
  autocmd!
