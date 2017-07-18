@@ -50,9 +50,13 @@ set foldlevel=-1
 
 "UNDO関連
 set undolevels=1000
-"無限UNDO
 if has('persistent_undo')
- set undodir=~/.vim/undo
+ let s:undodir = $HOME . "/.vim/undo"
+ if !isdirectory(s:undodir) && exists("*mkdir")
+  call mkdir(s:undodir, "p")
+ endif
+ let &undodir=s:undodir
+ "set undodir=~/.vim/undo
  set undofile
 endif
 
