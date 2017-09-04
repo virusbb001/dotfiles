@@ -7,10 +7,10 @@ URxvt.font: xft:Inconsolata:pixelsize=20:antialias=true,\
 !    xft:Source Code Pro for Powerline:pixelsize=16:antialias=true:hinting=true,\
 !    xft:IPAGothic:pixelsize=16:antialias=true:hinting=true
 URxvt*letterSpace: 0
-URxvt.perl-ext-common:default,tabbed
+URxvt.perl-ext-common:default,tabbed,xim-onthespot
 URxvt.inputMethod: fcitx
-URxvt.preeditType: OverTheSpot
+URxvt.preeditType: OnTheSpot
 URxvt.depth: 32
-URxvt*background: [75]#000000
+URxvt*background: [78]#000000
 URxvt.foreground: #00f900
 URxvt.cursorBlink: True
