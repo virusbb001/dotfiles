@@ -23,7 +23,10 @@ repo = 'Shougo/Unite.vim'
 
 [[plugins]]
 repo = 'Shougo/denite.nvim'
-hook_add = '''
+lazy = 1
+on_cmd = 'Denite'
+
+hook_source = '''
 call denite#custom#option('default', {
    \ 'mode': 'normal',
    \ 'direction': 'dynamictop'
@@ -83,6 +86,9 @@ repo = 'tmux-plugins/vim-tmux'
 
 [[plugins]]
 repo = 'w0rp/ale'
+hook_add = """
+let g:ale_lint_on_filetype_changed = 0
+"""
 
 [[plugins]]
 repo = 'Shougo/context_filetype.vim'
@@ -90,3 +96,6 @@ repo = 'Shougo/context_filetype.vim'
 [[plugins]]
 repo = 'osyo-manga/vim-precious'
 depends = 'Shougo/context_filetype.vim'
+
+[[plugins]]
+repo = 'majutsushi/tagbar'
