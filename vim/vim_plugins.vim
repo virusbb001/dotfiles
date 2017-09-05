@@ -36,7 +36,7 @@ filetype plugin indent off
 if dein#load_state(s:dein_dir)
  " vim_tomls
  " Required:
- call dein#begin(s:dein_dir,[expand('<sfile>')]+s:toml_files + [expand('~/.vim/dein.toml'),expand('~/.vim/dein_lazy.toml')])
+ call dein#begin(s:dein_dir,[$MYVIMRC, expand('<sfile>')])
 
  call dein#load_toml(expand('~/dotfiles/vim/dein.toml'), {'lazy' : 0})
  call dein#load_toml(expand('~/dotfiles/vim/dein_lazy.toml'), {'lazy' : 1})
