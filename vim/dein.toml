@@ -99,3 +99,6 @@ depends = 'Shougo/context_filetype.vim'
 
 [[plugins]]
 repo = 'majutsushi/tagbar'
+
+[[plugins]]
+repo = 'thinca/vim-quickrun'
