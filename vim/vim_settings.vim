@@ -78,7 +78,7 @@ map Q gQ
 "インデント
 set autoindent
 "set smartindent
-set shiftwidth=1
+set shiftwidth=2
 
 "その他
 set modeline
