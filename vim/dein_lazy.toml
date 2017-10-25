@@ -41,6 +41,22 @@ autocmd FileType javascript setlocal completeopt=menuone,preview
 repo = 'posva/vim-vue'
 on_ft = 'vue'
 
+[[plugins]]
+on_ft = ["typescript"]
+repo = "leafgarland/typescript-vim"
+
+[[plugins]]
+on_ft = ["typescript"]
+repo = "HerringtonDarkholme/yats.vim"
+
+[[plugins]]
+on_ft = ["typescript"]
+repo = "Quramy/tsuquyomi"
+hook_source = '''
+autocmd FileType typescript setlocal omnifunc=tsuquyomi#complete
+'''
+
+
 # python
 
 [[plugins]]
