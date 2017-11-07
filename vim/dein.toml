@@ -44,7 +44,7 @@ call denite#custom#option('default', {
 
 [[plugins]]
 repo = 'Shougo/vimfiler.vim'
-depends = 'Shougo/Unite.vim'
+depends = 'Unite.vim'
 hook_add = '''
 "call vimfiler#custom#profile('default', 'context', {
 "  \ 'safe' : 0,
@@ -54,7 +54,7 @@ hook_add = '''
 
 [[plugins]]
 repo = 'Shougo/unite-outline'
-depends = 'Shougo/Unite.vim'
+depends = 'Unite.vim'
 
 # help doc
 [[plugins]]
@@ -79,20 +79,6 @@ repo = 'niklasl/vim-rdf'
 [[plugins]]
 repo = 'tmux-plugins/vim-tmux'
 
-# [[plugins]]
-# repo = 'neomake/neomake'
-# hook_add = '''
-# let g:neomake_javascript_enabled_makers = ['eslint']
-# augroup MyNeomakeGroup
-#  autocmd!
-#  autocmd BufWritePost * Neomake
-# augroup END
-# '''
-
-# [[plugins]]
-# repo = 'benjie/neomake-local-eslint.vim'
-# depends = 'neomake/neomake'
-
 [[plugins]]
 repo = 'w0rp/ale'
 hook_add = """
@@ -113,7 +99,7 @@ repo = 'Shougo/context_filetype.vim'
 
 [[plugins]]
 repo = 'osyo-manga/vim-precious'
-depends = 'Shougo/context_filetype.vim'
+depends = 'context_filetype.vim'
 hook_add = """
 let g:precious_enable_switchers = {
       \ "*" : {
