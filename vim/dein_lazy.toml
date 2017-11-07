@@ -1,3 +1,14 @@
+# utils
+
+[[plugins]]
+if = 'has("python3")'
+repo = "Shougo/deoplete.nvim"
+depends = ["context_filetype.vim"]
+on_event = "InsertEnter"
+hook_add="""
+let g:deoplete#enable_at_startup = 1
+"""
+
 # html/css
 
 [[plugins]]
@@ -50,12 +61,12 @@ on_ft = ["typescript"]
 repo = "HerringtonDarkholme/yats.vim"
 
 [[plugins]]
-on_ft = ["typescript"]
-repo = "Quramy/tsuquyomi"
+if = "has('nvim')"
+repo = 'mhartington/nvim-typescript'
+on_ft = ['typescript', 'vue']
 hook_source = '''
-autocmd FileType typescript setlocal omnifunc=tsuquyomi#complete
+let g:nvim_typescript#vue_support = 1
 '''
-
 
 # python
 
