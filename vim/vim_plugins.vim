@@ -26,10 +26,7 @@ if !isdirectory(s:dein_repo_dir)
  call system('git clone https://github.com/Shougo/dein.vim ' . shellescape(s:dein_repo_dir))
 endif
 
-
-set runtimepath^=~/.vim/dein/repos/github.com/Shougo/dein.vim
-
-let s:toml_files=split(glob("<sfile>:p:h/*.toml"),"\n")
+let &runtimepath = s:dein_repo_dir . ',' . &runtimepath
 
 filetype plugin indent off
 
