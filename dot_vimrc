@@ -2,9 +2,11 @@
 
 scriptencoding utf-8
 
+let s:dotfiles_dir = '~/dotfiles/'
+
 let s:vim_files=[
-   \'~/dotfiles/vim/vim_settings.vim',
-   \'~/dotfiles/vim/vim_plugins.vim',
+   \s:dotfiles_dir + 'vim/vim_settings.vim',
+   \s:dotfiles_dir + 'vim/vim_plugins.vim',
    \'~/.vim/local_settings.vim'
    \]
 
