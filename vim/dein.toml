@@ -121,11 +121,23 @@ let g:precious_enable_switchers = {
 " let g:precious_enable_switch_CursorMoved_i = {
 "       \	"vue" : 0
 "       \}
-"augroup MyDeinPrecious
-"  autocmd!
-"  autocmd InsertEnter *.vue :PreciousSwitch
-"  autocmd InsertLeave *.vue :PreciousReset
-"augroup END
+augroup MyDeinPrecious
+  autocmd!
+  autocmd User PreciousFileType call s:only_switch_syntax_when_vue()
+augroup END
+
+function! s:only_switch_syntax_when_vue() abort
+  let l:basetype = precious#base_filetype()
+  if basetype != "vue"
+    return
+  endif
+  if precious#context_filetype() == "typescript"
+    let &l:syntax = precious#context_filetype()
+    return
+  endif
+  let &filetype = precious#context_filetype()
+  call precious#set_base_filetype(l:basetype)
+endfunction
 """
 
 [[plugins]]

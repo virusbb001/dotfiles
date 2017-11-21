@@ -25,6 +25,14 @@ let g:user_emmet_settings = {
 \}
 '''
 
+[[plugins]]
+repo = 'digitaltoad/vim-pug'
+on_ft = ["pug", "vue"]
+
+[[plugins]]
+repo = 'nikvdp/ejs-syntax'
+on_ft = ["ejs"]
+
 # javascript
 
 [[plugins]]
@@ -53,11 +61,11 @@ repo = 'posva/vim-vue'
 on_ft = 'vue'
 
 [[plugins]]
-on_ft = ["typescript"]
+on_ft = ["typescript", "vue"]
 repo = "leafgarland/typescript-vim"
 
 [[plugins]]
-on_ft = ["typescript"]
+on_ft = ["typescript", "vue"]
 repo = "HerringtonDarkholme/yats.vim"
 
 [[plugins]]
