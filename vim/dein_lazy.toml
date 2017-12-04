@@ -7,6 +7,9 @@ depends = ["context_filetype.vim"]
 on_event = "InsertEnter"
 hook_add="""
 let g:deoplete#enable_at_startup = 1
+let g:deoplete#sources#omni#input_patterns = {
+        \   "ruby" : '[^. *\t]\.\w*\|\h\w*::',
+        \}
 """
 
 # html/css
@@ -54,6 +57,7 @@ if = 'executable("npm")'
 build = 'npm install'
 hook_source = '''
 autocmd FileType javascript setlocal completeopt=menuone,preview
+autocmd FileType javascript map <buffer> <C-]> :TernDef
 '''
 
 [[plugins]]
@@ -99,3 +103,26 @@ let g:virtualenv_auto_activate = 1
 [[plugins]]
 repo = 'fatih/vim-go'
 on_ft = 'go'
+
+# ruby
+
+[[plugins]]
+on_ft = ["ruby"]
+repo = "tpope/vim-rails"
+
+[[plugins]]
+on_ft = ["ruby"]
+repo = "tpope/vim-bundler"
+
+[[plugins]]
+on_ft = ["ruby"]
+if = "(system(\"gem list -i rcodetools >/dev/null\") || v:shell_error == 0)"
+repo = "osyo-manga/vim-monster"
+hook_add = """
+let g:monster#completion#rcodetools#backend = "async_rct_complete"
+"""
+
+[[plugins]]
+on_ft = ["ruby"]
+if = 'executable("rct-complete")'
+repo = "Shougo/deoplete-rct"
