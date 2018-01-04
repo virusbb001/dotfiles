@@ -21,6 +21,8 @@ set statusline+=%=
 "右
 set statusline+=%l,%c%V%5P
 
+set concealcursor=nc
+
 set ruler
 syntax enable
 
@@ -147,6 +149,11 @@ function! s:vimrc_local(loc)
   source `=i`
  endfor
 endfunction
+
+if !exists(":DiffOrig")
+  command DiffOrig vert new | set bt=nofile | r ++edit # | 0d_ | diffthis
+        \ | wincmd p | diffthis
+endif
 
 " markdown syntax
 " see markdown syntax file or http://mattn.kaoriya.net/software/vim/20140523124903.htm
