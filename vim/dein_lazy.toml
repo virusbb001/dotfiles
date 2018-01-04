@@ -67,10 +67,13 @@ on_ft = 'vue'
 [[plugins]]
 on_ft = ["typescript", "vue"]
 repo = "leafgarland/typescript-vim"
+hook_source = '''
+autocmd FileType typescript setlocal indentkeys+=0.
+'''
 
-[[plugins]]
-on_ft = ["typescript", "vue"]
-repo = "HerringtonDarkholme/yats.vim"
+# [[plugins]]
+# on_ft = ["typescript", "vue"]
+# repo = "HerringtonDarkholme/yats.vim"
 
 [[plugins]]
 if = "has('nvim')"

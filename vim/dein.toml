@@ -7,7 +7,7 @@ repo = 'Shougo/vimproc.vim'
 build = 'make'
 
 [[plugins]]
-if = '!has("nvim") && has("python3")'
+if = 'has("python3")'
 repo = "roxma/nvim-yarp"
 
 [[plugins]]
@@ -145,3 +145,21 @@ repo = 'majutsushi/tagbar'
 
 [[plugins]]
 repo = 'thinca/vim-quickrun'
+
+[[plugins]]
+repo = "aklt/plantuml-syntax"
+
+[[plugins]]
+repo = "Shougo/neco-syntax"
+
+[[plugins]]
+repo = "autozimu/LanguageClient-neovim"
+hook_add = """
+"let g:LanguageClient_serverCommands = {
+"\ "vue": ["vls"]
+"\ }
+"let g:LanguageClient_autoStart = 1
+"""
+
+[[plugins]]
+repo = "Shougo/neosnippet-snippets"
