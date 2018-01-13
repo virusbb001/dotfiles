@@ -1,7 +1,9 @@
 "共通の設定
 
-set nocompatible
-
+if &termencoding == 0
+ let &termencoding = &encoding
+ set encoding=utf-8
+endif
 scriptencoding utf-8
 
 "表示関係
@@ -28,10 +30,6 @@ syntax enable
 
 "エンコード関連
 "termencodingがなければ設定
-if &termencoding == 0
- let &termencoding = &encoding
- set encoding=utf-8
-endif
 "保存
 if ( &modifiable )
  set fileencoding=utf-8
@@ -53,9 +51,9 @@ set foldlevel=-1
 "UNDO関連
 set undolevels=1000
 if has('persistent_undo')
- let s:undodir = $HOME . "/.vim/undo"
- if !isdirectory(s:undodir) && exists("*mkdir")
-  call mkdir(s:undodir, "p")
+ let s:undodir = $HOME . '/.vim/undo'
+ if !isdirectory(s:undodir) && exists('*mkdir')
+  call mkdir(s:undodir, 'p')
  endif
  let &undodir=s:undodir
  "set undodir=~/.vim/undo
@@ -92,7 +90,7 @@ set autoread
 set wildmenu
 set history=100
 filetype plugin indent on
-if &encoding == 'utf-8'
+if &encoding ==? 'utf-8'
  set ambiwidth=double
 endif
 
@@ -144,13 +142,13 @@ augroup END
 "file name:.vimrc.local
 "
 function! s:vimrc_local(loc)
- let files = findfile('.vimrc.local',escape(a:loc,' ').';',-1)
- for i in reverse(filter(files, 'filereadable(v:val)'))
+ let l:files = findfile('.vimrc.local',escape(a:loc,' ').';',-1)
+ for l:i in reverse(filter(l:files, 'filereadable(v:val)'))
   source `=i`
  endfor
 endfunction
 
-if !exists(":DiffOrig")
+if !exists(':DiffOrig')
   command DiffOrig vert new | set bt=nofile | r ++edit # | 0d_ | diffthis
         \ | wincmd p | diffthis
 endif
