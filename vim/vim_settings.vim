@@ -1,7 +1,9 @@
 "共通の設定
 
-set nocompatible
-
+if &termencoding == 0
+ let &termencoding = &encoding
+ set encoding=utf-8
+endif
 scriptencoding utf-8
 
 "表示関係
@@ -21,15 +23,13 @@ set statusline+=%=
 "右
 set statusline+=%l,%c%V%5P
 
+set concealcursor=nc
+
 set ruler
 syntax enable
 
 "エンコード関連
 "termencodingがなければ設定
-if &termencoding == 0
- let &termencoding = &encoding
- set encoding=utf-8
-endif
 "保存
 if ( &modifiable )
  set fileencoding=utf-8
@@ -50,9 +50,13 @@ set foldlevel=-1
 
 "UNDO関連
 set undolevels=1000
-"無限UNDO
 if has('persistent_undo')
- set undodir=~/.vim/undo
+ let s:undodir = $HOME . '/.vim/undo'
+ if !isdirectory(s:undodir) && exists('*mkdir')
+  call mkdir(s:undodir, 'p')
+ endif
+ let &undodir=s:undodir
+ "set undodir=~/.vim/undo
  set undofile
 endif
 
@@ -74,7 +78,7 @@ map Q gQ
 "インデント
 set autoindent
 "set smartindent
-set shiftwidth=1
+set shiftwidth=2
 
 "その他
 set modeline
@@ -86,7 +90,7 @@ set autoread
 set wildmenu
 set history=100
 filetype plugin indent on
-if &encoding == 'utf-8'
+if &encoding ==? 'utf-8'
  set ambiwidth=double
 endif
 
@@ -101,6 +105,24 @@ endif
 
 "キー設定
 nmap <F1> <Nop>
+
+noremap <special> <SID>win_inc_height <C-w>+
+noremap <special> <SID>win_dec_height <C-w>-
+noremap <special> <SID>win_inc_width <C-w>>
+noremap <special> <SID>win_dec_width <C-w><
+
+nmap <special> <SID>win_repeat+ <SID>win_inc_height<SID>win_repeat
+nmap <special> <SID>win_repeat- <SID>win_dec_height<SID>win_repeat
+nmap <special> <SID>win_repeat> <SID>win_inc_width<SID>win_repeat
+nmap <special> <SID>win_repeat< <SID>win_dec_width<SID>win_repeat
+
+nnoremap <special> <SID>win_repeat <C-w>
+
+nmap <special> <C-w>+ <SID>win_repeat+
+nmap <special> <C-w>- <SID>win_repeat-
+nmap <special> <C-w>> <SID>win_repeat>
+nmap <special> <C-w>< <SID>win_repeat<
+
 
 "自動コマンド
 augroup VirusDropboxAuto
@@ -120,11 +142,16 @@ augroup END
 "file name:.vimrc.local
 "
 function! s:vimrc_local(loc)
- let files = findfile('.vimrc.local',escape(a:loc,' ').';',-1)
- for i in reverse(filter(files, 'filereadable(v:val)'))
+ let l:files = findfile('.vimrc.local',escape(a:loc,' ').';',-1)
+ for l:i in reverse(filter(l:files, 'filereadable(v:val)'))
   source `=i`
  endfor
 endfunction
+
+if !exists(':DiffOrig')
+  command DiffOrig vert new | set bt=nofile | r ++edit # | 0d_ | diffthis
+        \ | wincmd p | diffthis
+endif
 
 " markdown syntax
 " see markdown syntax file or http://mattn.kaoriya.net/software/vim/20140523124903.htm

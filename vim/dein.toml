@@ -1,6 +1,19 @@
 [[plugins]]
 repo = 'Shougo/dein.vim'
 
+# core
+[[plugins]]
+repo = 'Shougo/vimproc.vim'
+build = 'make'
+
+[[plugins]]
+if = 'has("python3")'
+repo = "roxma/nvim-yarp"
+
+[[plugins]]
+if = '!has("nvim") && (has("python") || has("python3"))'
+repo = "roxma/vim-hug-neovim-rpc"
+
 # util
 [[plugins]]
 repo = 'sjl/gundo.vim'
@@ -12,10 +25,6 @@ endif
 '''
 
 [[plugins]]
-repo = 'Shougo/vimproc.vim'
-build = 'make'
-
-[[plugins]]
 repo = 'editorconfig/editorconfig-vim'
 
 [[plugins]]
@@ -23,7 +32,10 @@ repo = 'Shougo/Unite.vim'
 
 [[plugins]]
 repo = 'Shougo/denite.nvim'
-hook_add = '''
+lazy = 1
+on_cmd = 'Denite'
+
+hook_source = '''
 call denite#custom#option('default', {
    \ 'mode': 'normal',
    \ 'direction': 'dynamictop'
@@ -32,7 +44,7 @@ call denite#custom#option('default', {
 
 [[plugins]]
 repo = 'Shougo/vimfiler.vim'
-depends = 'Shougo/Unite.vim'
+depends = 'Unite.vim'
 hook_add = '''
 "call vimfiler#custom#profile('default', 'context', {
 "  \ 'safe' : 0,
@@ -42,7 +54,7 @@ hook_add = '''
 
 [[plugins]]
 repo = 'Shougo/unite-outline'
-depends = 'Shougo/Unite.vim'
+depends = 'Unite.vim'
 
 # help doc
 [[plugins]]
@@ -67,26 +79,87 @@ repo = 'niklasl/vim-rdf'
 [[plugins]]
 repo = 'tmux-plugins/vim-tmux'
 
-# [[plugins]]
-# repo = 'neomake/neomake'
-# hook_add = '''
-# let g:neomake_javascript_enabled_makers = ['eslint']
-# augroup MyNeomakeGroup
-#  autocmd!
-#  autocmd BufWritePost * Neomake
-# augroup END
-# '''
-
-# [[plugins]]
-# repo = 'benjie/neomake-local-eslint.vim'
-# depends = 'neomake/neomake'
-
 [[plugins]]
 repo = 'w0rp/ale'
+hook_add = """
+let g:ale_lint_on_filetype_changed = 0
+let g:ale_lint_on_text_changed = "never"
+let g:ale_linters = {
+      \ "vue" : ["eslint"]
+      \}
+let g:ale_fixers = {
+      \ 'javascript': [
+  \       'eslint'
+  \   ],
+      \ 'typescript': [
+  \       'eslint'
+  \   ],
+      \ 'vue': [
+  \       'eslint'
+  \   ],
+  \}
+"""
 
 [[plugins]]
 repo = 'Shougo/context_filetype.vim'
 
 [[plugins]]
 repo = 'osyo-manga/vim-precious'
-depends = 'Shougo/context_filetype.vim'
+depends = 'context_filetype.vim'
+hook_add = """
+let g:precious_enable_switchers = {
+      \ "*" : {
+      \         "setfiletype": 1
+      \ },
+      \ "vue" : {
+      \         "setfiletype": 0
+      \ },
+      \}
+" let g:precious_enable_switch_CursorMoved = {
+"       \	"vue" : 0
+"       \}
+" let g:precious_enable_switch_CursorMoved_i = {
+"       \	"vue" : 0
+"       \}
+augroup MyDeinPrecious
+  autocmd!
+  autocmd User PreciousFileType call s:only_switch_syntax_when_vue()
+augroup END
+
+function! s:only_switch_syntax_when_vue() abort
+  let l:basetype = precious#base_filetype()
+  if basetype != "vue"
+    return
+  endif
+  if precious#context_filetype() == "typescript"
+    let &l:syntax = precious#context_filetype()
+    return
+  endif
+  let &filetype = precious#context_filetype()
+  call precious#set_base_filetype(l:basetype)
+endfunction
+"""
+
+[[plugins]]
+repo = 'majutsushi/tagbar'
+
+[[plugins]]
+repo = 'thinca/vim-quickrun'
+
+[[plugins]]
+repo = "aklt/plantuml-syntax"
+
+[[plugins]]
+repo = "Shougo/neco-syntax"
+
+[[plugins]]
+repo = "autozimu/LanguageClient-neovim"
+hook_add = """
+"let g:LanguageClient_serverCommands = {
+"\ "vue": ["vls"]
+"\ }
+"let g:LanguageClient_autoStart = 1
+"""
+
+[[plugins]]
+repo = "Shougo/neosnippet-snippets"

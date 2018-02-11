@@ -1,0 +1,16 @@
+URxvt.font: xft:Inconsolata:pixelsize=20:antialias=true,\
+    xft:Noto Sans Mono CJK JP:pixelsize=18:antialias=true,\
+    xft:Symbola:pixelsize=18
+!   xft:Noto Sans Mono CJK JP:size=12:antialias=true:hinting=true,\
+!     xft:EmojiOne Color:size=4
+!    xft:DejaVu Sans Mono,
+!    xft:Source Code Pro for Powerline:pixelsize=16:antialias=true:hinting=true,\
+!    xft:IPAGothic:pixelsize=16:antialias=true:hinting=true
+URxvt*letterSpace: 0
+URxvt.perl-ext-common:default,tabbed,xim-onthespot
+URxvt.inputMethod: fcitx
+URxvt.preeditType: OnTheSpot
+URxvt.depth: 32
+URxvt*background: [78]#000000
+URxvt.foreground: #00f900
+URxvt.cursorBlink: True
