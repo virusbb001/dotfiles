@@ -154,6 +154,7 @@ repo = "Shougo/neco-syntax"
 
 [[plugins]]
 repo = "autozimu/LanguageClient-neovim"
+build="bash install.sh"
 hook_add = """
 "let g:LanguageClient_serverCommands = {
 "\ "vue": ["vls"]
