@@ -129,3 +129,8 @@ let g:monster#completion#rcodetools#backend = "async_rct_complete"
 on_ft = ["ruby"]
 if = 'executable("rct-complete")'
 repo = "Shougo/deoplete-rct"
+
+[[plugins]]
+on_ft = ["lisp"]
+repo = "l04m33/vlime"
+rtp = "vim/"
