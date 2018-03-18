@@ -40,6 +40,12 @@ call denite#custom#option('default', {
    \ 'mode': 'normal',
    \ 'direction': 'dynamictop'
    \})
+
+call denite#custom#alias('source', 'file_rec/git', 'file_rec')
+call denite#custom#var('file_rec/git', 'command',
+      \ ['git', 'ls-files', '-co', '--exclude-standard'])
+nnoremap &lt;silent&gt; &lt;C-p&gt; :&lt;C-u&gt;Denite
+      \ `finddir('.git', ';') != '' ? 'file_rec/git' : 'file_rec'`&lt;CR&gt;
 '''
 
 [[plugins]]
@@ -88,16 +94,23 @@ let g:ale_linters = {
       \ "vue" : ["eslint"]
       \}
 let g:ale_fixers = {
+      \ 'python': [
+      \     'autopep8'
+      \ ],
+      \ 'ruby': [
+      \     'rubocop'
+      \ ],
       \ 'javascript': [
-  \       'eslint'
-  \   ],
+      \     'eslint'
+      \ ],
       \ 'typescript': [
-  \       'eslint'
-  \   ],
+      \    'eslint',
+      \    'tslint',
+      \ ],
       \ 'vue': [
-  \       'eslint'
-  \   ],
-  \}
+      \    'eslint'
+      \ ],
+      \}
 """
 
 [[plugins]]
@@ -108,11 +121,11 @@ repo = 'osyo-manga/vim-precious'
 depends = 'context_filetype.vim'
 hook_add = """
 let g:precious_enable_switchers = {
-      \ "*" : {
-      \         "setfiletype": 1
-      \ },
       \ "vue" : {
       \         "setfiletype": 0
+      \ },
+      \ "*" : {
+      \         "setfiletype": 1
       \ },
       \}
 " let g:precious_enable_switch_CursorMoved = {
@@ -121,10 +134,10 @@ let g:precious_enable_switchers = {
 " let g:precious_enable_switch_CursorMoved_i = {
 "       \	"vue" : 0
 "       \}
-augroup MyDeinPrecious
-  autocmd!
-  autocmd User PreciousFileType call s:only_switch_syntax_when_vue()
-augroup END
+" augroup MyDeinPrecious
+"   autocmd!
+"   autocmd User PreciousFileType call s:only_switch_syntax_when_vue()
+" augroup END
 
 function! s:only_switch_syntax_when_vue() abort
   let l:basetype = precious#base_filetype()
@@ -156,10 +169,10 @@ repo = "Shougo/neco-syntax"
 repo = "autozimu/LanguageClient-neovim"
 build="bash install.sh"
 hook_add = """
-"let g:LanguageClient_serverCommands = {
-"\ "vue": ["vls"]
-"\ }
-"let g:LanguageClient_autoStart = 1
+let g:LanguageClient_serverCommands = {
+\ "vue": ["vls"]
+\ }
+let g:LanguageClient_autoStart = 1
 """
 
 [[plugins]]
