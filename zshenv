@@ -13,6 +13,7 @@ path=(
 $HOME/bin(N-/)
 #個人的にソースから入れたものは$HOME/localに
 $HOME/local/bin(N-/)
+$(python -m site --user-base)/bin
 $path
 $ECLIPSE_HOME(N-/)
 )
