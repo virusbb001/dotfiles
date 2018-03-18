@@ -1,6 +1,6 @@
 #!/bin/sh
 
-cd `dirname $0`
+cd "$(dirname "$0")" || exit 1
 
 if [ ! -f ~/.vimrc ]; then
  install -m 0644 dot_vimrc ~/.vimrc
