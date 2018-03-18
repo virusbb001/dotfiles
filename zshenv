@@ -3,7 +3,12 @@
 
 # PATH系変数設定
 typeset -T NODE_PATH node_path
-typeset -U path fpath manpath node_path
+typeset -Tx XDG_CONFIG_DIRS xdg_config_dirs
+
+typeset -U path fpath manpath node_path xdg_config_dirs
+
+dotfiles="$HOME/dotfiles"
+
 path=(
 $HOME/bin(N-/)
 #個人的にソースから入れたものは$HOME/localに
@@ -13,13 +18,18 @@ $ECLIPSE_HOME(N-/)
 )
 
 fpath=(
-$HOME/dotfiles/zsh-completions/src(N-/)
+$dotfiles/zsh-completions/src(N-/)
 /usr/local/share/zsh/site-functions(N-/)
 $fpath
 )
 
 manpath=(
 $manpath
+)
+
+xdg_config_dirs=(
+$dotfiles/config
+$xdg_config_dirs
 )
 
 # LANGが特に指定されてなければ
@@ -64,7 +74,7 @@ google_chrome_option=(
 case "${OSTYPE}" in
  # Mac用
  darwin*)
- if [ -e "$HOME/dotfiles/zsh/darwin.zsh" ] ; then
+ if [ -e "$dotfiles/zsh/darwin.zsh" ] ; then
   source ~/dotfiles/zsh/darwin.zsh
  fi
  ;;
