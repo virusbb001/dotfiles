@@ -44,8 +44,8 @@ call denite#custom#option('default', {
 call denite#custom#alias('source', 'file_rec/git', 'file_rec')
 call denite#custom#var('file_rec/git', 'command',
       \ ['git', 'ls-files', '-co', '--exclude-standard'])
-nnoremap &lt;silent&gt; &lt;C-p&gt; :&lt;C-u&gt;Denite
-      \ `finddir('.git', ';') != '' ? 'file_rec/git' : 'file_rec'`&lt;CR&gt;
+nnoremap <silent> <C-p> :<C-u>Denite
+      \ `finddir('.git', ';') != '' ? 'file_rec/git' : 'file_rec'`<CR>
 '''
 
 [[plugins]]
