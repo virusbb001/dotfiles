@@ -75,12 +75,11 @@ on_ft = 'toml'
 [[plugins]]
 repo = 'sjl/badwolf'
 
-[[plugins]]
-repo = 'nikolavp/sparql.vim'
-on_ft = 'sparql'
+# Git
 
 [[plugins]]
-repo = 'niklasl/vim-rdf'
+repo = 'tpope/vim-fugitive'
+
 
 [[plugins]]
 repo = 'tmux-plugins/vim-tmux'
@@ -177,3 +176,21 @@ let g:LanguageClient_autoStart = 1
 
 [[plugins]]
 repo = "Shougo/neosnippet-snippets"
+
+[[plugins]]
+repo = 'alpaca-tc/alpaca_tags'
+
+[[plugins]]
+repo = 'junegunn/vim-easy-align'
+hook_add = '''
+command PrettyCSV :%EasyAlign *, {'lm': 1, 'stl': 0}
+nmap <F4> ms:PrettyCSV<CR>`s
+'''
+
+# Syntax
+
+[[plugins]]
+repo = 'dannywillems/vim-icalendar'
+
+[[plugins]]
+repo = 'chakrit/upstart.vim'
