@@ -228,3 +228,8 @@ if [[ ! -z "$VIRTUAL_ENV" ]] ; then
  echo "virtualenv"
  source "$VIRTUAL_ENV/bin/activate"
 fi
+
+if which nvim >/dev/null 2>&1; then
+  alias vim='nvim'
+  export EDITOR="nvim"
+fi
