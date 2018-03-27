@@ -18,6 +18,10 @@ $path
 $ECLIPSE_HOME(N-/)
 )
 
+if which go >/dev/null 2>&1; then
+  path=($(go env GOPATH)/bin $path)
+fi
+
 fpath=(
 $dotfiles/zsh-completions/src(N-/)
 /usr/local/share/zsh/site-functions(N-/)
