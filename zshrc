@@ -235,5 +235,5 @@ if which nvim >/dev/null 2>&1; then
 fi
 
 if which ng >/dev/null 2>&1; then
-  source <(ng completion --zsh)
+  source <(ng completion --zsh 2>/dev/null)
 fi
