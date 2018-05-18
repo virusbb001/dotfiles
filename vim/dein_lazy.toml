@@ -5,11 +5,12 @@ if = 'has("python3")'
 repo = "Shougo/deoplete.nvim"
 depends = ["context_filetype.vim"]
 on_event = "InsertEnter"
-hook_add="""
-let g:deoplete#enable_at_startup = 1
+hook_source="""
+call deoplete#enable()
 let g:deoplete#sources#omni#input_patterns = {
         \   "ruby" : '[^. *\t]\.\w*\|\h\w*::',
         \}
+inoremap <expr> <C-\>d deoplete#mappings#manual_complete()
 """
 
 # html/css
@@ -116,7 +117,6 @@ let g:virtualenv_auto_activate = 1
 
 [[plugins]]
 repo = 'zchee/deoplete-jedi'
-depends = [ "Shougo/deoplete.nvim"]
 on_ft = ["python"]
 if = 'has("nvim")'
 
