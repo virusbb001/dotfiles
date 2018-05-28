@@ -1,15 +1,38 @@
+# lint: https://github.com/PowerShell/PSScriptAnalyzer
 Set-StrictMode -Version Latest
 
-Write-Host $PSScriptRoot
+Write-Output $PSScriptRoot
 
-if (!(Test-Path "${home}/_vimrc")) {
+# enviromnents
+
+if (Test-Path env:HOME) {
+  Write-Output "env:HOME has already set. skip"
+} else {
+  $home = "$env:USERPROFILE"
+  [Environment]::SetEnvironmentVariable("HOME", "$home", [EnvironmentVariableTarget]::User)
+  Set-Item env:HOME -value "$home"
+}
+
+if (Test-Path env:XDG_CONFIG_HOME) {
+  Write-Output "env:XDG_CONFIG_HOME has already set. skip"
+} else {
+  $xdg_config_home = "$env:USERPROFILE\AppData\Local"
+  [Environment]::SetEnvironmentVariable("XDG_CONFIG_HOME", "$xdg_config_home", [EnvironmentVariableTarget]::User)
+  Set-Item env:XDG_CONFIG_HOME -value "$xdg_config_home"
+}
+
+# Copy Files
+
+if (Test-Path "$home/_vimrc") {
+  Write-Output "vimrc is already exists. skip"
+}else{
   Copy-Item ($PSScriptRoot + "\dot_vimrc") "${home}\_vimrc"
-}else{
-  Write-Host "vimrc is already exists. skip"
 }
 
-if (!(Test-Path $profile)) {
-  Copy-Item ($PSScriptRoot + "\profile.ps1") $profile
+if (Test-Path $profile) {
+  Write-Output "$profile is already exists. skip"
 }else{
-  Write-Host "$profile is already exists. skip"
+  Copy-Item ($PSScriptRoot + "\profile.ps1") $profile
 }
+
+xcopy D:\dotfiles\config $env:XDG_CONFIG_HOME /s /P
