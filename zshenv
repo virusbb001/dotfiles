@@ -22,6 +22,13 @@ if which go >/dev/null 2>&1; then
   path=($(go env GOPATH)/bin $path)
 fi
 
+if which ruby >/dev/null 2>&1; then
+  path=(
+  $(ruby -e 'print Gem.user_dir')/bin(N-/)
+  $path
+  )
+fi
+
 fpath=(
 $dotfiles/zsh-completions/src(N-/)
 /usr/local/share/zsh/site-functions(N-/)
