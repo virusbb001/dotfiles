@@ -31,8 +31,9 @@ if dein#load_state(s:dein_dir)
  " Required:
  call dein#begin(s:dein_dir,[$MYVIMRC, expand('<sfile>')])
 
- call dein#load_toml(expand('~/dotfiles/vim/dein.toml'), {'lazy' : 0})
- call dein#load_toml(expand('~/dotfiles/vim/dein_lazy.toml'), {'lazy' : 1})
+ let s:directory = expand('<sfile>:p:h')
+ call dein#load_toml(expand(s:directory . '/dein.toml'), {'lazy' : 0})
+ call dein#load_toml(expand(s:directory . '/dein_lazy.toml'), {'lazy' : 1})
 
  if filereadable(expand('~/.vim/dein.toml'))
   call dein#load_toml(expand('~/.vim/dein.toml'), {'lazy' : 0})
