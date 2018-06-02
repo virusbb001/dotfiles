@@ -92,6 +92,7 @@ autocmd FileType typescript setlocal indentkeys+=0.
 [[plugins]]
 if = "has('nvim')"
 repo = 'mhartington/nvim-typescript'
+build = "./install"
 on_ft = ['typescript', 'vue']
 hook_source = '''
 let g:nvim_typescript#vue_support = 1
