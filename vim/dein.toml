@@ -196,4 +196,5 @@ repo = 'dannywillems/vim-icalendar'
 repo = 'chakrit/upstart.vim'
 
 # Scala
+[[plugins]]
 repo = "derekwyatt/vim-scala"
