@@ -79,21 +79,22 @@ repo = 'posva/vim-vue'
 on_ft = 'vue'
 
 [[plugins]]
-on_ft = ["typescript", "vue"]
+on_ft = ["typescript", "typescriptreact", "vue"]
 repo = "leafgarland/typescript-vim"
 hook_source = '''
 autocmd FileType typescript setlocal indentkeys+=0.
 '''
+if = "v:false"
 
-# [[plugins]]
-# on_ft = ["typescript", "vue"]
-# repo = "HerringtonDarkholme/yats.vim"
+[[plugins]]
+on_ft = ["typescript", "typescriptreact", "vue"]
+repo = "HerringtonDarkholme/yats.vim"
 
 [[plugins]]
 if = "has('nvim')"
 repo = 'mhartington/nvim-typescript'
 build = "./install.sh"
-on_ft = ['typescript', 'vue']
+on_ft = ['typescript', "typescript-react", 'vue']
 hook_source = '''
 let g:nvim_typescript#vue_support = 1
 '''
