@@ -17,7 +17,7 @@ inoremap <expr> <C-\>d deoplete#mappings#manual_complete()
 
 [[plugins]]
 repo = 'mattn/emmet-vim'
-on_ft = ['html','css','htmldjango','vue', 'pug', "eruby"]
+on_ft = ['html','css','htmldjango','vue', 'pug', "eruby", "typescriptreact"]
 hook_source = '''
 let g:user_emmet_settings = {
 \ 'variables': {
@@ -51,9 +51,13 @@ autocmd FileType javascript setlocal indentkeys+=.
 autocmd FileType javascript setlocal foldmethod=syntax
 '''
 
+# [[plugins]]
+# repo = 'mxw/vim-jsx'
+# on_ft = ['javascript', 'vue']
+
 [[plugins]]
-repo = 'mxw/vim-jsx'
-on_ft = ['javascript', 'vue']
+repo = "MaxMEllon/vim-jsx-pretty"
+on_ft = ["javascript", "jsx"]
 
 [[plugins]]
 repo = 'ternjs/tern_for_vim'
@@ -94,7 +98,7 @@ repo = "HerringtonDarkholme/yats.vim"
 if = "has('nvim')"
 repo = 'mhartington/nvim-typescript'
 build = "./install.sh"
-on_ft = ['typescript', "typescript-react", 'vue']
+on_ft = ['typescript', "typescriptreact", 'vue']
 hook_source = '''
 let g:nvim_typescript#vue_support = 1
 '''
