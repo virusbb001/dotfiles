@@ -34,9 +34,11 @@ compinit -u
 autoload -U colors
 colors
 
+# zmv
+autoload -U zmv
+
 #add-zsh-hook
 #イベント時に関数を複数定義できる
-#
 autoload -U add-zsh-hook
 
 # run-help
