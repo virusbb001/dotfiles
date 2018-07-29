@@ -31,24 +31,6 @@ repo = 'editorconfig/editorconfig-vim'
 repo = 'Shougo/Unite.vim'
 
 [[plugins]]
-repo = 'Shougo/denite.nvim'
-lazy = 1
-on_cmd = 'Denite'
-
-hook_source = '''
-call denite#custom#option('default', {
-   \ 'mode': 'normal',
-   \ 'direction': 'dynamictop'
-   \})
-
-call denite#custom#alias('source', 'file_rec/git', 'file_rec')
-call denite#custom#var('file_rec/git', 'command',
-      \ ['git', 'ls-files', '-co', '--exclude-standard'])
-nnoremap <silent> <C-p> :<C-u>Denite
-      \ `finddir('.git', ';') != '' ? 'file_rec/git' : 'file_rec'`<CR>
-'''
-
-[[plugins]]
 repo = 'Shougo/vimfiler.vim'
 depends = 'Unite.vim'
 hook_add = '''
