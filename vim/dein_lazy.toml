@@ -221,3 +221,12 @@ on_ft = ["apiblueprint"]
 hook_add = '''
 autocmd FileType apiblueprint setlocal tabstop=4 softtabstop=4 shiftwidth=4
 '''
+
+[[plugins]]
+repo = "chaimleib/vim-renpy"
+on_ft = ["renpy"]
+
+# JSON
+[[plugins]]
+on_ft = ["json"]
+repo = "Quramy/vison"
