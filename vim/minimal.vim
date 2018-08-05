@@ -1,5 +1,6 @@
 " vim -u /path/to/minimal_standalone.vim
 if &compatible
+ " vint: next-line -ProhibitSetNoCompatible
  set nocompatible
 endif
 
