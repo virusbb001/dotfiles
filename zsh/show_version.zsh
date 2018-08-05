@@ -39,5 +39,10 @@ if which brew >/dev/null 2>&1; then
  brew --version
 fi
 
+#rustup
+if which rustup >/dev/null 2>&1; then
+  rustup -V
+fi
+
 return 0
 }
