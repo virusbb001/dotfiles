@@ -63,6 +63,10 @@ on_ft = ["pug", "vue"]
 repo = 'nikvdp/ejs-syntax'
 on_ft = ["ejs"]
 
+[[plugins]]
+repo = "hail2u/vim-css3-syntax"
+on_ft = ["css", "vue"]
+
 # javascript
 
 [[plugins]]
@@ -125,6 +129,10 @@ hook_source = '''
 let g:nvim_typescript#vue_support = 1
 '''
 
+[[plugins]]
+repo = "kchmck/vim-coffee-script"
+on_ft = ["coffee"]
+
 # python
 
 [[plugins]]
@@ -181,10 +189,28 @@ on_ft = ["ruby", "eruby"]
 
 # Lisp
 
+# [[plugins]]
+# on_ft = ["lisp"]
+# repo = "l04m33/vlime"
+# rtp = "vim/"
+# hook_add = """
+# let g:vlime_cl_impl = "ros"
+# function! VlimeBuildServerCommandFor_ros(vlime_loader, vlime_eval)
+#   return ["ros", "run",
+#         \ "--load", a:vlime_loader,
+#         \ "--eval", a:vlime_eval]
+# endfunction
+# """
+
 [[plugins]]
-on_ft = ["lisp"]
-repo = "l04m33/vlime"
-rtp = "vim/"
+repo = "kovisoft/slimv"
+on_ft = ["lisp", "scheme"]
+hook_add = '''
+" let g:slimv_swank_cmd = "!xterm -e \"ros -e '(ql:quickload :swank) (swank:create-server)' wait \"&"
+" let g:slimv_lisp = 'ros run'
+" let g:slimv_impl = 'sbcl'
+'''
+
 
 # SPARQL/RDF
 
