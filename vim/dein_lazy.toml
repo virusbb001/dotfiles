@@ -38,6 +38,10 @@ repo = 'Shougo/deol.nvim'
 on_cmd = 'Deol'
 depends = 'denite.nvim'
 
+[[plugins]]
+repo = 'kmnk/denite-dirmark'
+on_source = 'denite.nvim'
+
 # html/css
 
 [[plugins]]
