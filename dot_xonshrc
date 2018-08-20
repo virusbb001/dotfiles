@@ -1,0 +1,10 @@
+import os
+from pathlib import Path
+
+def init_xonsh():
+    dotfiles = Path($HOME) / "dotfiles"
+    xonshrc = dotfiles / "xonsh" / "xonshrc.xsh"
+    if xonshrc.exists():
+        source @(xonshrc)
+
+init_xonsh()
