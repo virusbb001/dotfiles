@@ -72,4 +72,27 @@ if "NVIM_LISTEN_ADDRESS" in ${...}:
     aliases["tabnew"] = _tab_open
     aliases["nvim_cd"] = _nvim_cd
 
-print("loaded xonshrc")
+
+def _clear_var(current):
+    def clear_var(args, stdin=None):
+        currentSet = set(current)
+        globalKeySet = set(globals().keys())
+        diffKeys = globalKeySet - currentSet
+        if len(diffKeys) < 1:
+            print("nothing to do")
+            return
+
+        print("This variable has been deleted\n" + ", ".join(diffKeys))
+        confirm = input("Are you sure?")
+        if confirm[0].lower() == "y":
+            import gc
+            for key in diffKeys:
+                del globals()[key]
+            gc.collect()
+            print("complete")
+
+    return clear_var
+
+# it should be bottom of this script
+if "clear_var" not in aliases:
+    aliases["clear_var"] = _clear_var(dir())
