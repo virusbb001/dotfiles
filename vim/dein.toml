@@ -52,10 +52,18 @@ function! s:defx_my_settings() abort
   " Define mappings
   nnoremap <silent><buffer><expr> <CR>
         \ defx#do_action('open')
+  nnoremap <silent><buffer><expr> l
+        \ defx#do_action('open')
+  nnoremap <silent><buffer><expr> E
+        \ defx#do_action('open', 'vsplit')
   nnoremap <silent><buffer><expr> K
         \ defx#do_action('new_directory')
   nnoremap <silent><buffer><expr> N
         \ defx#do_action('new_file')
+  nnoremap <silent><buffer><expr> d
+        \ defx#do_action('remove')
+  nnoremap <silent><buffer><expr> r
+        \ defx#do_action('rename')
   nnoremap <silent><buffer><expr> h
         \ defx#do_action('cd', ['..'])
   nnoremap <silent><buffer><expr> ~
@@ -66,6 +74,14 @@ function! s:defx_my_settings() abort
         \ line('.') == line('$') ? 'gg' : 'j'
   nnoremap <silent><buffer><expr> k
         \ line('.') == 1 ? 'G' : 'k'
+  nnoremap <silent><buffer><expr> <C-l>
+        \ defx#do_action('redraw')
+  nnoremap <silent><buffer><expr> q
+        \ defx#do_action('quit')
+  nnoremap <silent><buffer><expr> <C-g>
+        \ defx#do_action('print')
+
+  setlocal foldlevel=99
 endfunction
 '''
 
@@ -229,7 +245,7 @@ repo = 'alpaca-tc/alpaca_tags'
 repo = 'junegunn/vim-easy-align'
 hook_add = '''
 command! PrettyCSV :%EasyAlign *, {'lm': 1, 'stl': 0}
-nmap <F4> ms:PrettyCSV<CR>`s
+nmap <F4> ms:<C-u>PrettyCSV<CR>`s
 '''
 
 [[plugins]]
