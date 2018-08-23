@@ -1,38 +1,54 @@
-# vim: set filetype=python :
+# vim: set fileencoding=utf-8 filetype=xonsh.python :
 
+from braceexpand import braceexpand
 import shutil
 import neovim
 import os
 import platform
 from pathlib import Path
 
-xontrib load vox vox_tabcomplete coreutils
+xontrib load coreutils vox vox_tabcomplete readable-traceback jedi docker_tabcomplete
+
+# Config
 
 $IGNOREEOF = True
 $INDENT = " " * 4
 $AUTO_PUSHD = True
+$PUSHD_MINUS = True # todo: check
 $HISTCONTROL = set("ignoredups")
 $INTENSIFY_COLORS_ON_WIN = False
 $AUTO_CD = True
 $PROMPT = "{env_name:{}}{BOLD_GREEN}{user}@{hostname}{BOLD_BLUE} {short_cwd}{branch_color}{curr_branch: {}}{NO_COLOR} {BOLD_BLUE}{prompt_end}> {NO_COLOR}"
 
-# inputs
+## input config
 $UPDATE_COMPLETIONS_ON_KEYPRESS = False
 $CASE_SENSITIVE_COMPLETIONS = False
-$COMPLETIONS_CONFIRM = True
+$COMPLETIONS_CONFIRM = False
 $VI_MODE = False
 $XONSH_AUTOPAIR = True
 
 # show error trace
 $XONSH_SHOW_TRACEBACK = True
 
+# Custom Path Search
+# brace expand
+# use to @b`file{1,2,3}`
+def b(s):
+    return list(braceexpand(s))
+
+# Aliases
+aliases["where"]=["which","-a"]
+aliases["gti"]="git"
+aliases["vi"]='vim'
+
 if shutil.which("nvim"):
     aliases["vim"] = "nvim"
-    $VISUAL = "nvim"
-    $EDITOR = "nvim"
+    os.environ["VISUAL"] = "nvim"
+    os.environ["EDITOR"] = "nvim"
 elif shutil.which("vim"):
-    $VISUAL = "vim"
-    $EDITOR = "vim"
+    os.environ["VISUAL"] = "vim"
+    os.environ["EDITOR"] = "vim"
+
 
 if platform.system() == "Windows":
     # WSL's bash is too slow and not usable on windows
@@ -45,7 +61,12 @@ if "NVIM_LISTEN_ADDRESS" in ${...}:
     if shutil.which("nvr"):
         editor = "nvr --remote-tab-wait-silent +'set bufhidden=delete'"
         aliases["nvim"] = editor
-        $EDITOR = editor
+        os.environ["VISUAL"] = editor
+        os.environ["EDITOR"] = editor
+        os.environ["GIT_EDITOR"] = editor
+        # $VISUAL = editor
+        # $EDITOR = editor
+        # $GIT_EDITOR = editor
 
     def _tab_open(args, stdin=None, stdout=None, stderr=None):
         if len(args) != 1:
@@ -92,6 +113,23 @@ def _clear_var(current):
             print("complete")
 
     return clear_var
+
+# https://xon.sh/events.html?highlight=on_ptk_create
+@events.on_ptk_create
+def custom_keybindings(bindings, **kw):
+    from prompt_toolkit.keys import Keys
+
+    handler = bindings.add
+
+    @handler(Keys.ControlV)
+    def edit_in_editor(event):
+        # https://python-prompt-toolkit.readthedocs.io/en/stable/pages/advanced_topics/key_bindings.html
+        # https://github.com/jonathanslenders/python-prompt-toolkit/blob/b7ab3ba67df2e7dbf63463fb98f817878dfd256a/prompt_toolkit/key_binding/key_processor.py#L412
+        # https://github.com/jonathanslenders/python-prompt-toolkit/blob/7ed428599bda5f62ed7534ee469b97f2b3e8510f/prompt_toolkit/buffer.py#L1352
+        # このあたりみて再実装？
+        event.current_buffer.tempfile_suffix = '.xsh'
+        # nvrに設定されているなら横分割
+        event.current_buffer.open_in_editor(event.cli)
 
 # it should be bottom of this script
 if "clear_var" not in aliases:
