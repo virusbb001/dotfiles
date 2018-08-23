@@ -9,10 +9,9 @@ if filereadable(expand('$HOME/.vimrc'))
   source ~/.vimrc
 endif
 
-if exists('g:nyaovim_version') && filereadable(expand('$HOME/.gvimrc'))
-  source ~/.gvimrc
+if filereadable(expand('$HOME/.gvimrc'))
+  let s:is_gui = exists('g:nyaovim_version') || exists('g:gui_oni')
+  if s:is_gui
+    source ~/.gvimrc
+  endif
 endif
-
-tnoremap <silent> <Esc> <C-\><C-n>
-tnoremap <C-\><Esc> <Esc>
-tnoremap <C-w> <C-\><C-N><C-w>
