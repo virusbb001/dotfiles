@@ -290,3 +290,11 @@ on_ft = ["renpy"]
 [[plugins]]
 on_ft = ["json"]
 repo = "Quramy/vison"
+
+[[plugins]]
+repo = 'zchee/deoplete-zsh'
+on_ft = ['zsh']
+
+[[plugins]]
+repo = 'Shougo/neco-vim'
+on_ft = ['vim']
