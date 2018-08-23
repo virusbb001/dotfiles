@@ -123,6 +123,7 @@ nmap <special> <C-w>- <SID>win_repeat-
 nmap <special> <C-w>> <SID>win_repeat>
 nmap <special> <C-w>< <SID>win_repeat<
 
+tnoremap <S-Space> <Space>
 
 "自動コマンド
 augroup VirusDropboxAuto
