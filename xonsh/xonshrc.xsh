@@ -11,6 +11,9 @@ xontrib load coreutils vox vox_tabcomplete readable-traceback jedi docker_tabcom
 
 # Config
 
+# show error trace
+$XONSH_SHOW_TRACEBACK = True
+
 $IGNOREEOF = True
 $INDENT = " " * 4
 $AUTO_PUSHD = True
@@ -26,9 +29,6 @@ $CASE_SENSITIVE_COMPLETIONS = False
 $COMPLETIONS_CONFIRM = False
 $VI_MODE = False
 $XONSH_AUTOPAIR = True
-
-# show error trace
-$XONSH_SHOW_TRACEBACK = True
 
 # Custom Path Search
 # brace expand
@@ -93,6 +93,9 @@ if "NVIM_LISTEN_ADDRESS" in ${...}:
     aliases["tabnew"] = _tab_open
     aliases["nvim_cd"] = _nvim_cd
 
+$EDITOR = os.environ["EDITOR"]
+$VISUAL = os.environ["VISUAL"]
+
 
 def _clear_var(current):
     def clear_var(args, stdin=None):
@@ -113,6 +116,7 @@ def _clear_var(current):
             print("complete")
 
     return clear_var
+
 
 # https://xon.sh/events.html?highlight=on_ptk_create
 @events.on_ptk_create
