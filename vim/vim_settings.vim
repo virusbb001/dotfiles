@@ -7,7 +7,7 @@ endif
 scriptencoding utf-8
 
 "表示関係
-set number
+" set number
 set showmode
 set listchars=tab:>-,eol:$,nbsp:-
 set list
@@ -88,6 +88,7 @@ set backspace=2
 set whichwrap=b,s,h,l,<,>,[,]
 set autoread
 set wildmenu
+set wildmode=list:longest,full
 set history=100
 filetype plugin indent on
 if &encoding ==? 'utf-8'
@@ -97,7 +98,7 @@ endif
 "マウスを無効に
 set mouse=
 set hidden
-set completeopt-=preview
+set completeopt=menuone,preview,longest
 
 if has('vim_starting')
  let &runtimepath.=',' . expand('$VIMRUNTIME')
