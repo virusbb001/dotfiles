@@ -265,3 +265,6 @@ repo = "derekwyatt/vim-scala"
 # nyaovim
 [[plugins]]
 repo = "rhysd/nyaovim-markdown-preview"
+
+[[plugins]]
+repo = 'idanarye/vim-smile'
