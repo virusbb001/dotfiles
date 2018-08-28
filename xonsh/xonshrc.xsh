@@ -64,9 +64,7 @@ if "NVIM_LISTEN_ADDRESS" in ${...}:
         os.environ["VISUAL"] = editor
         os.environ["EDITOR"] = editor
         os.environ["GIT_EDITOR"] = editor
-        # $VISUAL = editor
-        # $EDITOR = editor
-        # $GIT_EDITOR = editor
+        $GIT_EDITOR = os.environ["GIT_EDITOR"]
 
     def _tab_open(args, stdin=None, stdout=None, stderr=None):
         if len(args) != 1:
@@ -79,6 +77,7 @@ if "NVIM_LISTEN_ADDRESS" in ${...}:
                 filename = vim_cwd.relative_to(target)
             except ValueError:
                 filename = target
+                nvim.input("<C-\><C-n>")
             nvim.command("tabnew " + str(filename))
             print("tab opened")
         return 0
@@ -89,9 +88,8 @@ if "NVIM_LISTEN_ADDRESS" in ${...}:
             nvim.command("cd " + str(new_pwd))
             print(nvim.eval("getcwd()"))
 
-    aliases["tabopen"] = _tab_open
-    aliases["tabnew"] = _tab_open
-    aliases["nvim_cd"] = _nvim_cd
+    aliases[":tabnew"] = _tab_open
+    aliases[":nvim_cd"] = _nvim_cd
 
 $EDITOR = os.environ["EDITOR"]
 $VISUAL = os.environ["VISUAL"]
