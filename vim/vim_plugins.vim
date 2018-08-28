@@ -12,6 +12,8 @@ augroup VirusVimPlugins
   autocmd!
 augroup END
 
+let &runtimepath .= ',' . expand('<sfile>:p:h')
+
 " auto install
 let s:dein_dir=expand('~/.vim/dein')
 let s:dein_repo_dir = s:dein_dir . '/repos/github.com/Shougo/dein.vim'
