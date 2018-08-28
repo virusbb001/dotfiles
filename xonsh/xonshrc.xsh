@@ -1,4 +1,4 @@
-# vim: set fileencoding=utf-8 filetype=xonsh.python :
+# vim: set fileencoding=utf-8 :
 
 from braceexpand import braceexpand
 import shutil
@@ -132,6 +132,7 @@ def custom_keybindings(bindings, **kw):
         event.current_buffer.tempfile_suffix = '.xsh'
         # nvrに設定されているなら横分割
         event.current_buffer.open_in_editor(event.cli)
+
 
 # it should be bottom of this script
 if "clear_var" not in aliases:
