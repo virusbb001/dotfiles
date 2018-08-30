@@ -6,6 +6,7 @@ import neovim
 import os
 import platform
 from pathlib import Path
+from xonsh.lazyasd import LazyObject
 
 xontrib load coreutils vox vox_tabcomplete readable-traceback jedi docker_tabcomplete
 
@@ -66,30 +67,43 @@ if "NVIM_LISTEN_ADDRESS" in ${...}:
         os.environ["GIT_EDITOR"] = editor
         $GIT_EDITOR = os.environ["GIT_EDITOR"]
 
+    def _set_nvim_object():
+        # TODO: allow to tcp
+        pynvim = neovim.attach("socket", path=$NVIM_LISTEN_ADDRESS)
+
+        @events.on_exit
+        def release_something():
+            pynvim.close()
+
+        return pynvim
+
+    pynvim = LazyObject(_set_nvim_object, globals(), 'pynvim')
+
     def _tab_open(args, stdin=None, stdout=None, stderr=None):
         if len(args) != 1:
             stderr.write("argument requires 1.\nUsage: tabopen <filename>\n")
             return 2
-        with neovim.attach("socket", path=$NVIM_LISTEN_ADDRESS) as nvim:
-            vim_cwd = Path(nvim.eval("getcwd()")).resolve()
-            target = Path.cwd() / args[0]
-            try:
-                filename = vim_cwd.relative_to(target)
-            except ValueError:
-                filename = target
-                nvim.input("<C-\><C-n>")
-            nvim.command("tabnew " + str(filename))
-            print("tab opened")
+        vim_cwd = Path(pynvim.eval("getcwd()")).resolve()
+        target = Path.cwd() / args[0]
+
+        try:
+            filename = vim_cwd.relative_to(target)
+        except ValueError:
+            filename = target
+
+        pynvim.input("<C-\><C-n>")
+        pynvim.command("tabnew " + str(filename))
+        print("tab opened")
         return 0
 
     def _nvim_cd(args):
         new_pwd = Path(args[0]).resolve() if len(args) > 0 else Path.cwd()
-        with neovim.attach("socket", path=$NVIM_LISTEN_ADDRESS) as nvim:
-            nvim.command("cd " + str(new_pwd))
-            print(nvim.eval("getcwd()"))
+        pynvim.command("cd " + str(new_pwd))
+        print(pynvim.eval("getcwd()"))
 
     aliases[":tabnew"] = _tab_open
     aliases[":nvim_cd"] = _nvim_cd
+
 
 $EDITOR = os.environ["EDITOR"]
 $VISUAL = os.environ["VISUAL"]
