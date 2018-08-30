@@ -61,7 +61,7 @@ function! s:defx_my_settings() abort
   nnoremap <silent><buffer><expr> N
         \ defx#do_action('new_file')
   nnoremap <silent><buffer><expr> d
-        \ defx#do_action('remove')
+        \ defx#do_action('remove_trash')
   nnoremap <silent><buffer><expr> r
         \ defx#do_action('rename')
   nnoremap <silent><buffer><expr> h
@@ -146,14 +146,13 @@ repo = 'Shougo/context_filetype.vim'
 
 [[plugins]]
 repo = 'osyo-manga/vim-precious'
-lazy = 1
 depends = 'context_filetype.vim'
 hook_add = """
 let g:precious_enable_switchers = {
-      \ "vue" : {
+      \ "*" : {
       \         "setfiletype": 0
       \ },
-      \ "*" : {
+      \ "toml" : {
       \         "setfiletype": 1
       \ },
       \}
