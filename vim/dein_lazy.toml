@@ -60,6 +60,14 @@ let s:menus.my_commands.command_candidates = [
 
 call denite#custom#var('menu', 'menus', s:menus)
 
+function! DeniteOpenInTerm(context) abort
+  let l:path=a:context.targets[0].action__path
+  execute ':terminal (cd "' . l:path .'"; xonsh)'
+endfunction
+
+call denite#custom#action('directory', 'terminal', funcref('DeniteOpenInTerm'))
+call denite#custom#action('directory', 'debug', {context -> execute('PP! context', '')})
+
 '''
 
 [[plugins]]
