@@ -250,6 +250,9 @@ nmap <F4> ms:<C-u>PrettyCSV<CR>`s
 [[plugins]]
 repo = "Shougo/vinarise.vim"
 
+[[plugins]]
+repo = "thinca/vim-prettyprint"
+
 # Syntax
 [[plugins]]
 repo = 'dannywillems/vim-icalendar'
