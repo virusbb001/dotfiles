@@ -1,12 +1,12 @@
 # vim: set fileencoding=utf-8 :
 
-from braceexpand import braceexpand
+import importlib
 import shutil
-import neovim
 import os
 import platform
 from pathlib import Path
 from xonsh.lazyasd import LazyObject
+from prompt_toolkit.application.current import get_app
 
 xontrib load coreutils vox vox_tabcomplete readable-traceback jedi docker_tabcomplete
 
@@ -34,8 +34,10 @@ $XONSH_AUTOPAIR = True
 # Custom Path Search
 # brace expand
 # use to @b`file{1,2,3}`
-def b(s):
-    return list(braceexpand(s))
+if importlib.util.find_spec("braceexpand") is not None:
+    from braceexpand import braceexpand
+    def b(s):
+        return list(braceexpand(s))
 
 # Aliases
 aliases["where"]=["which","-a"]
@@ -56,7 +58,8 @@ if platform.system() == "Windows":
     if "bash" in __xonsh_completers__:
         completer remove bash
 
-if "NVIM_LISTEN_ADDRESS" in ${...}:
+if "NVIM_LISTEN_ADDRESS" in ${...} and importlib.util.find_spec("neovim") is not None:
+    import neovim
     print("nvim: ", $NVIM_LISTEN_ADDRESS)
 
     if shutil.which("nvr"):
@@ -146,6 +149,14 @@ def custom_keybindings(bindings, **kw):
         event.current_buffer.tempfile_suffix = '.xsh'
         # nvrに設定されているなら横分割
         event.current_buffer.open_in_editor(event.cli)
+
+    # TODO: change timeoutlen
+    @handler(Keys.Escape)
+    def leave_from_terminal_mode(event):
+        if "pynvim" not in globals():
+            # Nothing to do
+            return
+        globals()["pynvim"].input("<C-\><C-n>")
 
 
 # it should be bottom of this script
