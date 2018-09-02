@@ -18,16 +18,14 @@ repo = 'Shougo/denite.nvim'
 on_cmd = 'Denite'
 
 hook_add = '''
+nmap <Plug>[Space]<Space> :<C-u>Denite menu<CR>
+nmap <Plug>[Space]db :<C-u>Denite buffer<CR>
 '''
 
 hook_source = '''
 call denite#custom#option('_', {
   \ 'mode': 'normal'
   \})
-" call denite#custom#option('default', {
-"    \ 'mode': 'normal',
-"    \ 'direction': 'dynamictop'
-"    \})
 
 call denite#custom#map('normal', '<BS>', '<denite:jump_to_previous_source>')
 

@@ -126,6 +126,9 @@ nmap <special> <C-w>< <SID>win_repeat<
 
 tnoremap <S-Space> <Space>
 
+nmap <Space> <Plug>[Space]
+nnoremap <Plug>[Space] <Nop>
+
 "自動コマンド
 augroup VirusDropboxAuto
  autocmd!
