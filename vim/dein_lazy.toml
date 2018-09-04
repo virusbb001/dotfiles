@@ -60,6 +60,7 @@ call denite#custom#var('menu', 'menus', s:menus)
 
 function! DeniteOpenInTerm(context) abort
   let l:path=a:context.targets[0].action__path
+  tab split
   execute 'lcd ' . l:path
   execute 'terminal xonsh'
 endfunction
