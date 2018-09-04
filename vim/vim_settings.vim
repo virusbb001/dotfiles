@@ -143,6 +143,7 @@ augroup VirusDropboxAuto
  autocmd BufRead,BufNewFile *.yaml setlocal shiftwidth=2 tabstop=2 expandtab
  autocmd FileType mkd,markdown setlocal noexpandtab
  autocmd FileType help setlocal iskeyword+=-
+ autocmd TermOpen * setlocal statusline=%{b:term_title}
 augroup END
 
 "file name:.vimrc.local
