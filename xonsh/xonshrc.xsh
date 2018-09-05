@@ -146,7 +146,7 @@ def custom_keybindings(bindings, **kw):
         # https://github.com/jonathanslenders/python-prompt-toolkit/blob/7ed428599bda5f62ed7534ee469b97f2b3e8510f/prompt_toolkit/buffer.py#L1352
         # このあたりみて再実装？
         event.current_buffer.tempfile_suffix = '.xsh'
-        # nvrに設定されているなら横分割
+        # TODO: nvrに設定されているなら横分割
         event.current_buffer.open_in_editor(event.cli)
 
     # TODO: change timeoutlen
