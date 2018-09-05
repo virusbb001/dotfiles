@@ -6,7 +6,6 @@ import os
 import platform
 from pathlib import Path
 from xonsh.lazyasd import LazyObject
-from prompt_toolkit.application.current import get_app
 
 xontrib load coreutils vox vox_tabcomplete readable-traceback jedi docker_tabcomplete
 
