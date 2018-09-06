@@ -144,7 +144,7 @@ augroup VirusDropboxAuto
  autocmd FileType mkd,markdown setlocal noexpandtab
  autocmd FileType help setlocal iskeyword+=-
  if exists("##TermOpen")
-   autocmd TermOpen * setlocal statusline=%{b:term_title}%=PID:%{b:terminal_job_pid},%l/%L
+   autocmd TermOpen * setlocal statusline=%{b:term_title}%=PID:%{b:terminal_job_pid},%c_%l/%L
  endif
 augroup END
 
