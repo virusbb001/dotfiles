@@ -281,3 +281,6 @@ repo = "rhysd/nyaovim-markdown-preview"
 
 [[plugins]]
 repo = 'idanarye/vim-smile'
+
+[[plugins]]
+repo = 'luochen1990/rainbow'
