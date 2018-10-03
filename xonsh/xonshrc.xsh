@@ -6,6 +6,8 @@ import os
 import platform
 from pathlib import Path
 from xonsh.lazyasd import LazyObject
+from prompt_toolkit.application.current import get_app
+import argparse
 
 xontrib load coreutils vox vox_tabcomplete readable-traceback jedi docker_tabcomplete
 
@@ -81,12 +83,17 @@ if "NVIM_LISTEN_ADDRESS" in ${...} and importlib.util.find_spec("neovim") is not
 
     pynvim = LazyObject(_set_nvim_object, globals(), 'pynvim')
 
-    def _tab_open(args, stdin=None, stdout=None, stderr=None):
-        if len(args) != 1:
-            stderr.write("argument requires 1.\nUsage: tabopen <filename>\n")
-            return 2
+    def _tab_open(argv, stdin=None, stdout=None, stderr=None):
+        parser = argparse.ArgumentParser(description="")
+        parser.add_argument("file")
+        parser.add_argument("-r", dest='read', action='store_true')
+        args = parser.parse_args(argv)
+        opts = []
+        if args.read:
+            opts.append("+set\ readonly")
+
         vim_cwd = Path(pynvim.eval("getcwd()")).resolve()
-        target = Path.cwd() / args[0]
+        target = Path.cwd() / args.file
 
         try:
             filename = vim_cwd.relative_to(target)
@@ -94,7 +101,7 @@ if "NVIM_LISTEN_ADDRESS" in ${...} and importlib.util.find_spec("neovim") is not
             filename = target
 
         pynvim.input("<C-\><C-n>")
-        pynvim.command("tabnew " + str(filename))
+        pynvim.command("tabnew "+ " ".join(opts) +" "+ str(filename))
         print("tab opened")
         return 0
 
@@ -122,7 +129,7 @@ def _clear_var(current):
 
         print("This variable has been deleted\n" + ", ".join(diffKeys))
         confirm = input("Are you sure?")
-        if confirm[0].lower() == "y":
+        if confirm[0:1].lower() == "y":
             import gc
             for key in diffKeys:
                 del globals()[key]
