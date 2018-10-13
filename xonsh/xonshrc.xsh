@@ -93,7 +93,7 @@ if "NVIM_LISTEN_ADDRESS" in ${...} and importlib.util.find_spec("neovim") is not
         except ValueError:
             filename = target
 
-        pynvim.input("<C-\><C-n>")
+        pynvim.input(r"<C-\><C-n>")
         pynvim.command("tabnew " + str(filename))
         print("tab opened")
         return 0
@@ -155,7 +155,7 @@ def custom_keybindings(bindings, **kw):
         if "pynvim" not in globals():
             # Nothing to do
             return
-        globals()["pynvim"].input("<C-\><C-n>")
+        globals()["pynvim"].input(r"<C-\><C-n>")
 
 
 # it should be bottom of this script
