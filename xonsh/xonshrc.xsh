@@ -57,6 +57,16 @@ if platform.system() == "Windows":
     if "bash" in __xonsh_completers__:
         completer remove bash
 
+def raw_ansi_red(message: str):
+    return "\033[38;5;1m" + message + "\033[39;49m"
+
+if importlib.util.find_spec("neovim") is None:
+    print(raw_ansi_red("neovim module not found"))
+
+if importlib.util.find_spec("nvr") is None:
+    print(raw_ansi_red("nvr command is missing"))
+
+
 if "NVIM_LISTEN_ADDRESS" in ${...} and importlib.util.find_spec("neovim") is not None:
     import neovim
     print("nvim: ", $NVIM_LISTEN_ADDRESS)
