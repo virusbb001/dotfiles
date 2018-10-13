@@ -1,4 +1,4 @@
-URxvt.font: xft:Inconsolata:pixelsize=20:antialias=true,\
+URxvt.font: xft:Inconsolata:pixelsize=16:antialias=true,\
     xft:Noto Sans Mono CJK JP:pixelsize=18:antialias=true,\
     xft:Symbola:pixelsize=18,\
     xft:Noto Color Emoji:pixelsize=18
