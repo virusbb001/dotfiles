@@ -169,4 +169,5 @@ let g:markdown_fenced_languages = [
    \ 'js=javascript',
    \ 'cpp',
    \ 'ruby',
+   \ 'lua'
    \]
