@@ -235,7 +235,3 @@ if which nvim >/dev/null 2>&1; then
   alias vim='nvim'
   export EDITOR="nvim"
 fi
-
-if which ng >/dev/null 2>&1; then
-  source <(ng completion --zsh 2>/dev/null)
-fi
