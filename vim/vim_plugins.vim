@@ -8,6 +8,8 @@ if v:version < 704
   finish
 end
 
+let s:dotfiles_vim_dir=expand('<sfile>:p:h')
+
 augroup VirusVimPlugins
   autocmd!
 augroup END
@@ -32,12 +34,18 @@ let &runtimepath = s:dein_repo_dir . ',' . &runtimepath
 
 filetype plugin indent off
 
+function! LoadRCVim(name) abort
+  let l:filename = s:dotfiles_vim_dir . "/" . a:name
+  echomsg l:filename
+  execute "source " . l:filename
+endfunction
+
 if dein#load_state(s:dein_dir)
   " vim_tomls
   " Required:
   call dein#begin(s:dein_dir,[$MYVIMRC, expand('<sfile>')])
 
-  let s:directory = expand('<sfile>:p:h')
+  let s:directory = s:dotfiles_vim_dir
   call dein#load_toml(expand(s:directory . '/dein.toml'), {'lazy' : 0})
   call dein#load_toml(expand(s:directory . '/dein_lazy.toml'), {'lazy' : 1})
 
@@ -51,6 +59,8 @@ if dein#load_state(s:dein_dir)
   if dein#tap('deoplete.nvim') && has('nvim')
     call dein#disable('neocomplete.vim')
   endif
+
+  call dein#set_hook('denite.nvim', 'hook_source', 'call LoadRCVim("denite.rc.vim")')
 
   " Required:
   call dein#end()
