@@ -69,64 +69,66 @@ if importlib.util.find_spec("nvr") is None:
     print(raw_ansi_red("nvr command is missing"))
 
 
-if "NVIM_LISTEN_ADDRESS" in ${...} and importlib.util.find_spec("neovim") is not None:
-    import neovim
-    print("nvim: ", $NVIM_LISTEN_ADDRESS)
+def enable_nvim():
 
-    if shutil.which("nvr"):
-        editor = "nvr --remote-tab-wait-silent +'set bufhidden=delete'"
-        aliases["nvim"] = editor
-        os.environ["VISUAL"] = editor
-        os.environ["EDITOR"] = editor
-        os.environ["GIT_EDITOR"] = editor
-        $GIT_EDITOR = os.environ["GIT_EDITOR"]
+    if "NVIM_LISTEN_ADDRESS" in ${...} and importlib.util.find_spec("neovim") is not None:
+        import neovim
 
-    def _set_nvim_object():
-        # TODO: allow to tcp
-        pynvim = neovim.attach("socket", path=$NVIM_LISTEN_ADDRESS)
+        print("nvim: ", $NVIM_LISTEN_ADDRESS)
 
-        @events.on_exit
-        def release_something():
-            pynvim.close()
+        if shutil.which("nvr"):
+            editor = "nvr --remote-tab-wait-silent +'set bufhidden=delete'"
+            aliases["nvim"] = editor
+            os.environ["VISUAL"] = editor
+            os.environ["EDITOR"] = editor
+            os.environ["GIT_EDITOR"] = editor
+            $GIT_EDITOR = os.environ["GIT_EDITOR"]
 
-        return pynvim
+        def _set_nvim_object():
+            # TODO: allow to tcp
+            pynvim = neovim.attach("socket", path=$NVIM_LISTEN_ADDRESS)
 
-    pynvim = LazyObject(_set_nvim_object, globals(), 'pynvim')
+            @events.on_exit
+            def release_something():
+                pynvim.close()
 
-    def _tab_open(argv, stdin=None, stdout=None, stderr=None):
-        parser = argparse.ArgumentParser(description="")
-        parser.add_argument("file")
-        parser.add_argument("-r", dest='read', action='store_true')
-        args = parser.parse_args(argv)
-        opts = []
-        if args.read:
-            opts.append("+set\ readonly")
+            return pynvim
 
-        vim_cwd = Path(pynvim.eval("getcwd()")).resolve()
-        target = Path.cwd() / args.file
+        pynvim = LazyObject(_set_nvim_object, globals(), 'pynvim')
 
-        try:
-            filename = vim_cwd.relative_to(target)
-        except ValueError:
-            filename = target
+        def _tab_open(argv, stdin=None, stdout=None, stderr=None):
+            parser = argparse.ArgumentParser(description="")
+            parser.add_argument("file")
+            parser.add_argument("-r", dest='read', action='store_true')
+            args = parser.parse_args(argv)
+            opts = []
+            if args.read:
+                opts.append(r"+set\ readonly")
 
-        pynvim.input(r"<C-\><C-n>")
-        pynvim.command("tabnew "+ " ".join(opts) +" "+ str(filename))
-        print("tab opened")
-        return 0
+            vim_cwd = Path(pynvim.eval("getcwd()")).resolve()
+            target = Path.cwd() / args.file
 
-    def _nvim_cd(args):
-        new_pwd = Path(args[0]).resolve() if len(args) > 0 else Path.cwd()
-        pynvim.command("cd " + str(new_pwd))
-        print(pynvim.eval("getcwd()"))
+            try:
+                filename = vim_cwd.relative_to(target)
+            except ValueError:
+                filename = target
 
-    aliases[":tabnew"] = _tab_open
-    aliases[":nvim_cd"] = _nvim_cd
+            pynvim.input(r"<C-\><C-n>")
+            pynvim.command("tabnew "+ " ".join(opts) +" "+ str(filename))
+            print("tab opened")
+            return 0
 
+        def _nvim_cd(args):
+            new_pwd = Path(args[0]).resolve() if len(args) > 0 else Path.cwd()
+            pynvim.command("cd " + str(new_pwd))
+            print(pynvim.eval("getcwd()"))
 
-$EDITOR = os.environ["EDITOR"]
-$VISUAL = os.environ["VISUAL"]
+        aliases[":tabnew"] = _tab_open
+        aliases[":nvim_cd"] = _nvim_cd
+    $EDITOR = os.environ["EDITOR"]
+    $VISUAL = os.environ["VISUAL"]
 
+enable_nvim()
 
 def _clear_var(current):
     def clear_var(args, stdin=None):
