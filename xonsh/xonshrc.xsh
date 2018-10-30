@@ -56,7 +56,7 @@ elif shutil.which("vim"):
 
 if platform.system() == "Windows":
     # WSL's bash is too slow and not usable on windows
-    if "bash" in __xonsh_completers__:
+    if "bash" in __xonsh__.completers:
         completer remove bash
 
 def raw_ansi_red(message: str):
