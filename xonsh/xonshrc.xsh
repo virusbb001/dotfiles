@@ -62,8 +62,8 @@ if platform.system() == "Windows":
 def raw_ansi_red(message: str):
     return "\033[38;5;1m" + message + "\033[39;49m"
 
-if importlib.util.find_spec("neovim") is None:
-    print(raw_ansi_red("neovim module not found"))
+if importlib.util.find_spec("neovim") or importlib.util.find_spec("pynvim") is None:
+    print(raw_ansi_red("neovim/pynvim module not found"))
 
 if importlib.util.find_spec("nvr") is None:
     print(raw_ansi_red("nvr command is missing"))
@@ -71,9 +71,15 @@ if importlib.util.find_spec("nvr") is None:
 
 def enable_nvim():
 
-    if "NVIM_LISTEN_ADDRESS" in ${...} and importlib.util.find_spec("neovim") is not None:
-        import neovim
+    if ("NVIM_LISTEN_ADDRESS" in ${...}
+            and (importlib.util.find_spec("neovim") is not None
+                 or importlib.util.find_spec("pynvim") is not None)):
+        def load_pynvim():
+            if importlib.util.find_spec("pynvim") is not None:
+                return importlib.import_module("pynvim")
+            return importlib.import_module("neovim")
 
+        neovim = load_pynvim()
         print("nvim: ", $NVIM_LISTEN_ADDRESS)
 
         if shutil.which("nvr"):
