@@ -62,7 +62,7 @@ if platform.system() == "Windows":
 def raw_ansi_red(message: str):
     return "\033[38;5;1m" + message + "\033[39;49m"
 
-if importlib.util.find_spec("neovim") or importlib.util.find_spec("pynvim") is None:
+if (importlib.util.find_spec("neovim") or importlib.util.find_spec("pynvim")) is None:
     print(raw_ansi_red("neovim/pynvim module not found"))
 
 if importlib.util.find_spec("nvr") is None:
