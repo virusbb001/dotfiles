@@ -205,17 +205,22 @@ let g:dein#plugin.build = cmd
 '''
 hook_add = """
 let g:LanguageClient_serverCommands = {
-\ "vue": ["vls"]
+\ "vue": ["vls"],
+\ "haskell": ["stack", "exec", "hie-wrapper"],
+\ "python": ["pyls"]
 \ }
 let g:LanguageClient_autoStart = 1
 
-function! s:languageclient_key_setting() abort
-  nnoremap <buffer><silent> K :call LanguageClient#textDocument_hover()<CR>
-  nnoremap <buffer><silent> gd :call LanguageClient#textDocument_definition()<CR>
-  nnoremap <buffer><silent> <F2> :call LanguageClient#textDocument_rename()<CR>
+let g:LanguageClient_loggingLevel = "INFO"
+function s:LC_maps()
+  if has_key(g:LanguageClient_serverCommands, &filetype)
+    nnoremap <buffer> <silent> K :call LanguageClient#textDocument_hover()<cr>
+    nnoremap <buffer> <silent> gd :call LanguageClient#textDocument_definition()<CR>
+    nnoremap <buffer> <silent> <F2> :call LanguageClient#textDocument_rename()<CR>
+  endif
 endfunction
 
-autocmd VirusVimPlugins FileType vue call s:languageclient_key_setting()
+autocmd VirusVimPlugins FileType * call s:LC_maps()
 """
 
 [[plugins]]
