@@ -39,7 +39,7 @@ on_source = 'denite.nvim'
 
 [[plugins]]
 repo = 'mattn/emmet-vim'
-on_ft = ['html','css','htmldjango','vue', 'pug', "eruby", "typescriptreact"]
+on_ft = ['html','css','htmldjango','vue', 'pug', "eruby", "typescriptreact", "xml"]
 hook_source = '''
 let g:user_emmet_settings = {
 \ 'variables': {
