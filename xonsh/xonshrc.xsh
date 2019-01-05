@@ -6,7 +6,6 @@ import os
 import platform
 from pathlib import Path
 from xonsh.lazyasd import LazyObject
-from prompt_toolkit.application.current import get_app
 import argparse
 
 xontrib load coreutils vox vox_tabcomplete readable-traceback jedi docker_tabcomplete
@@ -59,14 +58,18 @@ if platform.system() == "Windows":
     if "bash" in __xonsh__.completers:
         completer remove bash
 
-def raw_ansi_red(message: str):
-    return "\033[38;5;1m" + message + "\033[39;49m"
+
+def print_error_msg(message: str):
+    # TODO print red color
+    print(message)
+    return
+
 
 if (importlib.util.find_spec("neovim") or importlib.util.find_spec("pynvim")) is None:
-    print(raw_ansi_red("neovim/pynvim module not found"))
+    print_error_msg("neovim/pynvim module not found")
 
-if importlib.util.find_spec("nvr") is None:
-    print(raw_ansi_red("nvr command is missing"))
+if importlib.util.find_spec("neovim-remote") is None:
+    print_error_msg("nvr command is missing")
 
 
 def enable_nvim():
