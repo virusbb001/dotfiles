@@ -132,8 +132,14 @@ def enable_nvim():
             pynvim.command("cd " + str(new_pwd))
             print(pynvim.eval("getcwd()"))
 
+        def _fix_tmpdir(args):
+            tempdir = Path(pynvim.eval("tempname()")).parent
+            tempdir.mkdir(exist_ok=True)
+            print(f"missing {str(tempdir)} is fixed.")
+
         aliases[":tabnew"] = _tab_open
         aliases[":nvim_cd"] = _nvim_cd
+        aliases[":fix_tmpdir"] = _fix_tmpdir
     $EDITOR = os.environ["EDITOR"]
     $VISUAL = os.environ["VISUAL"]
 
