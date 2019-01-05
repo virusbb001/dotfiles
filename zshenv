@@ -11,9 +11,7 @@ dotfiles="$HOME/dotfiles"
 
 path=(
 $HOME/bin(N-/)
-#個人的にソースから入れたものは$HOME/localに
 $HOME/local/bin(N-/)
-$(python -m site --user-base)/bin
 $path
 $ECLIPSE_HOME(N-/)
 )
@@ -25,6 +23,20 @@ fi
 if which ruby >/dev/null 2>&1; then
   path=(
   $(ruby -e 'print Gem.user_dir')/bin(N-/)
+  $path
+  )
+fi
+
+if which python3 >/dev/null 2>&1; then
+  path=(
+  $(python3 -m site --user-base)/bin(N-/)
+  $path
+  )
+fi
+
+if which python2 >/dev/null 2>&1; then
+  path=(
+  $(python2 -m site --user-base)/bin(N-/)
   $path
   )
 fi
