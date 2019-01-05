@@ -157,6 +157,10 @@ def _clear_var(current):
     return clear_var
 
 
+def show_ast(cmd):
+    xonsh.ast.pprint_ast(__xonsh__.execer.parse(cmd, ctx=__xonsh_ctx__))
+
+
 # https://xon.sh/events.html?highlight=on_ptk_create
 @events.on_ptk_create
 def custom_keybindings(bindings, **kw):
