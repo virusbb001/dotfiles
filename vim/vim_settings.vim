@@ -143,6 +143,7 @@ augroup VirusDropboxAuto
  autocmd BufRead,BufNewFile *.yaml setlocal shiftwidth=2 tabstop=2 expandtab
  autocmd FileType mkd,markdown setlocal noexpandtab
  autocmd FileType help setlocal iskeyword+=-
+ autocmd FileType python setlocal colorcolumn=80
  if exists("##TermOpen")
    autocmd TermOpen * setlocal statusline=%{b:term_title}%=PID:%{b:terminal_job_pid},%c_%l/%L
  endif
