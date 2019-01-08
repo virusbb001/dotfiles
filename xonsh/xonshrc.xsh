@@ -68,7 +68,7 @@ def print_error_msg(message: str):
 if (importlib.util.find_spec("neovim") or importlib.util.find_spec("pynvim")) is None:
     print_error_msg("neovim/pynvim module not found")
 
-if importlib.util.find_spec("neovim-remote") is None:
+if importlib.util.find_spec("nvr") is None:
     print_error_msg("nvr command is missing")
 
 
