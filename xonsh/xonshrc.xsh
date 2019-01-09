@@ -36,7 +36,7 @@ $XONSH_AUTOPAIR = True
 # use to @b`file{1,2,3}`
 if importlib.util.find_spec("braceexpand") is not None:
     from braceexpand import braceexpand
-    def b(s):
+    def B(s):
         return list(braceexpand(s))
 
 # Aliases
