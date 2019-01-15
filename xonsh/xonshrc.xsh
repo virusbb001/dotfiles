@@ -180,12 +180,14 @@ def custom_keybindings(bindings, **kw):
     @handler(Keys.ControlV)
     def edit_in_editor(event):
         # https://python-prompt-toolkit.readthedocs.io/en/stable/pages/advanced_topics/key_bindings.html
-        # https://github.com/jonathanslenders/python-prompt-toolkit/blob/b7ab3ba67df2e7dbf63463fb98f817878dfd256a/prompt_toolkit/key_binding/key_processor.py#L412
-        # https://github.com/jonathanslenders/python-prompt-toolkit/blob/7ed428599bda5f62ed7534ee469b97f2b3e8510f/prompt_toolkit/buffer.py#L1352
-        # このあたりみて再実装？
+        visual_backup = os.environ.get("VISUAL")
+        os.environ["VISUAL"] = "nvr -cc 10split --remote-wait +'set bufhidden=delete'"
         event.current_buffer.tempfile_suffix = '.xsh'
-        # TODO: nvrに設定されているなら横分割
-        event.current_buffer.open_in_editor(event.cli)
+        def reset_visual(_):
+            os.environ["VISUAL"] = visual_backup
+
+        future = event.current_buffer.open_in_editor(event.cli)
+        future.add_done_callback(reset_visual)
 
     # TODO: change timeoutlen
     @handler(Keys.Escape)
