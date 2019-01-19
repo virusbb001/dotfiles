@@ -21,7 +21,7 @@ set laststatus=2
 set statusline=%f[B-No.%n]%r%y\|%{(&fenc!=''?&fenc:&enc).'\|'.&ff.'\|'}%m
 set statusline+=%=
 "右
-set statusline+=%l,%c%V%5P
+set statusline+=%l/%L,%c%V%5P
 
 set concealcursor=nc
 
