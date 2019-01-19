@@ -59,17 +59,16 @@ if platform.system() == "Windows":
         completer remove bash
 
 
-def print_error_msg(message: str):
-    # TODO print red color
-    print(message)
-    return
+def checkhealth():
+    def print_error_msg(message: str):
+        # TODO print red color
+        print(message)
 
+    if (importlib.util.find_spec("neovim") or importlib.util.find_spec("pynvim")) is None:
+        print_error_msg("neovim/pynvim module not found")
 
-if (importlib.util.find_spec("neovim") or importlib.util.find_spec("pynvim")) is None:
-    print_error_msg("neovim/pynvim module not found")
-
-if importlib.util.find_spec("nvr") is None:
-    print_error_msg("nvr command is missing")
+    if importlib.util.find_spec("nvr") is None:
+        print_error_msg("nvr command is missing")
 
 
 def enable_nvim():
