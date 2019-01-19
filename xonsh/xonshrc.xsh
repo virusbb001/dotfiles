@@ -172,7 +172,7 @@ def show_ast(cmd):
 
 # https://xon.sh/events.html?highlight=on_ptk_create
 @events.on_ptk_create
-def custom_keybindings(bindings, **kw):
+def custom_keybindings(prompter, bindings, **kw):
     from prompt_toolkit.keys import Keys
 
     handler = bindings.add
@@ -189,7 +189,10 @@ def custom_keybindings(bindings, **kw):
         future = event.current_buffer.open_in_editor(event.cli)
         future.add_done_callback(reset_visual)
 
-    # TODO: change timeoutlen
+    prompter.app.timeoutlen = 0.05
+    prompter.app.ttimeoutlen = 0.01
+
+
     @handler(Keys.Escape)
     def leave_from_terminal_mode(event):
         if "pynvim" not in globals():
