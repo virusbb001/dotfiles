@@ -17,7 +17,7 @@ augroup END
 let &runtimepath .= ',' . expand('<sfile>:p:h')
 
 " auto install
-let s:dein_dir=expand('~/.vim/dein')
+let s:dein_dir=expand('~/.vim/dein/' . (has("nvim") ? "nvim" : "vim"))
 let s:dein_repo_dir = s:dein_dir . '/repos/github.com/Shougo/dein.vim'
 if !isdirectory(s:dein_repo_dir)
   " ask install or finish
