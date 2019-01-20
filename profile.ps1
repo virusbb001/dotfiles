@@ -32,7 +32,7 @@ function fix_tmpdir {
      $env:NVIM_LISTEN_ADDRESS = $_
      $dir = Split-Path (nvr --remote-expr 'tempname()') -Parent
      write-Host "progressing ${dir}"
-     if (-not $dir) {
+     if (!(Test-Path -Path $dir)) {
        New-Item -ItemType Directory -Path $dir
        Write-Host "Created ${dir}"
      }
