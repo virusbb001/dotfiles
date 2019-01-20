@@ -24,13 +24,8 @@ function sudo {
 }
 
 function fix_tmpdir {
-  $nvim_listen_address_backup = $null
-  if (Test-Path Env:\NVIM_LISTEN_ADDRESS) {
-    $nvim_listen_address_backup = $env:NVIM_LISTEN_ADDRESS
-  }
    [System.IO.Directory]::GetFiles("\\.\\pipe\\") | ? { $_.Contains("nvim") } | % {
-     $env:NVIM_LISTEN_ADDRESS = $_
-     $dir = Split-Path (nvr --remote-expr 'tempname()') -Parent
+     $dir = Split-Path (nvr --servername $_ --remote-expr 'tempname()') -Parent
      write-Host "progressing ${dir}"
      if (!(Test-Path -Path $dir)) {
        New-Item -ItemType Directory -Path $dir
