@@ -180,7 +180,7 @@ def custom_keybindings(prompter, bindings, **kw):
     def edit_in_editor(event):
         # https://python-prompt-toolkit.readthedocs.io/en/stable/pages/advanced_topics/key_bindings.html
         visual_backup = os.environ.get("VISUAL")
-        os.environ["VISUAL"] = "nvr -cc 10split --remote-wait +'set bufhidden=delete'"
+        os.environ["VISUAL"] = "nvr -cc 10split --remote-wait +'set bufhidden=delete fileformat=unix'"
         event.current_buffer.tempfile_suffix = '.xsh'
         def reset_visual(_):
             os.environ["VISUAL"] = visual_backup
