@@ -7,6 +7,7 @@ import platform
 from pathlib import Path
 from xonsh.lazyasd import LazyObject
 import argparse
+import xonsh
 
 xontrib load coreutils vox vox_tabcomplete readable-traceback jedi docker_tabcomplete
 
@@ -58,6 +59,106 @@ if platform.system() == "Windows":
     if "bash" in __xonsh__.completers:
         completer remove bash
 
+    def refreshenv():
+        # this function is rewritten for xonsh of chocolatey's refreshenv
+        # original source: https://github.com/chocolatey/choco/blob/8f4fe74f618df312f7773a218e76822a3337129b/src/chocolatey.resources/helpers/functions/Update-SessionEnvironment.ps1
+        # original's license is Apache License Version 2.0: http://www.apache.org/licenses/LICENSE-2.0
+
+        import winreg
+        import xonsh
+
+        # Registry Key ref:
+        # https://docs.microsoft.com/ja-jp/dotnet/api/system.environmentvariabletarget?view=netframework-4.8#System_EnvironmentVariableTarget_Machine
+        sys_env_dict ={}
+        usr_env_dict = {}
+        env_dict = {}
+        add_to_converter = set((
+            xonsh.tools.str_to_env_path,
+            xonsh.tools.pathsep_to_upper_seq
+        ))
+
+        env = xonsh.environ.Env(**__xonsh__.env)
+
+        username = env.get("USERNAME")
+        architecture = env.get("PROCESSOR_ARCHITECTURE")
+        def expand_value(value, regtype):
+            if regtype == winreg.REG_EXPAND_SZ:
+                return winreg.ExpandEnvironmentStrings(value)
+            if regtype == winreg.REG_SZ:
+                assert type(value) == str, "wrong Registry type"
+                return value
+            print("Unknown type:",regtype)
+            raise NotImplementedError
+
+        with winreg.OpenKeyEx(winreg.HKEY_LOCAL_MACHINE, r'System\CurrentControlSet\Control\Session Manager\Environment') as key:
+            for i in range(winreg.QueryInfoKey(key)[1]):
+                value = winreg.EnumValue(key, i)
+                name = "PATH" if value[0].upper() == "PATH" else value[0]
+                env[name] = expand_value(value[1], value[2])
+
+        with winreg.OpenKeyEx(winreg.HKEY_CURRENT_USER, r'Environment') as key:
+            for i in range(winreg.QueryInfoKey(key)[1]):
+                reg_value = winreg.EnumValue(key, i)
+                name = "PATH" if reg_value[0].upper() == "PATH" else reg_value[0]
+                convert = env.get_ensurer(name).convert
+                value = expand_value(reg_value[1], reg_value[2])
+                if convert in add_to_converter:
+                    env[name] += convert(value)
+                else:
+                    env[name] = value
+
+        if username is not None:
+            env["USERNAME"] = username
+        if architecture is not None:
+            env["PROCESSOR_ARCHITECTURE"] = architecture
+        missing_path = set(__xonsh__.env["PATH"]) - set(env["PATH"])
+        for p in missing_path:
+            env["PATH"].add(p)
+
+        # get diff
+        old_env_exists = set(__xonsh__.env.keys()) 
+        new_env_exists = set(env.keys())
+        print("removed: ", ", ".join(old_env_exists - new_env_exists ))
+        print("added: ", ", ".join(new_env_exists - old_env_exists))
+        changed_env = set()
+        for i in (new_env_exists & old_env_exists):
+            if __xonsh__.env[i] != env[i]:
+                changed_env.add(i)
+        if len(changed_env) > 0:
+            print("changed:", ", ".join(changed_env))
+
+        # __xonsh__.env.update(env)
+        return env
+
+
+    def sys_env():
+        import winreg
+        import xonsh
+
+        env_dict = {}
+
+        with winreg.OpenKeyEx(winreg.HKEY_LOCAL_MACHINE, r'System\CurrentControlSet\Control\Session Manager\Environment') as key:
+            for i in range(winreg.QueryInfoKey(key)[1]):
+                value = winreg.EnumValue(key, i)
+                name = "PATH" if value[0].upper() == "PATH" else value[0]
+                env_dict[name] = value[1]
+
+        return env_dict
+
+
+    def usr_env():
+        import winreg
+        import xonsh
+
+        env_dict = {}
+
+        with winreg.OpenKeyEx(winreg.HKEY_CURRENT_USER, r'Environment') as key:
+            for i in range(winreg.QueryInfoKey(key)[1]):
+                value = winreg.EnumValue(key, i)
+                name = "PATH" if value[0].upper() == "PATH" else value[0]
+                env_dict[name] = value[1]
+
+        return env_dict
 
 def checkhealth():
     def print_error_msg(message: str):
