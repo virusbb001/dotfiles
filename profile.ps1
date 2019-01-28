@@ -23,8 +23,12 @@ function sudo {
  powershell -command "Start-Process -Verb runas $args"
 }
 
+function list_neovim {
+  [System.IO.Directory]::GetFiles("\\.\\pipe\\") | ? { $_.Contains("nvim") }
+}
+
 function fix_tmpdir {
-   [System.IO.Directory]::GetFiles("\\.\\pipe\\") | ? { $_.Contains("nvim") } | % {
+   list_neovim | % {
      $dir = Split-Path (nvr --servername $_ --remote-expr 'tempname()') -Parent
      write-Host "progressing ${dir}"
      if (!(Test-Path -Path $dir)) {
