@@ -173,6 +173,7 @@ def checkhealth():
 
 
 def enable_nvim():
+    pynvim = None
 
     if ("NVIM_LISTEN_ADDRESS" in ${...}
             and (importlib.util.find_spec("neovim") is not None
@@ -198,7 +199,7 @@ def enable_nvim():
             pynvim = neovim.attach("socket", path=$NVIM_LISTEN_ADDRESS)
 
             @events.on_exit
-            def release_something():
+            def release_something(**kw):
                 pynvim.close()
 
             return pynvim
@@ -242,8 +243,10 @@ def enable_nvim():
         aliases[":fix_tmpdir"] = _fix_tmpdir
     $EDITOR = os.environ["EDITOR"]
     $VISUAL = os.environ["VISUAL"]
+    return pynvim
 
-enable_nvim()
+pynvim = enable_nvim()
+
 
 def _clear_var(current):
     def clear_var(args, stdin=None):
