@@ -160,6 +160,27 @@ if platform.system() == "Windows":
 
         return env_dict
 
+    def _edit_path(args):
+        import tempfile
+        temp_fd, tempname = tempfile.mkstemp(suffix=".txt", prefix="path_")
+        path = ""
+        new_path = ""
+        path_type = winreg.REG_EXPAND_SZ
+
+        with winreg.OpenKeyEx(winreg.HKEY_CURRENT_USER, r'Environment') as key:
+            path, path_type = winreg.QueryValueEx(key, "Path")
+        with os.fdopen(temp_fd, mode='w') as tmp:
+            tmp.write(path.replace(";","\n"))
+        nvr --remote-tab-wait-silent '+set bufhidden=delete' @(tempname)
+        with open(tempname) as fh:
+            new_path = ";".join(fh.read().splitlines())
+        print(new_path)
+        with winreg.OpenKeyEx(winreg.HKEY_CURRENT_USER, 'Environment', access=winreg.KEY_SET_VALUE) as key:
+            winreg.SetValueEx(key, "Path", 0, path_type, new_path)
+        os.remove(tempname)
+
+    aliases["edit_path"] = _edit_path
+
 def checkhealth():
     def print_error_msg(message: str):
         # TODO print red color
