@@ -5,7 +5,7 @@ import shutil
 import os
 import platform
 from pathlib import Path
-from xonsh.lazyasd import LazyObject
+from xonsh.lazyasd import LazyObject, load_module_in_background
 import argparse
 import xonsh
 
@@ -59,12 +59,13 @@ if platform.system() == "Windows":
     if "bash" in __xonsh__.completers:
         completer remove bash
 
+    winreg = load_module_in_background("winreg")
+
     def refreshenv():
         # this function is rewritten for xonsh of chocolatey's refreshenv
         # original source: https://github.com/chocolatey/choco/blob/8f4fe74f618df312f7773a218e76822a3337129b/src/chocolatey.resources/helpers/functions/Update-SessionEnvironment.ps1
         # original's license is Apache License Version 2.0: http://www.apache.org/licenses/LICENSE-2.0
 
-        import winreg
         import xonsh
 
         # Registry Key ref:
@@ -132,7 +133,6 @@ if platform.system() == "Windows":
 
 
     def sys_env():
-        import winreg
         import xonsh
 
         env_dict = {}
@@ -147,7 +147,6 @@ if platform.system() == "Windows":
 
 
     def usr_env():
-        import winreg
         import xonsh
 
         env_dict = {}
