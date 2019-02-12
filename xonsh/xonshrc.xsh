@@ -128,7 +128,7 @@ if platform.system() == "Windows":
         if len(changed_env) > 0:
             print("changed:", ", ".join(changed_env))
 
-        # __xonsh__.env.update(env)
+        __xonsh__.env.update(env)
         return env
 
 
