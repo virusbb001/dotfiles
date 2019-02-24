@@ -212,7 +212,7 @@ let g:LanguageClient_serverCommands = {
 let g:LanguageClient_autoStart = 1
 
 let g:LanguageClient_loggingLevel = "INFO"
-function s:LC_maps()
+function! s:LC_maps()
   if has_key(g:LanguageClient_serverCommands, &filetype)
     nnoremap <buffer> <silent> K :call LanguageClient#textDocument_hover()<cr>
     nnoremap <buffer> <silent> gd :call LanguageClient#textDocument_definition()<CR>
