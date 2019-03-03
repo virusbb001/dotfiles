@@ -293,6 +293,10 @@ def show_ast(cmd):
     xonsh.ast.pprint_ast(__xonsh__.execer.parse(cmd, ctx=__xonsh_ctx__))
 
 
+if importlib.util.find_spec("pipdeptree") is not None:
+    aliases["xpipdeptree"] = [sys.executable, "-m", "pipdeptree"]
+
+
 # https://xon.sh/events.html?highlight=on_ptk_create
 @events.on_ptk_create
 def custom_keybindings(prompter, bindings, **kw):
