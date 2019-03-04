@@ -290,5 +290,8 @@ repo = 'idanarye/vim-smile'
 [[plugins]]
 repo = "luochen1990/rainbow"
 hook_add = '''
-let g:rainbow_active = 1
+let g:rainbow_active = 0
 '''
+
+[[plugins]]
+repo = "junegunn/vim-emoji"

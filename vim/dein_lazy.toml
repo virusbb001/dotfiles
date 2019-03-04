@@ -35,6 +35,10 @@ depends = 'denite.nvim'
 repo = 'kmnk/denite-dirmark'
 on_source = 'denite.nvim'
 
+[[plugins]]
+repo = 'pocari/vim-denite-emoji'
+on_source = 'denite.nvim'
+
 # html/css
 
 [[plugins]]
