@@ -4,7 +4,7 @@
 " Maintainer:	virusbb001 <virusbb001a@gmail.com>
 " Last Change: YYYY LLL dd
 "
-if exists("b:current_syntax")
+if exists('b:current_syntax')
   finish
 endif
 
@@ -56,4 +56,4 @@ syntax keyword xshReservedEnv aliases
 
 highlight default link xshReservedEnv PreProc
 
-let b:current_syntax = "xonsh"
+let b:current_syntax = 'xonsh'

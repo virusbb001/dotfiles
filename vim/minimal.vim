@@ -1,8 +1,4 @@
 " vim -u /path/to/minimal_standalone.vim
-if &compatible
- " vint: next-line -ProhibitSetNoCompatible
- set nocompatible
-endif
 
 " auto install
 let s:dein_dir=expand('~/tmp/cache/dein')

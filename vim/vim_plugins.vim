@@ -17,7 +17,7 @@ augroup END
 let &runtimepath .= ',' . expand('<sfile>:p:h')
 
 " auto install
-let s:dein_dir=expand('~/.vim/dein/' . (has("nvim") ? "nvim" : "vim"))
+let s:dein_dir=expand('~/.vim/dein/' . (has('nvim') ? 'nvim' : 'vim'))
 let s:dein_repo_dir = s:dein_dir . '/repos/github.com/Shougo/dein.vim'
 if !isdirectory(s:dein_repo_dir)
   " ask install or finish
@@ -35,9 +35,9 @@ let &runtimepath = s:dein_repo_dir . ',' . &runtimepath
 filetype plugin indent off
 
 function! LoadRCVim(name) abort
-  let l:filename = s:dotfiles_vim_dir . "/" . a:name
+  let l:filename = s:dotfiles_vim_dir . '/' . a:name
   echomsg l:filename
-  execute "source " . l:filename
+  execute 'source ' . l:filename
 endfunction
 
 if dein#load_state(s:dein_dir)

@@ -27,7 +27,7 @@ let s:menus.my_commands.command_candidates = [
   \ ['Split the window', 'vnew'],
   \ ['Open zsh menu', 'Denite menu:zsh'],
   \ ['Running terms', 'Denite -input=term: buffer'],
-  \ ['dotfiles', 'Denite file::' . escape(expand("<sfile>:p:h:h") , ':\')],
+  \ ['dotfiles', 'Denite file::' . escape(expand('<sfile>:p:h:h') , ':\')],
   \ ]
 
 call denite#custom#var('menu', 'menus', s:menus)

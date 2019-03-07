@@ -1,6 +1,4 @@
-
-" このバッファに対してまだ実行されていない場合のみ処理を実行する
-if exists("b:did_ftplugin")
+if exists('b:did_ftplugin')
   finish
 endif
 

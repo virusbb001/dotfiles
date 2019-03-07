@@ -1,9 +1,5 @@
-"共通の設定
-
-if &termencoding == 0
- let &termencoding = &encoding
- set encoding=utf-8
-endif
+" common setting
+set encoding=utf-8
 scriptencoding utf-8
 
 "表示関係
@@ -144,7 +140,7 @@ augroup VirusDropboxAuto
  autocmd FileType mkd,markdown setlocal noexpandtab
  autocmd FileType help setlocal iskeyword+=-
  autocmd FileType python setlocal colorcolumn=80
- if exists("##TermOpen")
+ if exists('##TermOpen')
    autocmd TermOpen * setlocal statusline=%{b:term_title}%=PID:%{b:terminal_job_pid},%c_%l/%L
  endif
 augroup END
