@@ -25,3 +25,9 @@ if [ ! -f ~/.tmux.conf ]; then
 else
  echo ".tmux.conf already exists. skip"
 fi
+
+if [ ! -f ~/.xonshrc ]; then
+ install -m 0644 home/dot_xonshrc ~/.tmux.conf
+else
+ echo ".xonshrc already exists. skip"
+fi
