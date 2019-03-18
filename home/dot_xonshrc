@@ -2,6 +2,7 @@
 import os
 from pathlib import Path
 
+print(f"PID: {os.getpid()}")
 def init_xonsh():
     dotfiles = Path($HOME) / "dotfiles"
     xonshrc = dotfiles / "xonsh" / "xonshrc.xsh"
