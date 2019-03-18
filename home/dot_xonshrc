@@ -7,6 +7,6 @@ def init_xonsh():
     dotfiles = Path($HOME) / "dotfiles"
     xonshrc = dotfiles / "xonsh" / "xonshrc.xsh"
     if xonshrc.exists():
-        source @(xonshrc)
+        aliases["source"]([str(xonshrc)])
 
 init_xonsh()
