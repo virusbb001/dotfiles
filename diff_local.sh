@@ -13,3 +13,4 @@ cp $HOME/.gvimrc home/dot_gvimrc
 
 git -C $dotfiles add -N $dotfiles
 git -C $dotfiles diff > diff_dotfiles.patch
+git reset
