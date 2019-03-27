@@ -11,7 +11,7 @@ function fix_tmpdir {
      write-Host "`tprogressing ${dir}"
      if (!(Test-Path -Path $dir)) {
        New-Item -ItemType Directory -Path $dir
-       Write-Host "Created ${dir}"
+       Write-Host "`tCreated ${dir}"
      }
    }
 }
