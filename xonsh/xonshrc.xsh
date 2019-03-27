@@ -323,7 +323,8 @@ def custom_keybindings(prompter, bindings, **kw):
 
     @handler(Keys.Escape)
     def leave_from_terminal_mode(event):
-        if "pynvim" not in globals():
+        global pynvim
+        if pynvim is None:
             # Nothing to do
             return
         globals()["pynvim"].input(r"<C-\><C-n>")
