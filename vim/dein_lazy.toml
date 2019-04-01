@@ -172,6 +172,10 @@ if = 'has("nvim")'
 repo = 'fatih/vim-go'
 on_ft = 'go'
 
+[[plugins]]
+repo = "deoplete-plugins/deoplete-go"
+on_ft = 'go'
+
 # ruby
 
 [[plugins]]
