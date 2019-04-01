@@ -326,3 +326,9 @@ let g:rainbow_active = 0
 
 [[plugins]]
 repo = "junegunn/vim-emoji"
+
+[[plugins]]
+repo = "neoclide/coc.nvim"
+hook_post_update = '''
+call coc#util#install()
+'''
