@@ -302,6 +302,13 @@ repo = "neoclide/coc.nvim"
 hook_post_update = '''
 call coc#util#install()
 '''
+hook_add = '''
+function! s:SetCocKeyMap()
+  nmap gd <Plug>(coc-definition)
+endfunction
+autocmd User CocNvimInit call s:SetCocKeyMap()
+autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
+'''
 
 [[plugins]]
 repo = "kana/vim-gf-user"
