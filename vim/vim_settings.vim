@@ -146,11 +146,10 @@ set wrapscan
 set nobackup
 set writebackup
 
-"キー関連
+"about key settings
 set notimeout
 set ttimeout
 set timeoutlen=100
-map Q gQ
 "インデント
 set autoindent
 "set smartindent
@@ -182,6 +181,7 @@ endif
 
 "キー設定
 nmap <F1> <Nop>
+map Q gQ
 
 noremap <special> <SID>win_inc_height <C-w>+
 noremap <special> <SID>win_dec_height <C-w>-
@@ -199,6 +199,9 @@ nmap <special> <C-w>+ <SID>win_repeat+
 nmap <special> <C-w>- <SID>win_repeat-
 nmap <special> <C-w>> <SID>win_repeat>
 nmap <special> <C-w>< <SID>win_repeat<
+
+nnoremap <expr> n (v:searchforward ? 'n' : 'N')
+nnoremap <expr> N (v:searchforward ? 'N' : 'n')
 
 tnoremap <S-Space> <Space>
 
