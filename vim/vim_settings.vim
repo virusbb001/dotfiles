@@ -208,6 +208,42 @@ tnoremap <S-Space> <Space>
 nmap <Space> <Plug>[Space]
 nnoremap <Plug>[Space] <Nop>
 
+if has('nvim')
+  function! RotateTermBuffer(incnum) abort
+    let l:chans = nvim_list_chans()
+    call filter(l:chans, { idx, val -> val["mode"] ==# "terminal"})
+    call sort(l:chans, { a, b -> a['buffer'] - b['buffer']})
+    let currentBuf = bufnr('%')
+    let l:index = -1
+    let l:i = 0
+    let l:chansLen = len(l:chans)
+    while l:i < l:chansLen
+      if l:chans[l:i]['buffer'] == currentBuf
+        let l:index = l:i
+        break
+      endif
+      let l:i = l:i + 1
+    endwhile
+    let l:target = (l:index + a:incnum)
+    while l:target < 0
+      let l:target = l:target + l:chansLen
+    endwhile
+    let l:bufnr = l:chans[l:target % l:chansLen]['buffer']
+    execute 'edit' '#' . l:bufnr
+  endfunction
+else
+  function! RotateTermBuffer(incnum) abort
+    throw 'Not Implemented yet'
+  endfunction
+endif
+
+" terminal buffer setting
+function! s:setTermSetting() abort
+  setlocal statusline=%{b:term_title}%=PID:%{b:terminal_job_pid},%c_%l/%L
+  nnoremap <buffer> <C-n> :<C-u>call RotateTermBuffer(v:count1)<CR>
+  nnoremap <buffer> <C-p> :<C-u>call RotateTermBuffer(-1 * v:count1)<CR>
+endfunction
+
 "自動コマンド
 augroup VirusDropboxAuto
  autocmd!
@@ -224,7 +260,7 @@ augroup VirusDropboxAuto
  autocmd FileType help setlocal iskeyword+=-
  autocmd FileType python setlocal colorcolumn=80
  if exists('##TermOpen')
-   autocmd TermOpen * setlocal statusline=%{b:term_title}%=PID:%{b:terminal_job_pid},%c_%l/%L
+   autocmd TermOpen * call s:setTermSetting()
  endif
 augroup END
 
