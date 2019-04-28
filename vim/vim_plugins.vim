@@ -48,6 +48,7 @@ if dein#load_state(s:dein_dir)
   let s:directory = s:dotfiles_vim_dir
   call dein#load_toml(expand(s:directory . '/dein.toml'), {'lazy' : 0})
   call dein#load_toml(expand(s:directory . '/dein_lazy.toml'), {'lazy' : 1})
+  call dein#load_toml(expand(s:directory . '/dein/coc.toml'), {'lazy' : 1})
 
   if filereadable(expand('~/.vim/dein.toml'))
     call dein#load_toml(expand('~/.vim/dein.toml'), {'lazy' : 0})
