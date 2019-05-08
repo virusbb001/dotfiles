@@ -1,2 +1,2 @@
 *.xsh linguist-language=Python
-dot_xonshrc linguist-language=Python
+.xonshrc linguist-language=Python
