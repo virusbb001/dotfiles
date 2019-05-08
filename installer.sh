@@ -1,33 +1,24 @@
-#!/bin/sh
+#!/bin/bash
 
 cd "$(dirname "$0")" || exit 1
+DOTFILES_DIR="$(pwd)"
+ORIG_UMASK=$(umask)
 
-if [ ! -f ~/.vimrc ]; then
- install -m 0644 home/dot_vimrc ~/.vimrc
-else
- echo ".vimrc already exists. skip"
-fi
+umask 022
 
-if [ ! -f ~/.zshrc ]; then
- install -m 0644 home/dot_zshrc ~/.zshrc
-else
- echo ".zshrc already exists. skip"
-fi
+# cp -nrv  ./* $HOME
+files="$(ls -A home)"
+for file in $files ; do
+  if [ -f "$HOME/$file" ]; then
+    echo "\$HOME/$file already exits. skip"
+  else
+    echo install -m 0644 "home/$file" "$HOME/$file"
+  fi
+done
 
-if [ ! -f ~/.zshenv ]; then
- install -m 0644 home/dot_zshenv ~/.zshenv
-else
- echo ".zshenv already exists. skip"
-fi
+umask "$ORIG_UMASK"
 
-if [ ! -f ~/.tmux.conf ]; then
- install -m 0644 home/dot_tmux_conf ~/.tmux.conf
-else
- echo ".tmux.conf already exists. skip"
-fi
-
-if [ ! -f ~/.xonshrc ]; then
- install -m 0644 home/dot_xonshrc ~/.tmux.conf
-else
- echo ".xonshrc already exists. skip"
+if ! (grep XDG_CONFIG_DIRS ~/.bashrc >/dev/null); then
+  echo "export XDG_CONFIG_DIRS=\"$DOTFILES_DIR/config:\$XDG_CONFIG_DIRS\"" >> ~/.bashrc
+  echo "added XDG_CONFIG_DIRS setting to bashrc"
 fi
