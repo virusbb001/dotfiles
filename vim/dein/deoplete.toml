@@ -1,0 +1,76 @@
+# deoplete
+[[plugins]]
+lazy = 1
+repo = "Shougo/deoplete.nvim"
+depends = ["context_filetype.vim"]
+on_event = "InsertEnter"
+hook_source="""
+call deoplete#enable()
+let g:deoplete#sources#omni#input_patterns = {
+        \   "ruby" : '[^. *\t]\.\w*\|\h\w*::',
+        \}
+inoremap <expr> <C-b>d deoplete#mappings#manual_complete()
+"""
+
+[[plugins]]
+lazy = 1
+repo = "carlitux/deoplete-ternjs"
+on_ft = ["javascript", "vue"]
+hook_add = """
+let g:deoplete#sources#ternjs#filetypes = ['vue']
+let g:tern#command = ["tern"]
+let g:tern#arguments = ["--persistent"]
+"""
+
+[[plugins]]
+lazy = 1
+repo = 'deoplete-plugins/deoplete-jedi'
+on_ft = ["python", "xonsh"]
+if = 'has("nvim")'
+
+[[plugins]]
+lazy = 1
+repo = "deoplete-plugins/deoplete-go"
+on_ft = 'go'
+
+[[plugins]]
+lazy = 1
+repo = "uplus/deoplete-solargraph"
+on_ft = ["ruby", "eruby"]
+
+[[plugins]]
+lazy = 1
+repo = 'deoplete-plugins/deoplete-zsh'
+on_ft = ['zsh']
+
+[[plugins]]
+repo = "autozimu/LanguageClient-neovim"
+hook_post_update = '''
+let cmd = "bash install.sh"
+if has("win32") && executable("powershell")
+  let cmd = "powershell -executionpolicy bypass -File install.ps1"
+endif
+let g:dein#plugin.build = cmd
+'''
+hook_add = """
+let g:LanguageClient_serverCommands = {
+\ "vue": ["vls"],
+\ "haskell": ["stack", "exec", "hie-wrapper"],
+\ "python": ["pyls"],
+\ }
+let g:LanguageClient_autoStart = 1
+let g:LanguageClient_autoStop = 1
+
+let g:LanguageClient_loggingLevel = "INFO"
+let g:LanguageClient_diagnosticsList = "Location"
+function! s:LC_maps()
+  if has_key(g:LanguageClient_serverCommands, &filetype)
+    nnoremap <buffer> <silent> K :call LanguageClient#textDocument_hover()<cr>
+    nnoremap <buffer> <silent> gd :call LanguageClient#textDocument_definition()<CR>
+    nnoremap <buffer> <silent> <F2> :call LanguageClient#textDocument_rename()<CR>
+  endif
+endfunction
+
+autocmd VirusVimPlugins FileType * call s:LC_maps()
+"""
+
