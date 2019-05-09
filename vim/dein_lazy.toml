@@ -106,10 +106,10 @@ on_ft = ["typescript", "typescriptreact", "vue"]
 repo = "HerringtonDarkholme/yats.vim"
 
 [[plugins]]
-if = "has('nvim')"
+if = "has('nvim') && v:false"
 repo = 'mhartington/nvim-typescript'
 build = "./install.sh"
-on_ft = ['typescript', "typescriptreact", 'vue']
+# on_ft = ['typescript', "typescriptreact", 'vue']
 hook_add = '''
 let $TSS_LOG="-level verbose -logToFile true -file /home/virus/tmp/tsserver.log"
 '''
