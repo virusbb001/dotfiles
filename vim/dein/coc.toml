@@ -10,3 +10,6 @@ endfunction
 autocmd User CocNvimInit call s:SetCocKeyMap()
 autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
 '''
+
+[[plugins]]
+repo = "neoclide/coc-denite"
