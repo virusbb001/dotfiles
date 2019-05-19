@@ -186,11 +186,15 @@ def checkhealth():
         # TODO print red color
         print(message)
 
-    if (importlib.util.find_spec("neovim") or importlib.util.find_spec("pynvim")) is None:
-        print_error_msg("neovim/pynvim module not found")
+    wanted_modules = [
+        "pynvim",
+        "nvr",
+        "braceexpand"
+    ]
 
-    if importlib.util.find_spec("nvr") is None:
-        print_error_msg("nvr command is missing")
+    for module in wanted_modules:
+        if importlib.util.find_spec(module) is None:
+            print_error_msg(f"{module} module not found")
 
 
 def enable_nvim():
