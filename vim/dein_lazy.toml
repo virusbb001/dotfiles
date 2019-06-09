@@ -3,7 +3,7 @@
 [[plugins]]
 repo = 'Shougo/denite.nvim'
 on_cmd = 'Denite'
-rev = 'ui'
+rev = 'master'
 hook_add = '''
 nmap <Plug>[Space]<Space> :<C-u>Denite menu<CR>
 nmap <Plug>[Space]db :<C-u>Denite buffer<CR>
