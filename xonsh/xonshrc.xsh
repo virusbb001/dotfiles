@@ -189,7 +189,8 @@ def checkhealth():
     wanted_modules = [
         "pynvim",
         "nvr",
-        "braceexpand"
+        "braceexpand",
+        "pipdeptree"
     ]
 
     for module in wanted_modules:
