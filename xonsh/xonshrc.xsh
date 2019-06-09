@@ -264,6 +264,12 @@ def enable_nvim():
             tempdir.mkdir(exist_ok=True)
             print(f"missing {str(tempdir)} is fixed.")
 
+        def _term_open(args):
+            pynvim.command("enew")
+            pynvim.funcs.termopen(args, {
+                "cwd": os.getcwd()
+            })
+
         @events.on_chdir
         def _change_nvim_lcd(olddir: str, newdir: str, **kw):
             pynvim.command(f"lcd {newdir}")
@@ -271,6 +277,7 @@ def enable_nvim():
         aliases[":tabnew"] = _tab_open
         aliases[":nvim_cd"] = _nvim_cd
         aliases[":fix_tmpdir"] = _fix_tmpdir
+        aliases[":term"] = _term_open
     $EDITOR = os.environ["EDITOR"]
     $VISUAL = os.environ["VISUAL"]
     return pynvim
