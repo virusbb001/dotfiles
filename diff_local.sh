@@ -13,7 +13,6 @@ cp $HOME/.vim/dein_lazy.toml dein_lazy_local.toml
 fi
 
 cp $HOME/.xonshrc home/.xonshrc
-cp $HOME/.config/oni/config.tsx oni_config.tsx
 cp $HOME/.vimrc home/.vimrc
 cp $HOME/.gvimrc home/.gvimrc
 
