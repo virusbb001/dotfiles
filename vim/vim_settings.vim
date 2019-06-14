@@ -159,7 +159,7 @@ set shiftwidth=2
 set modeline
 set modelines=5
 set noinsertmode
-set backspace=2
+set backspace=indent,eol,start
 set whichwrap=b,s,h,l,<,>,[,]
 set autoread
 set wildmenu
@@ -211,7 +211,7 @@ nnoremap <Plug>[Space] <Nop>
 if has('nvim')
   function! RotateTermBuffer(incnum) abort
     let l:chans = nvim_list_chans()
-    call filter(l:chans, { idx, val -> val["mode"] ==# "terminal"})
+    call filter(l:chans, { idx, val -> val["mode"] ==# "terminal" && strlen(val["pty"]) > 0 })
     call sort(l:chans, { a, b -> a['buffer'] - b['buffer']})
     let currentBuf = bufnr('%')
     let l:index = -1
