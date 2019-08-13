@@ -307,7 +307,7 @@ def _clear_var(current):
 
 
 def show_ast(cmd):
-    xonsh.ast.pprint_ast(__xonsh__.execer.parse(cmd, ctx=__xonsh_ctx__))
+    xonsh.ast.pprint_ast(__xonsh__.execer.parse(cmd, ctx=__xonsh__.ctx))
 
 
 if importlib.util.find_spec("pipdeptree") is not None:
