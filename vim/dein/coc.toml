@@ -1,8 +1,7 @@
 [[plugins]]
 repo = "neoclide/coc.nvim"
-hook_post_update = '''
-call coc#util#install()
-'''
+merge = 0
+build = 'yarn install --frozen-lockfile'
 hook_add = '''
 function! s:SetCocKeyMap()
   nmap gd <Plug>(coc-definition)
