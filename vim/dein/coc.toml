@@ -13,6 +13,8 @@ function! s:show_documentation()
 endfunction
 function! SetMyCocKeyMap()
   nmap gd <Plug>(coc-definition)
+  nmap <F7> <Plug>(coc-codeaction)
+  nnoremap <silent> K :call <SID>show_documentation()<CR>
 endfunction
 autocmd User CocNvimInit call SetMyCocKeyMap()
 autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
