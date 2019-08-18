@@ -171,7 +171,7 @@ if platform.system() == "Windows":
             path, path_type = winreg.QueryValueEx(key, "Path")
         with os.fdopen(temp_fd, mode='w') as tmp:
             tmp.write(path.replace(";","\n"))
-        nvr --remote-tab-wait-silent '+set bufhidden=delete' @(tempname)
+        nvr --remote-tab-wait-silent -c 'set bufhidden=delete' @(tempname)
         with open(tempname) as fh:
             new_path = ";".join(fh.read().splitlines())
         print(new_path)
@@ -213,7 +213,7 @@ def enable_nvim():
         print("nvim: ", $NVIM_LISTEN_ADDRESS)
 
         if shutil.which("nvr"):
-            editor = "nvr --remote-tab-wait-silent '+set bufhidden=delete'"
+            editor = "nvr --remote-tab-wait-silent -c 'set bufhidden=delete'"
             aliases["nvim"] = editor
             os.environ["VISUAL"] = editor
             os.environ["EDITOR"] = editor
@@ -239,7 +239,7 @@ def enable_nvim():
             args = parser.parse_args(argv)
             opts = []
             if args.read:
-                opts.append(r"+set\ readonly")
+                opts.append(r"-c set\ readonly")
 
             vim_cwd = Path(pynvim.eval("getcwd()")).resolve()
             target = Path.cwd() / args.file
@@ -325,7 +325,7 @@ def custom_keybindings(prompter, bindings, **kw):
     def edit_in_editor(event):
         # https://python-prompt-toolkit.readthedocs.io/en/stable/pages/advanced_topics/key_bindings.html
         visual_backup = os.environ.get("VISUAL")
-        os.environ["VISUAL"] = "nvr -cc 10split --remote-wait '+set bufhidden=delete fileformat=unix'"
+        os.environ["VISUAL"] = "nvr -cc 10split --remote-wait -c 'set bufhidden=delete fileformat=unix'"
         event.current_buffer.tempfile_suffix = '.xsh'
         def reset_visual(_):
             os.environ["VISUAL"] = visual_backup
