@@ -278,3 +278,8 @@ on_ft = ['vim']
 [[plugins]]
 repo = 'PProvost/vim-ps1'
 on_ft = ['ps1']
+
+[[plugins]]
+repo = 'elixir-editors/vim-elixir'
+on_ft = ['elixir']
+if = 'executable("elixir")'
