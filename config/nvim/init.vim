@@ -10,8 +10,5 @@ if filereadable(expand('$HOME/.vimrc'))
 endif
 
 if filereadable(expand('$HOME/.gvimrc'))
-  let s:is_gui = exists('g:nyaovim_version') || exists('g:gui_oni')
-  if s:is_gui
-    source ~/.gvimrc
-  endif
+  autocmd UIEnter * source ~/.gvimrc
 endif
