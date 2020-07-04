@@ -1,0 +1,11 @@
+black==18.9b0
+braceexpand==0.1.5
+entrypoints==0.3
+flake8==3.8.3
+ipython==7.16.1
+neovim-remote==2.4.0
+pip==20.1.1
+pylint==2.5.3
+regex==2020.6.8
+win-unicode-console==0.5
+xonsh==0.9.18
