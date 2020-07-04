@@ -8,7 +8,7 @@ function fix_tmpdir {
    list_neovim | % {
      Write-Host "processing $_"
      $dir = Split-Path (nvr --servername $_ --remote-expr 'tempname()') -Parent
-     write-Host "`tprogressing ${dir}"
+     Write-Host "`tprogressing ${dir}"
      if (!(Test-Path -Path $dir)) {
        New-Item -ItemType Directory -Path $dir
        Write-Host "`tCreated ${dir}"
