@@ -13,6 +13,7 @@ for file in $files ; do
     echo "\$HOME/$file already exits. skip"
   else
     echo install -m 0644 "home/$file" "$HOME/$file"
+    install -m 0644 "home/$file" "$HOME/$file"
   fi
 done
 
