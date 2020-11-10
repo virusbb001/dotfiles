@@ -23,3 +23,7 @@ if ! (grep XDG_CONFIG_DIRS ~/.bashrc >/dev/null); then
   echo "export XDG_CONFIG_DIRS=\"$DOTFILES_DIR/config:\$XDG_CONFIG_DIRS\"" >> ~/.bashrc
   echo "added XDG_CONFIG_DIRS setting to bashrc"
 fi
+
+if ! (git config --global --get-all include.path | grep $DOTFILES_DIR/gitconfig); then
+  git config --global --add include.path $DOTFILES_DIR/gitconfig
+fi
