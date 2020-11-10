@@ -1,3 +1,6 @@
 # vim: set filetype=gitconfig:
 [url "git@github.com:"]
 	pushInsteadOf = https://github.com/
+
+[commit]
+	verbose = true
