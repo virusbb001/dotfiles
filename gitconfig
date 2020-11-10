@@ -1,0 +1,3 @@
+# vim: set filetype=gitconfig:
+[url "git@github.com:"]
+	pushInsteadOf = https://github.com/
