@@ -24,7 +24,7 @@ $PUSHD_MINUS = True # todo: check
 $HISTCONTROL = {"ignoredups"}
 $INTENSIFY_COLORS_ON_WIN = False
 $AUTO_CD = True
-$PROMPT = "{env_name:{}}{BOLD_GREEN}{user}@{hostname}{BOLD_BLUE} {short_cwd}{branch_color}{curr_branch: {}}{NO_COLOR} {BOLD_BLUE}{prompt_end}> {NO_COLOR}"
+$PROMPT = "{env_name:{}}{BOLD_GREEN}{user}@{hostname}{BOLD_BLUE} {short_cwd}{branch_color}{curr_branch: {}}{RESET} {BOLD_BLUE}{prompt_end}> {RESET}"
 
 ## input config
 $UPDATE_COMPLETIONS_ON_KEYPRESS = False
