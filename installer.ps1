@@ -26,7 +26,7 @@ if (Test-Path env:XDG_CONFIG_HOME) {
 if (Test-Path "$home/_vimrc") {
   Write-Output "vimrc is already exists. skip"
 }else{
-  Copy-Item ($PSScriptRoot + "\home\dot_vimrc") "${home}\_vimrc"
+  Copy-Item ($PSScriptRoot + "\home\.vimrc") "${home}\_vimrc"
 }
 
 if (Test-Path $profile) {
