@@ -181,6 +181,8 @@ if platform.system() == "Windows":
 
     aliases["edit_path"] = _edit_path
 
+    aliases["ls"] = ["cmd", "/c", "dir"]
+
 def checkhealth():
     def print_error_msg(message: str):
         # TODO print red color
