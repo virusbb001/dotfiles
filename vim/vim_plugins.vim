@@ -22,6 +22,11 @@ let s:dein_repo_dir = s:dein_dir . '/repos/github.com/Shougo/dein.vim'
 if !isdirectory(s:dein_repo_dir)
   " ask install or finish
   echo 'dein not detected'
+  if !executable('git')
+    echo "You have to install git first"
+    finish
+  endif
+
   let s:answer=confirm('Do you wanna install?', "&Yes\n&No")
   if s:answer == 2
     echo "OK, don't forget to comment out this script"
