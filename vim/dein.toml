@@ -161,6 +161,29 @@ let g:ale_fixers = {
       \    'eslint'
       \ ],
       \}
+
+function! s:disable_deno_in_buffer (loc)
+  if findfile('package.json',escape(a:loc,' ').';') != ""
+    breakadd here
+    if !exists("b:ale_linters_ignore")
+      let b:ale_linters_ignore = {}
+    endif
+    if type(b:ale_linters_ignore) == v:t_list
+      call add(b:ale_linters_ignore, "deno")
+    elseif type (b:ale_linters_ignore) == v:t_dict
+      if !has_key(b:ale_linters_ignore, "typescript")
+        let b:ale_linters_ignore["typescript"] = ["deno"]
+      else
+        call add(b:ale_linters_ignore["typescript"], "deno")
+      endif
+    endif
+  endif
+endfunction
+augroup VirusAleAutocmdSetting
+  autocmd!
+  autocmd FileType typescript call s:disable_deno_in_buffer(expand('<afile>:p:h'))
+augroup END
+
 """
 
 [[plugins]]
