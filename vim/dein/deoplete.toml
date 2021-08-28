@@ -14,16 +14,6 @@ inoremap <expr> <C-b>d deoplete#mappings#manual_complete()
 
 [[plugins]]
 lazy = 1
-repo = "carlitux/deoplete-ternjs"
-on_ft = ["javascript", "vue"]
-hook_add = """
-let g:deoplete#sources#ternjs#filetypes = ['vue']
-let g:tern#command = ["tern"]
-let g:tern#arguments = ["--persistent"]
-"""
-
-[[plugins]]
-lazy = 1
 repo = 'deoplete-plugins/deoplete-jedi'
 on_ft = ["python", "xonsh"]
 if = 'has("nvim")'

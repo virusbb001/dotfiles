@@ -71,16 +71,6 @@ on_ft = ["ejs"]
 # javascript
 
 [[plugins]]
-repo = 'ternjs/tern_for_vim'
-on_ft = ['javascript', 'vue']
-if = 'executable("npm")'
-build = 'npm install'
-hook_source = '''
-" autocmd FileType javascript setlocal completeopt+=menuone,preview
-autocmd FileType javascript nmap <buffer> <C-]> :TernDef<CR>
-'''
-
-[[plugins]]
 repo = "kchmck/vim-coffee-script"
 on_ft = ["coffee"]
 
