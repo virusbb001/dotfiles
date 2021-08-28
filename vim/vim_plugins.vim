@@ -50,7 +50,7 @@ if dein#load_state(s:dein_dir)
   " Required:
   call dein#begin(s:dein_dir,[$MYVIMRC, expand('<sfile>')])
 
-  let s:support_treesitter = v:true " has('nvim-0.5.0')
+  let s:support_treesitter = has('nvim-0.5.0')
 
   let s:directory = s:dotfiles_vim_dir
   call dein#load_toml(expand(s:directory . '/dein.toml'), {'lazy' : 0})
