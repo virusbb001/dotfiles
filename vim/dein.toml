@@ -111,11 +111,6 @@ nmap <F3> :<C-u>Defx -winwidth=30 -toggle -direction=topleft -buffer-name=explor
 [[plugins]]
 repo = 'vim-jp/vimdoc-ja'
 
-# filetypes
-[[plugins]]
-repo = 'cespare/vim-toml'
-on_ft = 'toml'
-
 # colorscheme
 [[plugins]]
 repo = 'sjl/badwolf'

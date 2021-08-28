@@ -61,10 +61,6 @@ let g:user_emmet_settings = {
 '''
 
 [[plugins]]
-repo = "othree/html5.vim"
-on_ft = ["html", "vue"]
-
-[[plugins]]
 repo = 'digitaltoad/vim-pug'
 on_ft = ["pug", "vue"]
 
@@ -72,27 +68,7 @@ on_ft = ["pug", "vue"]
 repo = 'nikvdp/ejs-syntax'
 on_ft = ["ejs"]
 
-[[plugins]]
-repo = "hail2u/vim-css3-syntax"
-on_ft = ["css", "vue"]
-
 # javascript
-
-[[plugins]]
-repo = 'pangloss/vim-javascript'
-on_ft = ['javascript']
-hook_source = '''
-autocmd FileType javascript setlocal indentkeys+=.
-autocmd FileType javascript setlocal foldmethod=syntax
-'''
-
-# [[plugins]]
-# repo = 'mxw/vim-jsx'
-# on_ft = ['javascript', 'vue']
-
-[[plugins]]
-repo = "MaxMEllon/vim-jsx-pretty"
-on_ft = ["javascript", "jsx"]
 
 [[plugins]]
 repo = 'ternjs/tern_for_vim'
@@ -102,44 +78,6 @@ build = 'npm install'
 hook_source = '''
 " autocmd FileType javascript setlocal completeopt+=menuone,preview
 autocmd FileType javascript nmap <buffer> <C-]> :TernDef<CR>
-'''
-
-[[plugins]]
-repo = 'posva/vim-vue'
-on_ft = 'vue'
-hook_add = """
-autocmd FileType vue syntax sync fromstart
-"""
-
-[[plugins]]
-on_ft = ["typescript", "typescriptreact", "vue"]
-repo = "leafgarland/typescript-vim"
-hook_source = '''
-autocmd FileType typescript setlocal indentkeys+=0.
-'''
-if = "v:false"
-
-[[plugins]]
-on_ft = ["typescript", "typescriptreact", "vue"]
-repo = "HerringtonDarkholme/yats.vim"
-
-[[plugins]]
-if = "has('nvim') && v:false"
-repo = 'mhartington/nvim-typescript'
-build = "./install.sh"
-# on_ft = ['typescript', "typescriptreact", 'vue']
-hook_add = '''
-let $TSS_LOG="-level verbose -logToFile true -file /home/virus/tmp/tsserver.log"
-'''
-hook_source = '''
-let g:nvim_typescript#vue_support = 0
-function! s:TypescriptKeymap() abort
-  noremap <buffer> <silent> K :<C-u>TSDoc<CR>
-  noremap <buffer> <silent> gd :<C-u>TSDef<CR>
-endfunction
-augroup VirusVimPlugins
-  autocmd FileType typescript,typescript.tsx call s:TypescriptKeymap()
-augroup END
 '''
 
 [[plugins]]
@@ -215,12 +153,7 @@ hook_add = '''
 " let g:slimv_impl = 'sbcl'
 '''
 
-
 # SPARQL/RDF
-
-[[plugins]]
-repo = 'atextor/sparql.vim'
-on_ft = 'sparql'
 
 [[plugins]]
 repo = 'niklasl/vim-rdf'

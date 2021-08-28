@@ -50,6 +50,8 @@ if dein#load_state(s:dein_dir)
   " Required:
   call dein#begin(s:dein_dir,[$MYVIMRC, expand('<sfile>')])
 
+  let s:support_treesitter = v:true " has('nvim-0.5.0')
+
   let s:directory = s:dotfiles_vim_dir
   call dein#load_toml(expand(s:directory . '/dein.toml'), {'lazy' : 0})
   call dein#load_toml(expand(s:directory . '/dein_lazy.toml'), {'lazy' : 1})
@@ -58,6 +60,11 @@ if dein#load_state(s:dein_dir)
   endif
   if v:false
     call dein#load_toml(expand(s:directory . '/dein/deoplete.toml'), {'lazy' : 0})
+  endif
+  if v:true
+    call dein#load_toml(expand(s:directory . '/dein/tree_sitter.toml'), {'lazy' : 0})
+  else
+    call dein#load_toml(expand(s:directory . '/dein/non_tree_sitter.toml'), {'lazy' : 1})
   endif
 
   if filereadable(expand('~/.vim/dein.toml'))
@@ -78,6 +85,8 @@ if dein#load_state(s:dein_dir)
   call dein#save_state()
 end
 
+call dein#call_hook('source')
+
 " Required:
 filetype plugin indent on
 
@@ -90,5 +99,6 @@ endfunction
 if v:vim_did_enter
   call InstallMissedPlugin()
 else
+  autocmd VirusVimPlugins VimEnter * call dein#call_hook('post_source')
   autocmd VirusVimPlugins VimEnter * call InstallMissedPlugin()
 endif
