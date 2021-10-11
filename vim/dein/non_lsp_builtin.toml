@@ -1,0 +1,8 @@
+[[plugins]]
+repo = 'davidhalter/jedi-vim'
+on_ft = ['python', 'xonsh']
+build = 'git submodule update --init --recursive'
+hook_add = '''
+let g:jedi#completions_enabled = 0
+'''
+

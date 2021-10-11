@@ -51,17 +51,24 @@ if dein#load_state(s:dein_dir)
   call dein#begin(s:dein_dir,[$MYVIMRC, expand('<sfile>')])
 
   let s:support_treesitter = has('nvim-0.5.0')
+  let s:support_lspbuiltin = has('nvim-0.5.0')
 
   let s:directory = s:dotfiles_vim_dir
   call dein#load_toml(expand(s:directory . '/dein.toml'), {'lazy' : 0})
   call dein#load_toml(expand(s:directory . '/dein_lazy.toml'), {'lazy' : 1})
-  if v:true
+  if v:false
     call dein#load_toml(expand(s:directory . '/dein/coc.toml'), {'lazy' : 0})
   endif
   if v:false
     call dein#load_toml(expand(s:directory . '/dein/deoplete.toml'), {'lazy' : 0})
   endif
-  if v:true
+  if s:support_lspbuiltin && v:true
+    call dein#load_toml(expand(s:directory . '/dein/lsp_builtin.toml'), {'lazy' : 1})
+  else
+    call dein#load_toml(expand(s:directory . '/dein/non_lsp_builtin.toml'), {'lazy' : 1})
+  endif
+
+  if s:support_treesitter
     call dein#load_toml(expand(s:directory . '/dein/tree_sitter.toml'), {'lazy' : 0})
   else
     call dein#load_toml(expand(s:directory . '/dein/non_tree_sitter.toml'), {'lazy' : 1})
