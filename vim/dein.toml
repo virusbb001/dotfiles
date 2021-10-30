@@ -276,3 +276,6 @@ function! GfFile()
 endfunction
 call gf#user#extend('GfFile', 1000)
 '''
+
+[[plugins]]
+repo = 'vim-denops/denops.vim'
