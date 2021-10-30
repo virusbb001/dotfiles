@@ -6,3 +6,54 @@ hook_add = '''
 let g:jedi#completions_enabled = 0
 '''
 
+[[plugins]]
+repo = 'dense-analysis/ale'
+hook_add = """
+let g:ale_lint_on_filetype_changed = 0
+let g:ale_lint_on_text_changed = "never"
+let g:ale_linters = {
+      \ "vue" : ["eslint"]
+      \}
+let g:ale_fixers = {
+      \ 'python': [
+      \     'autopep8'
+      \ ],
+      \ 'ruby': [
+      \     'rubocop'
+      \ ],
+      \ 'javascript': [
+      \     'eslint'
+      \ ],
+      \ 'typescript': [
+      \    'eslint',
+      \    'tslint',
+      \ ],
+      \ 'vue': [
+      \    'eslint'
+      \ ],
+      \}
+
+function! s:disable_deno_in_buffer (loc)
+  if findfile('package.json',escape(a:loc,' ').';') != ""
+    breakadd here
+    if !exists("b:ale_linters_ignore")
+      let b:ale_linters_ignore = {}
+    endif
+    if type(b:ale_linters_ignore) == v:t_list
+      call add(b:ale_linters_ignore, "deno")
+    elseif type (b:ale_linters_ignore) == v:t_dict
+      if !has_key(b:ale_linters_ignore, "typescript")
+        let b:ale_linters_ignore["typescript"] = ["deno"]
+      else
+        call add(b:ale_linters_ignore["typescript"], "deno")
+      endif
+    endif
+  endif
+endfunction
+augroup VirusAleAutocmdSetting
+  autocmd!
+  autocmd FileType typescript call s:disable_deno_in_buffer(expand('<afile>:p:h'))
+augroup END
+
+"""
+
