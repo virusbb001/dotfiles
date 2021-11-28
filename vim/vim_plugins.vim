@@ -16,8 +16,10 @@ augroup END
 
 let &runtimepath .= ',' . expand('<sfile>:p:h')
 
+let s:dein_dir_name = 'dein'
+
 " auto install
-let s:dein_dir=expand('~/.vim/dein/' . (has('nvim') ? 'nvim' : 'vim'))
+let s:dein_dir=expand('~/.vim/' .. s:dein_dir_name .. '/' . (has('nvim') ? 'nvim' : 'vim'))
 let s:dein_repo_dir = s:dein_dir . '/repos/github.com/Shougo/dein.vim'
 if !isdirectory(s:dein_repo_dir)
   " ask install or finish
@@ -45,13 +47,13 @@ function! LoadRCVim(name) abort
   execute 'source ' . l:filename
 endfunction
 
+let s:support_treesitter = has('nvim-0.5.0')
+let s:support_lspbuiltin = has('nvim-0.5.0')
+
 if dein#load_state(s:dein_dir)
   " vim_tomls
   " Required:
   call dein#begin(s:dein_dir,[$MYVIMRC, expand('<sfile>')])
-
-  let s:support_treesitter = has('nvim-0.5.0')
-  let s:support_lspbuiltin = has('nvim-0.5.0')
 
   let s:directory = s:dotfiles_vim_dir
   call dein#load_toml(expand(s:directory . '/dein.toml'), {'lazy' : 0})
@@ -62,7 +64,7 @@ if dein#load_state(s:dein_dir)
   if v:false
     call dein#load_toml(expand(s:directory . '/dein/deoplete.toml'), {'lazy' : 0})
   endif
-  if s:support_lspbuiltin && v:true
+  if s:support_lspbuiltin
     call dein#load_toml(expand(s:directory . '/dein/lsp_builtin.toml'), {'lazy' : 1})
   else
     call dein#load_toml(expand(s:directory . '/dein/non_lsp_builtin.toml'), {'lazy' : 1})
@@ -91,6 +93,10 @@ if dein#load_state(s:dein_dir)
   call dein#end()
   call dein#save_state()
 end
+
+if s:support_lspbuiltin
+  execute 'luafile ' . expand(s:dotfiles_vim_dir . '/dein/lsp_settings.lua')
+endif
 
 call dein#call_hook('source')
 
