@@ -43,8 +43,7 @@ function _G.virus_lsp_settings ()
     'angularls',
     'eslint',
     'html',
-    'cssls',
-    'jsonls'
+    'cssls'
   }
   for _, lsp in ipairs(servers) do
     nvim_lsp[lsp].setup {
@@ -54,6 +53,17 @@ function _G.virus_lsp_settings ()
       }
     }
   end
+
+  local json_scheme = vim.fn.json_decode(vim.fn.readfile(vim.fn.expand("~/.cache/virus_dotfiles/catalog.json")))
+  nvim_lsp.jsonls.setup {
+    on_attach = on_attach,
+    flags = {
+      debounce_text_changes = 150,
+    },
+    settings = {
+      json = json_scheme
+    }
+  }
 
   local detect_deno_root_dir = function (filename, bufnr)
     if (bufnr ~= nil) then
