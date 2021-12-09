@@ -54,7 +54,7 @@ function _G.virus_lsp_settings ()
     }
   end
 
-  local json_scheme = vim.fn.json_decode(vim.fn.readfile(vim.fn.expand("~/.cache/virus_dotfiles/catalog.json")))
+  local json_scheme = vim.fn.json_decode(vim.fn['denops#request']( 'virus_dotfiles', 'checkAndFetchJsonScheme', { vim.fn.stdpath('cache') }))
   nvim_lsp.jsonls.setup {
     on_attach = on_attach,
     flags = {
