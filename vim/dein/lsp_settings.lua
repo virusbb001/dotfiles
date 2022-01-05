@@ -2,9 +2,17 @@ function _G.virus_lsp_settings ()
   -- lspconfig is not set when defined this function
   local nvim_lsp = require('lspconfig')
   local util = require('lspconfig/util')
+  local lsp_status = require('lsp-status')
+  lsp_status.config({
+    indicator_errors = 'E',
+    indicator_warnings = 'W',
+    indicator_ok = 'Ok',
+  })
+  lsp_status.register_progress()
   -- Use an on_attach function to only map the following keys
   -- after the language server attaches to the current buffer
   local on_attach = function(client, bufnr)
+    lsp_status.on_attach(client, bufnr)
     local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
     local function buf_set_option(...) vim.api.nvim_buf_set_option(bufnr, ...) end
 
@@ -48,6 +56,7 @@ function _G.virus_lsp_settings ()
   for _, lsp in ipairs(servers) do
     nvim_lsp[lsp].setup {
       on_attach = on_attach,
+      capabilities = lsp_status.capabilities,
       flags = {
         debounce_text_changes = 150,
       }
@@ -57,6 +66,7 @@ function _G.virus_lsp_settings ()
   local json_scheme = vim.fn.json_decode(vim.fn['denops#request']( 'virus_dotfiles', 'checkAndFetchJsonScheme', { vim.fn.stdpath('cache') }))
   nvim_lsp.jsonls.setup {
     on_attach = on_attach,
+    capabilities = lsp_status.capabilities,
     flags = {
       debounce_text_changes = 150,
     },
@@ -87,6 +97,7 @@ function _G.virus_lsp_settings ()
 
   nvim_lsp.denols.setup {
     on_attach = on_attach,
+    capabilities = lsp_status.capabilities,
     flags = {
       debounce_text_changes = 150,
     },
@@ -94,6 +105,7 @@ function _G.virus_lsp_settings ()
   }
   nvim_lsp.tsserver.setup {
     on_attach = on_attach,
+    capabilities = lsp_status.capabilities,
     flags = {
       debounce_text_changes = 150,
     },

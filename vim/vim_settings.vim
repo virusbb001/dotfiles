@@ -93,11 +93,15 @@ set wrap
 set hlsearch
 set showtabline=2
 set laststatus=2
+function! LspStatus() abort
+  " This function will overwrite in lsp-status settings.
+  return ''
+endfunction
 "左
 set statusline=%f[B-No.%n]%r%y\|%{(&fenc!=''?&fenc:&enc).'\|'.&ff.'\|'}%m
 set statusline+=%=
 "右
-set statusline+=%l/%L,%c%V%5P
+set statusline+=%{LspStatus()}%l/%L,%c%V%5P
 
 set concealcursor=nc
 

@@ -1,5 +1,17 @@
 [[plugins]]
+repo = 'nvim-lua/lsp-status.nvim'
+hook_source = '''
+  function! LspStatus() abort
+    if luaeval('#vim.lsp.buf_get_clients() > 0')
+      return luaeval("require('lsp-status').status()")
+    endif
+    return ''
+  endfunction
+'''
+
+[[plugins]]
 repo = 'neovim/nvim-lspconfig'
+depends = ['lsp-status.nvim']
 on_event = ['BufRead', 'BufNewFile']
 hook_source = '''
   lua _G.virus_lsp_settings()
