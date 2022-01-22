@@ -63,18 +63,6 @@ function _G.virus_lsp_settings ()
     }
   end
 
-  local json_scheme = vim.fn.json_decode(vim.fn['denops#request']( 'virus_dotfiles', 'checkAndFetchJsonScheme', { vim.fn.stdpath('cache') }))
-  nvim_lsp.jsonls.setup {
-    on_attach = on_attach,
-    capabilities = lsp_status.capabilities,
-    flags = {
-      debounce_text_changes = 150,
-    },
-    settings = {
-      json = json_scheme
-    }
-  }
-
   local detect_deno_root_dir = function (filename, bufnr)
     if (bufnr ~= nil) then
       local firstline = vim.fn.getbufline(bufnr, 1)[1]
@@ -111,4 +99,21 @@ function _G.virus_lsp_settings ()
     },
     root_dir = detect_node_root_dir
   }
+
+  local function virus_lsp_after_denops ()
+    local json_scheme = vim.fn.json_decode(vim.fn['denops#request']( 'virus_dotfiles', 'checkAndFetchJsonScheme', { vim.fn.stdpath('cache') }))
+    nvim_lsp.jsonls.setup {
+      on_attach = on_attach,
+      capabilities = lsp_status.capabilities,
+      flags = {
+        debounce_text_changes = 150,
+      },
+      settings = {
+        json = json_scheme
+      }
+    }
+    -- TODO: enable jsonls opened buffer
+  end
+
+  vim.fn['denops#plugin#wait_async']('virus_dotfiles', virus_lsp_after_denops)
 end
