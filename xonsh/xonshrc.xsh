@@ -202,8 +202,10 @@ def checkhealth():
 
 def enable_nvim():
     pynvim = None
+    # NVIM_LISTEN_ADDRESS for old nvim
+    nvim_address = ${...}.get("NVIM") or ${...}.get("NVIM_LISTEN_ADDRESS")
 
-    if ("NVIM_LISTEN_ADDRESS" in ${...}
+    if (nvim_address is not None
             and (importlib.util.find_spec("neovim") is not None
                  or importlib.util.find_spec("pynvim") is not None)):
         def load_pynvim():
@@ -212,7 +214,7 @@ def enable_nvim():
             return importlib.import_module("neovim")
 
         neovim = load_pynvim()
-        print("nvim: ", $NVIM_LISTEN_ADDRESS)
+        print("nvim: ", nvim_address)
 
         if shutil.which("nvr"):
             editor = "nvr --remote-tab-wait-silent -c 'set bufhidden=delete'"
@@ -224,7 +226,7 @@ def enable_nvim():
 
         def _set_nvim_object():
             # TODO: allow to tcp
-            pynvim = neovim.attach("socket", path=$NVIM_LISTEN_ADDRESS)
+            pynvim = neovim.attach("socket", path=nvim_address)
 
             @events.on_exit
             def release_something(**kw):
