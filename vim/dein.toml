@@ -3,10 +3,6 @@ repo = 'Shougo/dein.vim'
 
 # core
 [[plugins]]
-repo = 'Shougo/vimproc.vim'
-build = 'make'
-
-[[plugins]]
 if = 'has("python3")'
 repo = "roxma/nvim-yarp"
 
