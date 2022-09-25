@@ -1,6 +1,15 @@
 # utils
 
 [[plugins]]
+repo = 'tyru/open-browser.vim'
+
+[[plugins]]
+repo = 'previm/previm'
+on_cmd = 'PrevimOpen'
+depends = 'open-browser.vim'
+
+## denite
+[[plugins]]
 repo = 'Shougo/denite.nvim'
 on_cmd = 'Denite'
 rev = 'master'
