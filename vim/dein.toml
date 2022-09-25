@@ -133,42 +133,42 @@ repo = 'tmux-plugins/vim-tmux'
 [[plugins]]
 repo = 'Shougo/context_filetype.vim'
 
-[[plugins]]
-repo = 'osyo-manga/vim-precious'
-depends = 'context_filetype.vim'
-hook_add = """
-let g:precious_enable_switchers = {
-      \ "*" : {
-      \         "setfiletype": 0
-      \ },
-      \ "toml" : {
-      \         "setfiletype": 1
-      \ },
-      \}
-" let g:precious_enable_switch_CursorMoved = {
-"       \	"vue" : 0
-"       \}
-" let g:precious_enable_switch_CursorMoved_i = {
-"       \	"vue" : 0
-"       \}
-" augroup MyDeinPrecious
-"   autocmd!
-"   autocmd User PreciousFileType call s:only_switch_syntax_when_vue()
-" augroup END
-
-function! s:only_switch_syntax_when_vue() abort
-  let l:basetype = precious#base_filetype()
-  if basetype != "vue"
-    return
-  endif
-  if precious#context_filetype() == "typescript"
-    let &l:syntax = precious#context_filetype()
-    return
-  endif
-  let &filetype = precious#context_filetype()
-  call precious#set_base_filetype(l:basetype)
-endfunction
-"""
+# [[plugins]]
+# repo = 'osyo-manga/vim-precious'
+# depends = 'context_filetype.vim'
+# hook_add = """
+# let g:precious_enable_switchers = {
+#       \ "*" : {
+#       \         "setfiletype": 0
+#       \ },
+#       \ "toml" : {
+#       \         "setfiletype": 1
+#       \ },
+#       \}
+# " let g:precious_enable_switch_CursorMoved = {
+# "       \	"vue" : 0
+# "       \}
+# " let g:precious_enable_switch_CursorMoved_i = {
+# "       \	"vue" : 0
+# "       \}
+# " augroup MyDeinPrecious
+# "   autocmd!
+# "   autocmd User PreciousFileType call s:only_switch_syntax_when_vue()
+# " augroup END
+# 
+# function! s:only_switch_syntax_when_vue() abort
+#   let l:basetype = precious#base_filetype()
+#   if basetype != "vue"
+#     return
+#   endif
+#   if precious#context_filetype() == "typescript"
+#     let &l:syntax = precious#context_filetype()
+#     return
+#   endif
+#   let &filetype = precious#context_filetype()
+#   call precious#set_base_filetype(l:basetype)
+# endfunction
+# """
 
 [[plugins]]
 repo = 'majutsushi/tagbar'
