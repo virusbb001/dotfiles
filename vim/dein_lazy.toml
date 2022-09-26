@@ -70,10 +70,6 @@ let g:user_emmet_settings = {
 '''
 
 [[plugins]]
-repo = 'digitaltoad/vim-pug'
-on_ft = ["pug", "vue"]
-
-[[plugins]]
 repo = 'nikvdp/ejs-syntax'
 on_ft = ["ejs"]
 
