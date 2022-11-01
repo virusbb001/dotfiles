@@ -167,7 +167,7 @@ repo = 'Shougo/context_filetype.vim'
 # """
 
 [[plugins]]
-repo = 'majutsushi/tagbar'
+repo = 'preservim/tagbar'
 
 [[plugins]]
 repo = 'thinca/vim-quickrun'
