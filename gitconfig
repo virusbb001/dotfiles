@@ -4,3 +4,10 @@
 
 [commit]
 	verbose = true
+
+[alias]
+  clear-branches=!"\
+  tmp=$(mktemp) \
+  && (git config --get-all delbranch.ignore > \"$tmp\" || true) \
+  && (git branch --merged | grep -v -e '+' -e '*' | grep -v -f \"$tmp\" | xargs git branch --delete) \
+  && rm \"$tmp\""
