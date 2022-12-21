@@ -51,7 +51,8 @@ function _G.virus_lsp_settings ()
     'angularls',
     'eslint',
     'html',
-    'cssls'
+    'cssls',
+    'clangd'
   }
   for _, lsp in ipairs(servers) do
     nvim_lsp[lsp].setup {
