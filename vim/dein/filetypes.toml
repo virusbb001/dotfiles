@@ -146,3 +146,6 @@ repo = 'elixir-editors/vim-elixir'
 on_ft = ['elixir']
 if = 'executable("elixir")'
 
+[[plugins]]
+repo = 'yasuhiroki/github-actions-yaml.vim'
+on_ft = ['yaml.gha']
