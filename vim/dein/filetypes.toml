@@ -1,0 +1,148 @@
+# html/css
+
+[[plugins]]
+repo = 'mattn/emmet-vim'
+on_ft = ['html','css','htmldjango','vue', 'pug', "eruby", "typescriptreact", "xml"]
+hook_source = '''
+let g:user_emmet_settings = {
+\ 'variables': {
+\  'lang': 'ja',
+\ },
+\ 'vue': {
+\  'filters': 'html',
+\ }
+\}
+'''
+
+[[plugins]]
+repo = 'nikvdp/ejs-syntax'
+on_ft = ["ejs"]
+
+# javascript
+
+[[plugins]]
+repo = "kchmck/vim-coffee-script"
+on_ft = ["coffee"]
+
+# python
+[[plugins]]
+repo = 'Vimjas/vim-python-pep8-indent'
+on_ft = ['python', 'xonsh']
+
+[[plugins]]
+repo = 'jmcantrell/vim-virtualenv'
+on_ft = 'python'
+hook_add = '''
+let g:virtualenv_auto_activate = 1
+'''
+
+# go
+[[plugins]]
+repo = 'fatih/vim-go'
+on_ft = 'go'
+
+# ruby
+[[plugins]]
+repo = "vim-ruby/vim-ruby"
+on_ft = ["ruby"]
+
+[[plugins]]
+on_ft = ["ruby", "eruby"]
+repo = "tpope/vim-rails"
+
+[[plugins]]
+on_ft = ["ruby"]
+repo = "tpope/vim-bundler"
+
+[[plugins]]
+repo = "5t111111/denite-rails"
+on_ft = ["ruby", "eruby"]
+
+# Lisp
+
+# [[plugins]]
+# on_ft = ["lisp"]
+# repo = "l04m33/vlime"
+# rtp = "vim/"
+# hook_add = """
+# let g:vlime_cl_impl = "ros"
+# function! VlimeBuildServerCommandFor_ros(vlime_loader, vlime_eval)
+#   return ["ros", "run",
+#         \ "--load", a:vlime_loader,
+#         \ "--eval", a:vlime_eval]
+# endfunction
+# """
+
+[[plugins]]
+repo = "kovisoft/slimv"
+on_ft = ["lisp", "scheme"]
+hook_add = '''
+" let g:slimv_swank_cmd = "!xterm -e \"ros -e '(ql:quickload :swank) (swank:create-server)' wait \"&"
+" let g:slimv_lisp = 'ros run'
+" let g:slimv_impl = 'sbcl'
+'''
+
+# SPARQL/RDF
+
+[[plugins]]
+repo = 'niklasl/vim-rdf'
+
+# Swift/iOS
+
+[[plugins]]
+if = 'executable("swift")'
+repo = 'keith/swift.vim'
+on_ft = ['swift']
+
+[[plugins]]
+if = 'has("nvim") && executable("swift")'
+repo = 'mitsuse/autocomplete-swift'
+
+# Other
+
+[[plugins]]
+repo = 'vim-scripts/nginx.vim'
+on_ft = ['nginx']
+
+# [[plugins]]
+# repo = "chrisbra/csv.vim"
+# on_ft = ["csv"]
+
+[[plugins]]
+repo = 'kylef/apiblueprint.vim'
+on_ft = ["apiblueprint"]
+hook_add = '''
+autocmd FileType apiblueprint setlocal tabstop=4 softtabstop=4 shiftwidth=4
+'''
+
+[[plugins]]
+repo = "chaimleib/vim-renpy"
+on_ft = ["renpy"]
+
+# JSON
+[[plugins]]
+on_ft = ["json"]
+repo = "Quramy/vison"
+
+# Haskell
+[[plugins]]
+on_ft = ["haskell"]
+repo = 'neovimhaskell/haskell-vim'
+
+[[plugins]]
+on_ft = ["haskell"]
+repo = 'eagletmt/neco-ghc'
+
+[[plugins]]
+repo = 'Shougo/neco-vim'
+on_ft = ['vim']
+
+[[plugins]]
+repo = 'PProvost/vim-ps1'
+on_ft = ['ps1']
+
+[[plugins]]
+repo = 'elixir-editors/vim-elixir'
+on_ft = ['elixir']
+if = 'executable("elixir")'
+
