@@ -1,7 +1,16 @@
+function virus_null_ls_settings ()
+  local null_ls = require('null-ls')
+  local sources = {
+  }
+
+  null_ls.setup({ sources = sources })
+end
+
 function _G.virus_lsp_settings ()
   -- lspconfig is not set when defined this function
   local nvim_lsp = require('lspconfig')
   local util = require('lspconfig/util')
+
   local lsp_status = require('lsp-status')
   lsp_status.config({
     indicator_errors = 'E',
@@ -9,6 +18,7 @@ function _G.virus_lsp_settings ()
     indicator_ok = 'Ok',
   })
   lsp_status.register_progress()
+
   -- Use an on_attach function to only map the following keys
   -- after the language server attaches to the current buffer
   local on_attach = function(client, bufnr)

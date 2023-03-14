@@ -1,4 +1,7 @@
 [[plugins]]
+repo = 'nvim-lua/plenary.nvim'
+
+[[plugins]]
 repo = 'nvim-lua/lsp-status.nvim'
 hook_source = '''
   function! LspStatus() abort
@@ -10,8 +13,14 @@ hook_source = '''
 '''
 
 [[plugins]]
+repo = 'jose-elias-alvarez/null-ls.nvim'
+depends = ['plenary.nvim']
+
+[[plugins]]
 repo = 'neovim/nvim-lspconfig'
-depends = ['lsp-status.nvim']
+# actually, nvim-lsp config don't require null-ls
+# This allows set null-ls settings in lsp settings
+depends = ['lsp-status.nvim', 'null-ls.nvim']
 on_event = ['BufRead', 'BufNewFile']
 hook_source = '''
   lua _G.virus_lsp_settings()
