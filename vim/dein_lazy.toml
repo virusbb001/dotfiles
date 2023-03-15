@@ -52,3 +52,24 @@ on_source = 'denite.nvim'
 [[plugins]]
 repo = 'pocari/vim-denite-emoji'
 on_source = 'denite.nvim'
+
+[[plugins]]
+repo = 'skk-dev/dict'
+name = 'skk-dict'
+
+[[plugins]]
+repo = 'vim-skk/skkeleton'
+on_map = {ic = '<Plug>(skkeleton-toggle)'}
+depends = ['denops.vim', 'skk-dict']
+hook_add = '''
+  imap <C-j> <Plug>(skkeleton-toggle)
+  cmap <C-j> <Plug>(skkeleton-toggle)
+'''
+hook_source = '''
+let s:dict_location = dein#get('skk-dict')['path']
+call skkeleton#config(#{
+  \ globalDictionaries: [
+  \     expand(s:dict_location .. '/SKK-JISYO.L')
+  \ ]
+  \ })
+'''
