@@ -149,3 +149,7 @@ if = 'executable("elixir")'
 [[plugins]]
 repo = 'yasuhiroki/github-actions-yaml.vim'
 on_ft = ['yaml.gha']
+
+[[plugins]]
+repo = 'iloginow/vim-stylus'
+on_ft = 'stylus'
