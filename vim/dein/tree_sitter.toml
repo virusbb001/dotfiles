@@ -1,6 +1,7 @@
 [[plugins]]
 repo = 'nvim-treesitter/nvim-treesitter'
-# rev = '0.5-compat'
+lazy = 1
+on_event = ['BufRead', 'CursorHold', 'FileType']
 hook_post_update = 'TSUpdate'
 hook_post_source = '''
 lua <<EOF
