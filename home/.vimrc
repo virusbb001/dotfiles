@@ -25,7 +25,5 @@ for s:file in s:vim_files
 endfor
 
 let $PATH = $PATH . ':/home/virus/.virtualenvs/dev/bin'
-set background=dark
-colorscheme gruvbox
 
 " vim: set ft=vim :
