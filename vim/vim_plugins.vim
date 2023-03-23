@@ -57,6 +57,7 @@ if dein#load_state(s:dein_dir)
   call dein#load_toml(expand(s:directory . '/dein.toml'), {'lazy' : 0})
   call dein#load_toml(expand(s:directory . '/dein_lazy.toml'), {'lazy' : 1})
   call dein#load_toml(expand(s:directory . '/dein/filetypes.toml'), { 'lazy': 1, 'merge_ftdetect': 1 })
+  call dein#load_toml(expand(s:directory . '/dein/ddu.toml'), { 'lazy': 1, 'on_source': 'ddu.vim' })
   if v:false
     call dein#load_toml(expand(s:directory . '/dein/deoplete.toml'), {'lazy' : 0})
   endif
