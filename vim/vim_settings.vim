@@ -102,6 +102,10 @@ if has('vim_starting')
  let &runtimepath.=',' . expand('$VIMRUNTIME')
 endif
 
+let s:dotfiles_vim_dir=expand('<sfile>:p:h')
+let s:dotfiles_vim_dir_after=s:dotfiles_vim_dir .. '/after'
+let &runtimepath = s:dotfiles_vim_dir .. ',' .. &runtimepath .. ',' .. s:dotfiles_vim_dir_after
+
 "キー設定
 nmap <F1> <Nop>
 map Q gQ

@@ -14,8 +14,6 @@ augroup VirusVimPlugins
   autocmd!
 augroup END
 
-let &runtimepath .= ',' . expand('<sfile>:p:h')
-
 let s:dein_dir_name = 'dein'
 
 " auto install
