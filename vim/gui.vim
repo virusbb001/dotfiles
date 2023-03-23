@@ -7,9 +7,6 @@ if has('mac')
   imap ¥ \
   cmap ¥ \
   tmap ¥ \
-
-  let s:path = system("echo echo VIMPATH'${PATH}' | $SHELL -l")
-  let $PATH = matchstr(s:path, 'VIMPATH\zs.\{-}\ze\n')
 endif
 
 tnoremap <C-;> <C-\><C-n>
