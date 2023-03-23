@@ -117,6 +117,9 @@ repo = "cocopon/iceberg.vim"
 [[plugins]]
 repo = "morhetz/gruvbox"
 
+[[plugins]]
+repo = "folke/tokyonight.nvim"
+
 # Git
 
 [[plugins]]

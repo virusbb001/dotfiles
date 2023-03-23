@@ -91,6 +91,8 @@ if dein#load_state(s:dein_dir)
   call dein#save_state()
 end
 
+colorscheme tokyonight-night
+
 if s:support_lspbuiltin
   execute 'luafile ' . expand(s:dotfiles_vim_dir . '/dein/lsp_settings.lua')
 endif

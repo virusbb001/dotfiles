@@ -12,6 +12,8 @@ set wrap
 set hlsearch
 set showtabline=2
 set laststatus=2
+set background=dark
+
 function! LspStatus() abort
   " This function will overwrite in lsp-status settings.
   return ''
