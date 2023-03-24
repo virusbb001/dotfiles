@@ -91,8 +91,6 @@ if dein#load_state(s:dein_dir)
   call dein#save_state()
 end
 
-colorscheme tokyonight-night
-
 if s:support_lspbuiltin
   execute 'luafile ' . expand(s:dotfiles_vim_dir . '/dein/lsp_settings.lua')
 endif
@@ -114,3 +112,5 @@ else
   autocmd VirusVimPlugins VimEnter * call dein#call_hook('post_source')
   autocmd VirusVimPlugins VimEnter * call InstallMissedPlugin()
 endif
+
+colorscheme tokyonight-night
