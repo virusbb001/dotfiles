@@ -64,14 +64,21 @@ function _G.virus_lsp_settings ()
     'cssls',
     'clangd'
   }
-  for _, lsp in ipairs(servers) do
-    nvim_lsp[lsp].setup {
-      on_attach = on_attach,
-      capabilities = lsp_status.capabilities,
-      flags = {
-        debounce_text_changes = 150,
-      }
+
+  local base_lsp_settings = {
+    on_attach = on_attach,
+    capabilities = lsp_status.capabilities,
+    flags = {
+      debounce_text_changes = 150,
     }
+  }
+
+  function base_lsp_with (cfg)
+    return vim.tbl_deep_extend("force", base_lsp_settings, cfg)
+  end
+
+  for _, lsp in ipairs(servers) do
+    nvim_lsp[lsp].setup(base_lsp_settings)
   end
 
   local detect_deno_root_dir = function (filename, bufnr)
@@ -94,22 +101,12 @@ function _G.virus_lsp_settings ()
     return util.root_pattern('package.json', 'tsconfig.json')(filename)
   end
 
-  nvim_lsp.denols.setup {
-    on_attach = on_attach,
-    capabilities = lsp_status.capabilities,
-    flags = {
-      debounce_text_changes = 150,
-    },
+  nvim_lsp.denols.setup(base_lsp_with({
     root_dir = detect_deno_root_dir
-  }
-  nvim_lsp.tsserver.setup {
-    on_attach = on_attach,
-    capabilities = lsp_status.capabilities,
-    flags = {
-      debounce_text_changes = 150,
-    },
+  }))
+  nvim_lsp.tsserver.setup(base_lsp_with({
     root_dir = detect_node_root_dir
-  }
+  }))
 
   local function virus_lsp_after_denops ()
     local json_scheme = vim.fn.json_decode(vim.fn['denops#request']( 'virus_dotfiles', 'checkAndFetchJsonScheme', { vim.fn.stdpath('cache') }))
