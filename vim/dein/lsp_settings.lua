@@ -124,4 +124,16 @@ function _G.virus_lsp_settings ()
   end
 
   vim.fn['denops#plugin#wait_async']('virus_dotfiles', virus_lsp_after_denops)
+
+  nvim_lsp.rust_analyzer.setup(base_lsp_with({
+    cmd = {"rustup", "run", "stable", "rust-analyzer"},
+    settings = {
+      ["rust-analyzer"] = {
+        check = {
+          command = "clippy"
+        }
+      }
+    }
+  }))
+
 end
