@@ -24,13 +24,6 @@ endif
 repo = 'editorconfig/editorconfig-vim'
 
 [[plugins]]
-repo = 'Shougo/Unite.vim'
-
-[[plugins]]
-repo = 'Shougo/unite-outline'
-depends = 'Unite.vim'
-
-[[plugins]]
 repo = "Shougo/defx.nvim"
 hook_add = '''
 autocmd FileType defx call s:defx_my_settings()
