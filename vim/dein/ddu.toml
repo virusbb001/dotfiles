@@ -95,6 +95,12 @@ vim.fn['ddu#custom#patch_global']('kindOptions', {
 [[plugins]]
 repo = '4513ECHO/ddu-source-colorscheme'
 
+[[plugins]]
+repo = 'Shougo/ddu-source-file_old'
+
+[[plugins]]
+repo = 'shun/ddu-source-buffer'
+
 # Filter
 [[plugins]]
 repo = 'Shougo/ddu-filter-matcher_substring'
@@ -107,6 +113,8 @@ vim.fn['ddu#custom#patch_global']('filterParams', {
 '''
 
 # Kinds
+[[plugins]]
+repo = 'Shougo/ddu-kind-file'
 
 # Miscs
 [[plugins]]
