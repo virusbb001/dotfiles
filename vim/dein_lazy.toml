@@ -59,7 +59,7 @@ name = 'skk-dict'
 
 [[plugins]]
 repo = 'vim-skk/skkeleton'
-on_map = {ic = '<Plug>(skkeleton-toggle)'}
+on_event = 'InsertEnter'
 depends = ['denops.vim', 'skk-dict']
 hook_add = '''
   imap <C-j> <Plug>(skkeleton-toggle)
