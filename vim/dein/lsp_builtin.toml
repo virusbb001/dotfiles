@@ -17,10 +17,13 @@ repo = 'jose-elias-alvarez/null-ls.nvim'
 depends = ['plenary.nvim']
 
 [[plugins]]
+repo = 'davidosomething/format-ts-errors.nvim'
+
+[[plugins]]
 repo = 'neovim/nvim-lspconfig'
 # actually, nvim-lsp config don't require null-ls
 # This allows set null-ls settings in lsp settings
-depends = ['lsp-status.nvim', 'null-ls.nvim']
+depends = ['lsp-status.nvim', 'null-ls.nvim', 'format-ts-errors.nvim']
 on_event = ['BufRead', 'BufNewFile']
 hook_source = '''
   lua _G.virus_lsp_settings()
