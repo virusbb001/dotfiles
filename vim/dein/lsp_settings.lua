@@ -173,7 +173,7 @@ function _G.virus_lsp_settings ()
   }))
 
   nvim_lsp.lua_ls.setup(base_lsp_with({
-    settinsg = {
+    settings = {
       Lua = {
         runtime = {
           version = 'LuaJIT',
