@@ -64,7 +64,6 @@ function _G.virus_lsp_settings ()
     'angularls',
     'eslint',
     'html',
-    'cssls',
     'clangd'
   }
 
@@ -76,7 +75,7 @@ function _G.virus_lsp_settings ()
     }
   }
 
-  function base_lsp_with (cfg)
+  local function base_lsp_with (cfg)
     return vim.tbl_deep_extend("force", base_lsp_settings, cfg)
   end
 
@@ -107,6 +106,7 @@ function _G.virus_lsp_settings ()
   nvim_lsp.denols.setup(base_lsp_with({
     root_dir = detect_deno_root_dir
   }))
+
   nvim_lsp.tsserver.setup(base_lsp_with({
     root_dir = detect_node_root_dir,
     handlers = {
@@ -181,12 +181,15 @@ function _G.virus_lsp_settings ()
         runtime = {
           version = 'LuaJIT',
         },
-        diagnostics = {
-          globals = {'vim'},
-        },
-        workspace = {
-          library = vim.api.nvim_get_runtime_file("", true),
-        },
+      }
+    }
+  }))
+
+  nvim_lsp.cssls.setup(base_lsp_with({
+    settings = {
+      css = {
+        -- TODO: should I check that project do not uses postcss and change to true?
+        validate = false
       }
     }
   }))
