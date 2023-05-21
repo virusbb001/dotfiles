@@ -216,3 +216,7 @@ let g:markdown_fenced_languages = [
    \ 'ruby',
    \ 'lua'
    \]
+
+if has('nvim')
+  lua if vim.loader then vim.loader.enable() end
+endif

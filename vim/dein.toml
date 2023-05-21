@@ -267,9 +267,3 @@ call gf#user#extend('GfFile', 1000)
 
 [[plugins]]
 repo = 'vim-denops/denops.vim'
-
-[[plugins]]
-repo = 'lewis6991/impatient.nvim'
-lua_add = '''
-require('impatient')
-'''
