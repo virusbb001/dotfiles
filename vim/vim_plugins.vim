@@ -56,6 +56,7 @@ if dein#load_state(s:dein_dir)
   let s:directory = s:dotfiles_vim_dir
   call dein#load_toml(expand(s:directory . '/dein.toml'), {'lazy' : 0})
   call dein#load_toml(expand(s:directory . '/dein_lazy.toml'), {'lazy' : 1})
+  call dein#load_toml(expand(s:directory . '/dein/nvim.toml'), { 'if': has('nvim') })
   call dein#load_toml(expand(s:directory . '/dein/filetypes.toml'), { 'lazy': 1, 'merge_ftdetect': 1 })
   call dein#load_toml(expand(s:directory . '/dein/ddu.toml'), { 'lazy': 1, 'on_source': 'ddu.vim' })
   if v:false

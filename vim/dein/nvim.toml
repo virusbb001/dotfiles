@@ -1,0 +1,3 @@
+[[plugins]]
+repo = 'MunifTanjim/nui.nvim'
+lazy = 1
