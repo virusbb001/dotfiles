@@ -44,3 +44,12 @@ require("ssr").setup {
   },
 }
 '''
+
+[[plugins]]
+repo = 'bennypowers/nvim-regexplainer'
+depends = ['nvim-treesitter', 'nui.nvim']
+lazy = 1
+on_source = ['nvim-treesitter']
+lua_source = '''
+require'regexplainer'.setup()
+'''
