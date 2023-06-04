@@ -5,3 +5,22 @@ lazy = 1
 [[plugins]]
 repo = 'nvim-lua/plenary.nvim'
 lazy = 1
+
+[[plugins]]
+repo = 'andythigpen/nvim-coverage'
+depends = ['plenary.nvim']
+on_event = 'BufRead'
+lazy = 1
+lua_post_source = '''
+require("coverage").setup()
+'''
+
+[[plugins]]
+repo = 'theHamsta/nvim_rocks'
+lazy = 1
+on_event = 'VimEnter'
+build = 'pip3 install --user hererocks && python3 -mhererocks . -j2.1.0-beta3 -r3.0.0 && cp nvim_rocks.lua lua'
+lua_posr_source = '''
+-- for nvim-coverage
+nvim_rocks.ensure_installed('lua-xmlreader')
+'''
