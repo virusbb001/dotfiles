@@ -1,3 +1,7 @@
 [[plugins]]
 repo = 'MunifTanjim/nui.nvim'
 lazy = 1
+
+[[plugins]]
+repo = 'nvim-lua/plenary.nvim'
+lazy = 1
