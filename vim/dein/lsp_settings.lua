@@ -170,6 +170,9 @@ function _G.virus_lsp_settings ()
       ["rust-analyzer"] = {
         check = {
           command = "clippy"
+        },
+        procMacro = {
+          enable = true,
         }
       }
     }
