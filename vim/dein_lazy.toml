@@ -75,6 +75,21 @@ call skkeleton#config(#{
 '''
 
 [[plugins]]
+repo = 'delphinus/skkeleton_indicator.nvim'
+depends = 'skkeleton'
+on_source = 'skkeleton'
+lua_source = '''
+require'skkeleton_indicator'.setup({
+  fadeOutMs = 0;
+  alwaysShown = false;
+  hiraText = "あ";
+  kataText = "ア";
+  hankataText = "ｱ";
+  zenkakuText = "ａ";
+})
+'''
+
+[[plugins]]
 repo = 'Shougo/ddu.vim'
 depends = 'denops.vim'
 on_source = 'denops.vim'
