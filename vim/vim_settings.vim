@@ -185,6 +185,7 @@ augroup VirusDropboxAuto
  " rubyの時インデントを2に
  autocmd BufRead,BufNewFile *.rb setlocal shiftwidth=2 tabstop=2 expandtab
  autocmd BufRead,BufNewFile *.yaml setlocal shiftwidth=2 tabstop=2 expandtab
+ autocmd BufNewFile,BufRead *.blade.php set ft=blade
  autocmd FileType mkd,markdown setlocal noexpandtab
  autocmd FileType help setlocal iskeyword+=-
  autocmd FileType python setlocal colorcolumn=80
