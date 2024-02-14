@@ -197,4 +197,7 @@ function _G.virus_lsp_settings ()
     }
   }))
 
+  nvim_lsp.phpactor.setup(base_lsp_with({
+  }))
+
 end
