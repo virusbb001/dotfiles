@@ -22,7 +22,13 @@ function _G.virus_lsp_settings ()
   require('neodev').setup({
   });
 
+  local augroup = "VirusLspAugroup"
+
+  vim.api.nvim_create_augroup(augroup, {
+  })
+
   vim.api.nvim_create_autocmd("LspAttach", {
+    group = augroup,
     callback = function(args)
       local bufnr = args.buf
       local client = vim.lsp.get_client_by_id(args.data.client_id)
