@@ -148,7 +148,6 @@ function _G.virus_lsp_settings ()
   }))
 
   local function virus_lsp_after_denops ()
-    local json_scheme = vim.fn.json_decode(vim.fn['denops#request']( 'virus_dotfiles', 'checkAndFetchJsonScheme', { vim.fn.stdpath('cache') }))
     nvim_lsp.jsonls.setup {
       on_attach = on_attach,
       capabilities = lsp_status.capabilities,
@@ -156,7 +155,9 @@ function _G.virus_lsp_settings ()
         debounce_text_changes = 150,
       },
       settings = {
-        json = json_scheme
+        json = {
+          schemas = require('schemastore').json.schemas(),
+        }
       }
     }
     -- TODO: enable jsonls opened buffer
