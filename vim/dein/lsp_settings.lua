@@ -69,7 +69,6 @@ function _G.virus_lsp_settings ()
   -- map buffer local keybindings when the language server attaches
   local servers = {
     'pyright',
-    'rust_analyzer',
     'angularls',
     'eslint',
     'html',
@@ -93,7 +92,7 @@ function _G.virus_lsp_settings ()
 
   local detect_deno_root_dir = function (filename, bufnr)
     if (bufnr ~= nil) then
-      local firstline = vim.fn.getbufline(bufnr, 1)[1]
+      local firstline = vim.fn.getbufline(bufnr, 1)[1] or ""
       -- detect from shebang
       local is_shebang = string.sub(firstline, 1, 2) == "#!"
       if is_shebang and string.match(firstline, "deno") then
@@ -177,10 +176,17 @@ function _G.virus_lsp_settings ()
     settings = {
       ["rust-analyzer"] = {
         check = {
-          command = "clippy"
+          command = "clippy",
+          targets = {
+            "x86_64-pc-windows-gnu",
+            "x86_64-unknown-linux-gnu"
+          },
         },
         procMacro = {
           enable = true,
+        },
+        cargo = {
+          features = "all",
         }
       }
     }
