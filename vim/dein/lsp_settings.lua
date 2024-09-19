@@ -114,7 +114,7 @@ function _G.virus_lsp_settings ()
     root_dir = detect_deno_root_dir
   }))
 
-  nvim_lsp.tsserver.setup(base_lsp_with({
+  nvim_lsp.ts_ls.setup(base_lsp_with({
     root_dir = detect_node_root_dir,
     handlers = {
       ["textDocument/publishDiagnostics"] = function(
@@ -127,7 +127,7 @@ function _G.virus_lsp_settings ()
           return
         end
 
-        -- ignore some tsserver diagnostics
+        -- ignore some ts_ls diagnostics
         local idx = 1
         while idx <= #result.diagnostics do
           local entry = result.diagnostics[idx]
