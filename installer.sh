@@ -9,8 +9,8 @@ umask 022
 # cp -nrv  ./* $HOME
 files="$(ls -A home)"
 for file in $files ; do
-  if [ -f "$HOME/$file" ]; then
-    echo "\$HOME/$file already exits. skip"
+  if [ -e "$HOME/$file" ]; then
+    echo "\$HOME/$file already exists. skip"
   else
     echo install -m 0644 "home/$file" "$HOME/$file"
     install -m 0644 "home/$file" "$HOME/$file"
@@ -26,4 +26,10 @@ fi
 
 if ! (git config --global --get-all include.path | grep $DOTFILES_DIR/gitconfig); then
   git config --global --add include.path $DOTFILES_DIR/gitconfig
+fi
+
+if [ -e "$HOME/README.md" ]; then
+  echo "\$HOME/README.md already exists. skip"
+else
+  ln -s $DOTFILES_DIR/memo/home.md $HOME/README.md
 fi
