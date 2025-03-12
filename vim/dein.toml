@@ -270,3 +270,9 @@ repo = 'vim-denops/denops.vim'
 
 [[plugins]]
 repo = 'b0o/schemastore.nvim'
+
+# database
+[[plugins]]
+repo = 'tpope/vim-dadbod'
+[[plugins]]
+repo = 'kristijanhusak/vim-dadbod-ui'
