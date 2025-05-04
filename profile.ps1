@@ -15,3 +15,7 @@ function fix_tmpdir {
      }
    }
 }
+
+if (Get-Command -ErrorAction SilentlyContinue fnm) {
+  fnm env --use-on-cd --shell powershell | Out-String | Invoke-Expression
+}
