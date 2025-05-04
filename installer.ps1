@@ -32,7 +32,13 @@ if (Test-Path "$home/_vimrc") {
 if (Test-Path $profile) {
   Write-Output "$profile is already exists. skip"
 }else{
-  Copy-Item ($PSScriptRoot + "\profile.ps1") $profile
+  $LocalProfileSrc=@"
+`$dotfiles_root = "$PSScriptRoot"
+`$dotfiles_profile = "`$dotfiles_root\profile.ps1"
+if ( Test-Path `$dotfiles_profile ) { . `$dotfiles_profile }
+"@
+
+  $LocalProfileSrc > $profile
 }
 
 xcopy D:\dotfiles\config $env:XDG_CONFIG_HOME /s /P
