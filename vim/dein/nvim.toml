@@ -24,3 +24,13 @@ lua_posr_source = '''
 -- for nvim-coverage
 nvim_rocks.ensure_installed('lua-xmlreader')
 '''
+
+[[plugins]]
+repo = 'oflisback/obsidian-bridge.nvim'
+lazy = 1
+if = 'exists("$OBSIDIAN_REST_API_KEY")'
+on_ft = ['markdown']
+depends = ['plenary.nvim']
+lua_post_source = '''
+require("obsidian-bridge").setup()
+'''
