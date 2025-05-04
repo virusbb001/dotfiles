@@ -3,3 +3,6 @@ vim.diagnostic.config({
     source = true
   }
 })
+
+-- lsp settings
+vim.lsp.enable('lua_ls')
