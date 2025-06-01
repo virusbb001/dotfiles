@@ -114,4 +114,8 @@ else
   autocmd VirusVimPlugins VimEnter * call InstallMissedPlugin()
 endif
 
+if has('nvim')
+  lua require 'nvim_settings'
+endif
+
 colorscheme tokyonight-night
