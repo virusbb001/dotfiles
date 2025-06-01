@@ -171,22 +171,6 @@ function _G.virus_lsp_settings ()
 
   vim.fn['denops#plugin#wait_async']('virus_dotfiles', virus_lsp_after_denops)
 
-  nvim_lsp.rust_analyzer.setup(base_lsp_with({
-    settings = {
-      ["rust-analyzer"] = {
-        check = {
-          command = "clippy"
-        },
-        procMacro = {
-          enable = true,
-        },
-        cargo = {
-          features = "all",
-        }
-      }
-    }
-  }))
-
   nvim_lsp.lua_ls.setup(base_lsp_with({
     settings = {
       Lua = {
@@ -209,4 +193,14 @@ function _G.virus_lsp_settings ()
   nvim_lsp.phpactor.setup(base_lsp_with({
   }))
 
+  -- new version LSP settings
+
+  vim.lsp.config('*', {
+    flags = {
+      debounce_text_changes = 150,
+    }
+  });
+
+  -- lsp settings
+  vim.lsp.enable({'lua_ls', 'rust_analyzer'})
 end
