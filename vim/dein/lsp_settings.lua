@@ -171,16 +171,6 @@ function _G.virus_lsp_settings ()
 
   vim.fn['denops#plugin#wait_async']('virus_dotfiles', virus_lsp_after_denops)
 
-  nvim_lsp.lua_ls.setup(base_lsp_with({
-    settings = {
-      Lua = {
-        runtime = {
-          version = 'LuaJIT',
-        },
-      }
-    }
-  }))
-
   nvim_lsp.cssls.setup(base_lsp_with({
     settings = {
       css = {
