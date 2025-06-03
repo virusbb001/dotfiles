@@ -65,16 +65,6 @@ function _G.virus_lsp_settings ()
     end,
   })
 
-  -- Use a loop to conveniently call 'setup' on multiple servers and
-  -- map buffer local keybindings when the language server attaches
-  local servers = {
-    'pyright',
-    'angularls',
-    'eslint',
-    'html',
-    'clangd'
-  }
-
   local base_lsp_settings = {
     capabilities = lsp_status.capabilities,
     flags = {
@@ -84,10 +74,6 @@ function _G.virus_lsp_settings ()
 
   local function base_lsp_with (cfg)
     return vim.tbl_deep_extend("force", base_lsp_settings, cfg)
-  end
-
-  for _, lsp in ipairs(servers) do
-    nvim_lsp[lsp].setup(base_lsp_settings)
   end
 
   local detect_deno_root_dir = function (filename, bufnr)
@@ -190,5 +176,13 @@ function _G.virus_lsp_settings ()
   });
 
   -- lsp settings
-  vim.lsp.enable({'lua_ls', 'rust_analyzer'})
+  vim.lsp.enable({
+    'lua_ls',
+    'rust_analyzer',
+    'pyright',
+    'angularls',
+    'eslint',
+    'html',
+    'clangd'
+  })
 end
