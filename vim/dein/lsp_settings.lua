@@ -186,6 +186,7 @@ function _G.virus_lsp_settings ()
   -- new version LSP settings
 
   vim.lsp.config('*', {
+    capabilities = lsp_status.capabilities,
     flags = {
       debounce_text_changes = 150,
     }
