@@ -140,23 +140,6 @@ function _G.virus_lsp_settings ()
     }
   }))
 
-  local function virus_lsp_after_denops ()
-    nvim_lsp.jsonls.setup {
-      capabilities = lsp_status.capabilities,
-      flags = {
-        debounce_text_changes = 150,
-      },
-      settings = {
-        json = {
-          schemas = require('schemastore').json.schemas(),
-        }
-      }
-    }
-    -- TODO: enable jsonls opened buffer
-  end
-
-  vim.fn['denops#plugin#wait_async']('virus_dotfiles', virus_lsp_after_denops)
-
   nvim_lsp.cssls.setup(base_lsp_with({
     settings = {
       css = {
@@ -183,6 +166,7 @@ function _G.virus_lsp_settings ()
     'angularls',
     'eslint',
     'html',
-    'clangd'
+    'clangd',
+    'jsonls'
   })
 end
