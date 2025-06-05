@@ -140,15 +140,6 @@ function _G.virus_lsp_settings ()
     }
   }))
 
-  nvim_lsp.cssls.setup(base_lsp_with({
-    settings = {
-      css = {
-        -- TODO: should I check that project do not uses postcss and change to true?
-        validate = false
-      }
-    }
-  }))
-
   -- new version LSP settings
 
   vim.lsp.config('*', {
@@ -167,6 +158,7 @@ function _G.virus_lsp_settings ()
     'eslint',
     'html',
     'clangd',
-    'jsonls'
+    'jsonls',
+    'cssls'
   })
 end
