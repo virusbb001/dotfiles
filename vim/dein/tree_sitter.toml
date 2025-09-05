@@ -1,26 +1,52 @@
 [[plugins]]
 repo = 'nvim-treesitter/nvim-treesitter'
+rev = 'main'
 lazy = 1
 on_event = ['BufRead', 'CursorHold', 'FileType']
 hook_post_update = 'TSUpdate'
 hook_post_source = '''
 lua <<EOF
-require'nvim-treesitter.configs'.setup {
-  -- Modules and its options go here
-  ensure_installed = "all",
-  ignore_install = {
-    "norg", -- https://github.com/nvim-neorg/tree-sitter-norg/issues/74
-  },
-  highlight = { enable = true },
-  incremental_selection = { enable = true },
-  textobjects = { enable = true },
-  indent = {
-    enable = true,
-  },
+local treesitter = require'nvim-treesitter'
+treesitter.setup {
+  install_dir = vim.fn.stdpath('data') .. '/site'
 }
-EOF
-set foldmethod=expr
-set foldexpr=nvim_treesitter#foldexpr()
+
+treesitter.install {
+  'javascript',
+  'rust',
+  'slim',
+  'toml',
+  'tsx',
+  'typescript',
+  'vim',
+  'vimdoc',
+  'yaml',
+}
+
+local augroup = "VirusTSAugroup"
+
+vim.api.nvim_create_augroup(augroup, {
+})
+
+vim.api.nvim_create_autocmd('FileType', {
+  pattern = {
+    'help',
+    'javascript',
+    'rust',
+    'slim',
+    'toml',
+    'tsx',
+    'typescript',
+    'vim',
+    'yaml',
+  },
+  callback = function()
+    vim.treesitter.start()
+    vim.wo.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
+    vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+  end
+})
+
 '''
 
 [[plugins]]
