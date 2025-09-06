@@ -1,13 +1,5 @@
 scriptencoding utf-8
 
-if v:version < 704
-  echohl WarningMsg
-  echo "Vim's version is under 7.4"
-  echo 'plz upgrade vim'
-  echohl None
-  finish
-end
-
 let s:dotfiles_vim_dir=expand('<sfile>:p:h')
 
 augroup VirusVimPlugins
