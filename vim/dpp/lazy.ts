@@ -17,8 +17,16 @@ export default function getLazyPlugins(): Plugin[] {
     hooks_file: (path.join(import.meta.dirname!, "hooks/skkeleton_indicator.lua"))
   }];
 
+  const otherPlugins: RemotePlugin[] = [{
+    repo: 'tyru/open-browser.vim'
+  }, {
+      repo: 'previm/previm',
+      on_cmd: 'PrevimOpen',
+      depends: 'open-browser.vim'
+  }]
+
   const lazyPlugins = ([] as RemotePlugin[])
-  .concat(skkeletonPlugins)
+  .concat(skkeletonPlugins, otherPlugins)
   .map((p): RemotePlugin => ({
     ...p,
     lazy: true
