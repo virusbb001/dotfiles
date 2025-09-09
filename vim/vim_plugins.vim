@@ -1,11 +1,87 @@
 scriptencoding utf-8
 
-let s:dotfiles_vim_dir=expand('<sfile>:p:h')
+" dpp uses denops so deno should be installed
+
+if ! executable('deno')
+  echohl WarningMsg
+  echomsg "deno should be installed"
+  echohl None
+  finish
+endif
+
+if ! executable('git')
+  echohl WarningMsg
+  echomsg "git should be installed"
+  echohl None
+  finish
+endif
+
+const s:dotfiles_vim_dir=expand('<sfile>:p:h')
+const s:dpp_config = expand(s:dotfiles_vim_dir .. "/dpp/config.ts")
+
+const s:plugins_data_json = expand(s:dotfiles_vim_dir .. "/dpp/dpp_plugins.json")
+" const s:plugins_data = json_decode(readfile(s:plugins_data_json))
+const s:plugins_data = {
+\   "minimal": ["Shougo/dpp.vim", "Shougo/dpp-ext-lazy"],
+\   "install": [
+\       "vim-denops/denops.vim",
+\       "Shougo/dpp-ext-installer",
+\       "Shougo/dpp-protocol-git"]
+\ }
+
+" no trail slash
+const s:dpp_base = expand(stdpath("cache") .. "/dpp")
+const s:dpp_github_repos = s:dpp_base .. "/repos/github.com"
+
+function! InstallAndAddPlugin (github_repo)
+  const dir = expand(s:dpp_github_repos .. "/" .. a:github_repo)
+  if ! isdirectory(dir)
+    const github_url = "https://github.com/" .. a:github_repo .. ".git"
+    execute "!git clone" github_url dir
+  endif
+  execute 'set runtimepath^=' .. dir->fnamemodify(":p")->substitute('[/\\]$', '', '')
+endfunction
+
+for s:minimal_plugin in s:plugins_data["minimal"]
+  call InstallAndAddPlugin(s:minimal_plugin)
+endfor
+
+if dpp#min#load_state(s:dpp_base)
+  for s:install_plugin in s:plugins_data["install"]
+    call InstallAndAddPlugin(s:install_plugin)
+  endfor
+
+  " Why is this needed?
+  if has('nvim')
+    runtime! plugin/denops.vim
+  endif
+
+  autocmd User DenopsReady
+  \ : echohl Warning
+  \ | echomsg "dpp load_state() is failed"
+  \ | echohl None
+  \ | call dpp#make_state(s:dpp_base, s:dpp_config)
+endif
+
+autocmd User Dpp:makeStatePost
+  \ : echohl Warning
+  \ | echomsg "dpp make_state() is done"
+  \ | echohl None
+
+filetype indent plugin on
+
+if has('syntax')
+  syntax on
+endif
 
 augroup VirusVimPlugins
   autocmd!
 augroup END
 
+finish
+
+
+"
 let s:dein_dir_name = 'dein'
 
 " auto install

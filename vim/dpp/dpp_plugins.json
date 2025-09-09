@@ -1,0 +1,11 @@
+{
+  "minimal": [
+    "Shougo/dpp.vim",
+    "Shougo/dpp-ext-lazy"
+  ],
+  "install": [
+    "vim-denops/denops.vim",
+    "Shougo/dpp-ext-installer",
+    "Shougo/dpp-protocol-git"
+  ]
+}
