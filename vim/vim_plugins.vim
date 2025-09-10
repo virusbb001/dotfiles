@@ -78,6 +78,10 @@ augroup VirusVimPlugins
   autocmd!
 augroup END
 
+" TODO: source when lspsettings sourced
+execute 'luafile ' . expand(s:dotfiles_vim_dir . '/dein/lsp_settings.lua')
+colorscheme tokyonight-night
+
 finish
 
 
@@ -161,7 +165,6 @@ if dein#load_state(s:dein_dir)
 end
 
 if s:support_lspbuiltin
-  execute 'luafile ' . expand(s:dotfiles_vim_dir . '/dein/lsp_settings.lua')
 endif
 
 call dein#call_hook('source')

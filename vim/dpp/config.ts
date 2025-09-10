@@ -5,10 +5,13 @@ import {
   ConfigReturn
 } from "jsr:@shougo/dpp-vim@~3.1.0/config";
 import { LazyMakeStateResult } from "jsr:@shougo/dpp-ext-lazy@~2.0.1";
+import * as path from "jsr:@std/path";
+
+import { RemotePlugin, addName } from "./util.ts";
+
 import getDppPlugins from "./dpp_plugins.ts";
 import getLazyPlugins from "./lazy.ts";
-import * as path from "jsr:@std/path";
-import { RemotePlugin, addName } from "./util.ts";
+import getLSPPlugins from "./lsp_plugins.ts";
 
 function f(p: RemotePlugin[]): Plugin[] {
   return p.map(addName)
@@ -80,12 +83,16 @@ endif`
       repo: "pbogut/vim-dadbod-ssh"
     }])
 
+    const lspPlugins = getLSPPlugins();
+
     const allPlugins = ([] as Plugin[]).concat(
       dppPlugins,
       nonLazyPlugins,
       dadbodPlugins,
       colorschemes,
-      lazyPlugins);
+      lazyPlugins,
+      lspPlugins
+    );
 
     const [context, options] = await contextBuilder.get(args.denops);
 
