@@ -12,6 +12,8 @@ import { RemotePlugin, addName } from "./util.ts";
 import getDppPlugins from "./dpp_plugins.ts";
 import getLazyPlugins from "./lazy.ts";
 import getLSPPlugins from "./lsp_plugins.ts";
+import getTSPlugins from "./ts_plugins.ts";
+import getNvimPlugins from "./nvim_plugins.ts";
 
 function f(p: RemotePlugin[]): Plugin[] {
   return p.map(addName)
@@ -85,13 +87,17 @@ endif`
 
     const lspPlugins = getLSPPlugins();
 
+    const nvimPlugins = args.denops.meta.host === "nvim" ? getNvimPlugins() : [];
+
     const allPlugins = ([] as Plugin[]).concat(
       dppPlugins,
       nonLazyPlugins,
       dadbodPlugins,
       colorschemes,
       lazyPlugins,
-      lspPlugins
+      lspPlugins,
+      getTSPlugins(),
+      nvimPlugins
     );
 
     const [context, options] = await contextBuilder.get(args.denops);
