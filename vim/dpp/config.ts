@@ -5,7 +5,7 @@ import {
   ConfigReturn
 } from "jsr:@shougo/dpp-vim@~3.1.0/config";
 import { LazyMakeStateResult } from "jsr:@shougo/dpp-ext-lazy@~2.0.1";
-import * as path from "jsr:@std/path";
+import { globpath } from "jsr:@denops/std/function";
 
 import { RemotePlugin, addName } from "./util.ts";
 
@@ -23,7 +23,7 @@ function f(p: RemotePlugin[]): Plugin[] {
 
 export class Config extends BaseConfig {
   override async config(args: ConfigArguments): Promise<ConfigReturn> {
-    const { contextBuilder } = args;
+    const { contextBuilder, denops } = args;
     contextBuilder.setGlobal({
       protocols: ["git"]
     });
@@ -116,11 +116,12 @@ endif`
     const plugins = lazyResult?.plugins ?? [];
     const stateLines = lazyResult?.stateLines ?? [];
 
+    const dirname = import.meta.dirname!;
+
     // check files.
-    const checkFiles = [
-      import.meta.filename,
-      path.join(import.meta.dirname!, "lazy.ts")
-    ].filter(v => typeof v === "string");
+    const checkFiles = ([] as string[]).concat(
+      await globpath(denops, dirname, "*.ts", true, true)
+    ).filter(v => typeof v === "string");
 
     return {
       plugins: plugins,
