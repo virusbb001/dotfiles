@@ -20,14 +20,7 @@ const s:dotfiles_vim_dir=expand('<sfile>:p:h')
 const s:dpp_config = expand(s:dotfiles_vim_dir .. "/dpp/config.ts")
 
 const s:plugins_data_json = expand(s:dotfiles_vim_dir .. "/dpp/dpp_plugins.json")
-" const s:plugins_data = json_decode(readfile(s:plugins_data_json))
-const s:plugins_data = {
-\   "minimal": ["Shougo/dpp.vim", "Shougo/dpp-ext-lazy"],
-\   "install": [
-\       "vim-denops/denops.vim",
-\       "Shougo/dpp-ext-installer",
-\       "Shougo/dpp-protocol-git"]
-\ }
+const s:plugins_data = json_decode(readfile(s:plugins_data_json))
 
 " no trail slash
 const s:dpp_base = expand(stdpath("cache") .. "/dpp")
