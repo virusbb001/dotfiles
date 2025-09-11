@@ -16,8 +16,6 @@ endfunction
       repo: 'jose-elias-alvarez/null-ls.nvim',
       depends: ['plenary.nvim']
     }, {
-      repo: 'nvim-lua/plenary.nvim'
-    }, {
       repo: 'davidosomething/format-ts-errors.nvim'
     }, {
       repo: 'folke/neodev.nvim'
