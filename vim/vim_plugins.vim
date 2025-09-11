@@ -54,6 +54,9 @@ if dpp#min#load_state(s:dpp_base)
   \ | echomsg "dpp load_state() is failed"
   \ | echohl None
   \ | call dpp#make_state(s:dpp_base, s:dpp_config)
+else
+  autocmd User DenopsReady
+  \ call dpp#check_files()
 endif
 
 autocmd User Dpp:makeStatePost
