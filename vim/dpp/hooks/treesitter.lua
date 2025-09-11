@@ -4,7 +4,7 @@ treesitter.setup {
   install_dir = vim.fn.stdpath('data') .. '/site'
 }
 
-treesitter.install {
+local required = {
   'javascript',
   'rust',
   'slim',
@@ -15,6 +15,24 @@ treesitter.install {
   'vimdoc',
   'yaml',
 }
+
+local installed = treesitter.get_installed()
+
+local required_table = {}
+local missings = {}
+for _, lang in ipairs(required) do
+  required_table[lang] = true
+end
+for _, lang in ipairs(installed) do
+  required_table[lang] = false
+end
+for k, v in pairs(required_table) do
+  if v then
+    table.insert(missings, k)
+  end
+end
+
+treesitter.install(missings)
 
 local augroup = "VirusTSAugroup"
 
