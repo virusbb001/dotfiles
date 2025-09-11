@@ -21,11 +21,12 @@ export default function getNvimPlugins (): Plugin[] {
       lazy: true,
       on_event: 'VimEnter',
       extAttrs: {
-        installerBuild: 'pip3 install --user hererocks && python3 -mhererocks . -j2.1.0-beta3 -r3.0.0 && cp nvim_rocks.lua lua'
+        // TODO: check inside virtualenv
+        installerBuild: 'pip3 install user hererocks && python3 -mhererocks . -j2.1.0-beta3 -r3.0.0 && cp nvim_rocks.lua lua'
       },
       lua_post_source: `
 -- for nvim-coverage
-nvim_rocks.ensure_installed('lua-xmlreader')
+-- nvim_rocks.ensure_installed('lua-xmlreader')
 `
     }, {
       repo: 'oflisback/obsidian-bridge.nvim',
@@ -34,6 +35,15 @@ nvim_rocks.ensure_installed('lua-xmlreader')
       on_ft: ['markdown'],
       depends: ['plenary.nvim'],
       lua_post_source: `require("obsidian-bridge").setup()`
+    }, {
+      repo: "bfredl/nvim-luadev",
+      on_cmd: ["Luadev"],
+      on_map: "<Plug>(Luadev-",
+      hook_add: `
+nmap <Leader>ldl <Plug>(Luadev-RunLine)
+nmap <Leader>ldr <Plug>(Luadev-Run)
+nmap <Leader>ldw <Plug>(Luadev-RunWord)
+      `
     }]
 
   return depends.concat(nvimOnly).map((v): Plugin => ({
