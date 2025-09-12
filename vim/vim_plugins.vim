@@ -44,10 +44,8 @@ if dpp#min#load_state(s:dpp_base)
     call InstallAndAddPlugin(s:install_plugin)
   endfor
 
-  " Why is this needed?
-  if has('nvim')
-    runtime! plugin/denops.vim
-  endif
+  " turn on when --noplugin
+  " runtime! plugin/denops.vim
 
   autocmd User DenopsReady
   \ : echohl Warning
@@ -59,10 +57,17 @@ else
   \ call dpp#check_files()
 endif
 
-autocmd User Dpp:makeStatePost
-  \ : echohl Warning
-  \ | echomsg "dpp make_state() is done"
-  \ | echohl None
+function s:completeMakeState ()
+  echohl Warning
+  echomsg "dpp make_state() is done"
+  echohl None
+  " make_stateした後ではgetNotInstalledに反映されないらしい
+  " if ! dpp#sync_ext_action('installer', 'getNotInstalled')->empty()
+  "   call dpp#async_ext_action("installer", "install")
+  " endif
+endfunction
+
+autocmd User Dpp:makeStatePost call s:completeMakeState()
 
 filetype indent plugin on
 
