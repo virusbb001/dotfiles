@@ -15,6 +15,20 @@ local required = {
   'vimdoc',
   'yaml',
 }
+-- convert from ts name to filetype
+local filetypemap = {
+  vimdoc = "help"
+}
+
+local filetype = {}
+for _, lang in ipairs(required) do
+  local ft = filetypemap[lang]
+  if ft then
+    table.insert(filetype, ft)
+  else
+    table.insert(filetype, lang)
+  end
+end
 
 local installed = treesitter.get_installed()
 
@@ -40,26 +54,19 @@ vim.api.nvim_create_augroup(augroup, {
 })
 
 vim.api.nvim_create_autocmd('FileType', {
-  pattern = {
-    'help',
-    'javascript',
-    'rust',
-    'slim',
-    'toml',
-    'tsx',
-    'typescript',
-    'vim',
-    'yaml',
-  },
+  pattern = filetype,
   callback = function(ev)
     vim.treesitter.start()
     vim.wo.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
 
     print(string.format('event fired: %s', vim.inspect(ev)))
 
-    if vim.treesitter.query.get("rust", "indents") then
+    if vim.treesitter.query.get(ev["match"], "indents") then
       vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
     end
   end
 })
+
+-- TODO: start treesitter when sourced
+
 -- }}}
