@@ -44,13 +44,3 @@ on_source = 'denite.nvim'
 [[plugins]]
 repo = 'pocari/vim-denite-emoji'
 on_source = 'denite.nvim'
-
-[[plugins]]
-repo = 'Shougo/ddu.vim'
-depends = 'denops.vim'
-on_source = 'denops.vim'
-lua_source = '''
-vim.fn['ddu#custom#patch_global']({
-  ui='ff'
-})
-'''

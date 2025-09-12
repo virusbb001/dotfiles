@@ -14,6 +14,7 @@ import getLazyPlugins from "./lazy.ts";
 import getLSPPlugins from "./lsp_plugins.ts";
 import getTSPlugins from "./ts_plugins.ts";
 import getNvimPlugins from "./nvim_plugins.ts";
+import getDduPlugins from "./ddu_plugins.ts";
 
 function f(p: RemotePlugin[]): Plugin[] {
   return p.map(addName)
@@ -97,7 +98,8 @@ endif`
       lazyPlugins,
       lspPlugins,
       getTSPlugins(),
-      nvimPlugins
+      nvimPlugins,
+      getDduPlugins(),
     );
 
     const [context, options] = await contextBuilder.get(args.denops);
@@ -117,10 +119,13 @@ endif`
     const stateLines = lazyResult?.stateLines ?? [];
 
     const dirname = import.meta.dirname!;
+    // hooks
+    const hooks = (await denops.eval(`globpath("${dirname}", "hooks/**/*", v:true, v:true)->filter('!isdirectory(v:val)')`)) as string[];
 
     // check files.
     const checkFiles = ([] as string[]).concat(
-      await globpath(denops, dirname, "*.ts", true, true)
+      await globpath(denops, dirname, "*.ts", true, true),
+      hooks
     ).filter(v => typeof v === "string");
 
     return {
