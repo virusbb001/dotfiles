@@ -3,6 +3,13 @@ import { type Plugin } from "jsr:@shougo/dpp-vim@~3.1.0/types"
 import { addName, type RemotePlugin } from "./util.ts";
 
 export default function getFileTypePlugins(): Plugin[] {
+  // plugins that doesn't have plugin/*
+  const syntaxPlugins: RemotePlugin[] = [{
+    repo: "dannywillems/vim-icalendar"
+  }, {
+    repo: "chakrit/upstart.vim"
+  }];
+
   const plugins: RemotePlugin[] = [{
     "repo": "mattn/emmet-vim",
     "on_ft": [
@@ -165,5 +172,5 @@ export default function getFileTypePlugins(): Plugin[] {
     }
   ];
 
-  return plugins.map(addName);
+  return plugins.concat(syntaxPlugins).map(addName);
 }

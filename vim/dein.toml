@@ -1,9 +1,6 @@
 # TODO:
 
 [[plugins]]
-repo = 'preservim/tagbar'
-
-[[plugins]]
 repo = "Shougo/neco-syntax"
 
 [[plugins]]
@@ -43,19 +40,3 @@ repo = "Shougo/vinarise.vim"
 [[plugins]]
 repo = "thinca/vim-prettyprint"
 
-# Syntax
-[[plugins]]
-repo = 'dannywillems/vim-icalendar'
-
-[[plugins]]
-repo = 'chakrit/upstart.vim'
-
-# Scala
-[[plugins]]
-repo = "derekwyatt/vim-scala"
-
-[[plugins]]
-repo = "luochen1990/rainbow"
-hook_add = '''
-let g:rainbow_active = 0
-'''
