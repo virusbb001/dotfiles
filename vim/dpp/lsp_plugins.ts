@@ -6,7 +6,8 @@ export default function getLSPPlugins (): Plugin[] {
     repo: 'nvim-lua/lsp-status.nvim',
     hook_source: `
 function! LspStatus() abort
-if luaeval('#vim.lsp.buf_get_clients() > 0')
+" TODO: check (require bufnr?)
+if luaeval('#vim.lsp.get_clients() > 0')
 return luaeval("require('lsp-status').status()")
 endif
 return ''
