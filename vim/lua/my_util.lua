@@ -15,12 +15,16 @@ local function detect_deno_root_dir (bufnr, on_dir)
   -- detect from shebang
   local is_shebang = string.sub(firstline, 1, 2) == "#!"
   if is_shebang and string.match(firstline, "deno") then
-    on_dir(vim.fs.dirname(filename))
+    if on_dir then
+      on_dir(vim.fs.dirname(filename))
+    end
     return
   end
   local root = util.root_pattern('deno.json', 'deno.jsonc')(filename)
   if root then
-    on_dir(root)
+    if on_dir then
+      on_dir(root)
+    end
     return
   end
 end
