@@ -62,9 +62,9 @@ function s:completeMakeState ()
   echomsg "dpp make_state() is done"
   echohl None
   " make_stateした後ではgetNotInstalledに反映されないらしい
-  " if ! dpp#sync_ext_action('installer', 'getNotInstalled')->empty()
-  "   call dpp#async_ext_action("installer", "install")
-  " endif
+  if ! dpp#sync_ext_action('installer', 'getNotInstalled')->empty()
+    call dpp#async_ext_action("installer", "install")
+  endif
 endfunction
 
 autocmd User Dpp:makeStatePost call s:completeMakeState()
@@ -82,6 +82,10 @@ augroup END
 " TODO: source when lspsettings sourced
 execute 'luafile ' . expand(s:dotfiles_vim_dir . '/dein/lsp_settings.lua')
 colorscheme tokyonight-night
+
+if has('nvim')
+  lua require 'nvim_settings'
+endif
 
 finish
 
@@ -184,10 +188,6 @@ if v:vim_did_enter
 else
   autocmd VirusVimPlugins VimEnter * call dein#call_hook('post_source')
   autocmd VirusVimPlugins VimEnter * call InstallMissedPlugin()
-endif
-
-if has('nvim')
-  lua require 'nvim_settings'
 endif
 
 colorscheme tokyonight-night
