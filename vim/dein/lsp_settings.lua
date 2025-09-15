@@ -8,8 +8,6 @@ end
 
 function _G.virus_lsp_settings ()
   -- lspconfig is not set when defined this function
-  local nvim_lsp = require('lspconfig')
-  local util = require('lspconfig/util')
 
   local lsp_status = require('lsp-status')
   lsp_status.config({
@@ -33,7 +31,7 @@ function _G.virus_lsp_settings ()
       local bufnr = args.buf
       local client = vim.lsp.get_client_by_id(args.data.client_id)
 
-      lsp_status.on_attach(client, bufnr)
+      lsp_status.on_attach(client)
 
       local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
       local function buf_set_option(...) vim.api.nvim_buf_set_option(bufnr, ...) end
@@ -65,83 +63,7 @@ function _G.virus_lsp_settings ()
     end,
   })
 
-  local base_lsp_settings = {
-    capabilities = lsp_status.capabilities,
-    flags = {
-      debounce_text_changes = 150,
-    }
-  }
-
-  local function base_lsp_with (cfg)
-    return vim.tbl_deep_extend("force", base_lsp_settings, cfg)
-  end
-
-  local detect_deno_root_dir = function (filename, bufnr)
-    if (bufnr ~= nil) then
-      local firstline = vim.fn.getbufline(bufnr, 1)[1] or ""
-      -- detect from shebang
-      local is_shebang = string.sub(firstline, 1, 2) == "#!"
-      if is_shebang and string.match(firstline, "deno") then
-        return util.path.dirname(filename)
-      end
-    end
-    return util.root_pattern('deno.json', 'deno.jsonc')(filename)
-  end
-
-  local detect_node_root_dir = function(filename, bufnr)
-    local is_deno = detect_deno_root_dir(filename, bufnr)
-    if is_deno then
-      return nil
-    end
-    return util.root_pattern('package.json', 'tsconfig.json')(filename)
-  end
-
-  nvim_lsp.denols.setup(base_lsp_with({
-    root_dir = detect_deno_root_dir
-  }))
-
-  nvim_lsp.ts_ls.setup(base_lsp_with({
-    root_dir = detect_node_root_dir,
-    handlers = {
-      ["textDocument/publishDiagnostics"] = function(
-        _,
-        result,
-        ctx,
-        config
-      )
-        if result.diagnostics == nil then
-          return
-        end
-
-        -- ignore some ts_ls diagnostics
-        local idx = 1
-        while idx <= #result.diagnostics do
-          local entry = result.diagnostics[idx]
-
-          local formatter = require('format-ts-errors')[entry.code]
-          entry.message = formatter and formatter(entry.message) or entry.message
-
-          -- codes: https://github.com/microsoft/TypeScript/blob/main/src/compiler/diagnosticMessages.json
-          if entry.code == 80001 then
-            -- { message = "File is a CommonJS module; it may be converted to an ES module.", }
-            table.remove(result.diagnostics, idx)
-          else
-            idx = idx + 1
-          end
-        end
-
-        vim.lsp.diagnostic.on_publish_diagnostics(
-          _,
-          result,
-          ctx,
-          config
-        )
-      end,
-    }
-  }))
-
   -- new version LSP settings
-
   vim.lsp.config('*', {
     capabilities = lsp_status.capabilities,
     flags = {
@@ -159,6 +81,8 @@ function _G.virus_lsp_settings ()
     'html',
     'clangd',
     'jsonls',
-    'cssls'
+    'cssls',
+    'denols',
+    'ts_ls'
   })
 end

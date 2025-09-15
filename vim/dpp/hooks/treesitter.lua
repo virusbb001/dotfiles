@@ -59,8 +59,6 @@ vim.api.nvim_create_autocmd('FileType', {
     vim.treesitter.start()
     vim.wo.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
 
-    print(string.format('event fired: %s', vim.inspect(ev)))
-
     if vim.treesitter.query.get(ev["match"], "indents") then
       vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
     end
