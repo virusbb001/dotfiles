@@ -17,6 +17,7 @@ if ! executable('git')
 endif
 
 const s:dotfiles_vim_dir=expand('<sfile>:p:h')
+let $DOTFILES_BASE_DIR = s:dotfiles_vim_dir
 const s:dpp_config = expand(s:dotfiles_vim_dir .. "/dpp/config.ts")
 
 const s:plugins_data_json = expand(s:dotfiles_vim_dir .. "/dpp/dpp_plugins.json")

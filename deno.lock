@@ -1,6 +1,7 @@
 {
   "version": "5",
   "specifiers": {
+    "jsr:@core/unknownutil@4.3": "4.3.0",
     "jsr:@core/unknownutil@^4.3.0": "4.3.0",
     "jsr:@deno/cache-dir@~0.13.2": "0.13.2",
     "jsr:@deno/graph@~0.73.1": "0.73.1",
@@ -11,6 +12,7 @@
     "jsr:@denops/std@7.3": "7.3.2",
     "jsr:@denops/std@8.0": "8.0.0",
     "jsr:@lambdalisue/import-map-importer@~0.5.1": "0.5.1",
+    "jsr:@shougo/ddu-vim@^11.1.0": "11.1.0",
     "jsr:@shougo/dpp-ext-lazy@~2.0.1": "2.0.1",
     "jsr:@shougo/dpp-vim@3.1": "3.1.0",
     "jsr:@shougo/dpp-vim@5.0": "5.0.0",
@@ -68,7 +70,7 @@
     "@denops/std@8.0.0": {
       "integrity": "1a3e4ba4fab7d88da0de1c5330b6b87b5c959037d55542edb18c51cda054caa2",
       "dependencies": [
-        "jsr:@core/unknownutil",
+        "jsr:@core/unknownutil@^4.3.0",
         "jsr:@denops/core@8",
         "jsr:@std/semver",
         "jsr:@std/ulid"
@@ -77,12 +79,20 @@
     "@lambdalisue/import-map-importer@0.5.1": {
       "integrity": "e4822500c8619c5cead6003e502d872eaec9d2216b01c72790933996e7ddf696",
       "dependencies": [
-        "jsr:@core/unknownutil",
+        "jsr:@core/unknownutil@^4.3.0",
         "jsr:@deno/cache-dir",
         "jsr:@deno/graph@~0.96.2",
         "jsr:@std/crypto",
         "jsr:@std/fs@^1.0.1",
         "jsr:@std/path@^1.0.1"
+      ]
+    },
+    "@shougo/ddu-vim@11.1.0": {
+      "integrity": "839d7c51a78ece975e034bacda2bf61a7e334dbf95d1ca2a838630933b0175e6",
+      "dependencies": [
+        "jsr:@core/unknownutil@4.3",
+        "jsr:@lambdalisue/import-map-importer",
+        "jsr:@std/path@1.1"
       ]
     },
     "@shougo/dpp-ext-lazy@2.0.1": {
@@ -163,5 +173,10 @@
     "@std/ulid@1.0.0": {
       "integrity": "d41c3d27a907714413649fee864b7cde8d42ee68437d22b79d5de4f81d808780"
     }
+  },
+  "workspace": {
+    "dependencies": [
+      "jsr:@shougo/ddu-vim@^11.1.0"
+    ]
   }
 }

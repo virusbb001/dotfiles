@@ -14,36 +14,26 @@ export default function getDDUPlugins (): Plugin[] {
   const uis: RemotePlugin[] = [{
     repo: 'Shougo/ddu-ui-ff',
     hooks_file: path.join(import.meta.dirname!, "hooks/ddu/ui-ff.vim")
+  }, {
+    repo: 'Shougo/ddu-ui-filer'
   }];
 
   const sources: RemotePlugin[] = [{
     repo: "Shougo/ddu-source-action"
   }, {
     repo: "4513ECHO/ddu-source-source",
-    lua_source: `
-vim.fn['ddu#custom#patch_global']('kindOptions', {
-  source={
-    defaultAction='execute'
-  }
-})
-`
   }, {
       repo: "4513ECHO/ddu-source-colorscheme"
     }, {
       repo: "Shougo/ddu-source-file_old"
     }, {
       repo: "shun/ddu-source-buffer"
+    }, {
+      repo: "Shougo/ddu-source-file_rec"
     }];
 
   const filters: RemotePlugin[] = [{
     repo: "Shougo/ddu-filter-matcher_substring",
-    lua_source: `
-vim.fn['ddu#custom#patch_global']('filterParams', {
-  matcher_substring={
-    highlightMatched='Search'
-  }
-})
-    `
   }]
 
   const kinds: RemotePlugin[] = [{
