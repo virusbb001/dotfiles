@@ -81,7 +81,7 @@ augroup VirusVimPlugins
 augroup END
 
 " TODO: source when lspsettings sourced
-execute 'luafile ' . expand(s:dotfiles_vim_dir . '/dein/lsp_settings.lua')
+execute 'luafile ' . expand(s:dotfiles_vim_dir . '/rc/lsp_settings.lua')
 colorscheme tokyonight-night
 
 if has('nvim')
