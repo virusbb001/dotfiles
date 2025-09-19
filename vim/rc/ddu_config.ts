@@ -3,7 +3,11 @@ import { MatcherSubstringParams } from "./types.ts";
 
 const Sources = Object.freeze({
   source: "source"
-})
+});
+
+const Kinds = Object.freeze({
+  colorscheme: "colorscheme"
+});
 
 export class Config extends BaseConfig {
   override config (args: ConfigArguments): void {
@@ -16,6 +20,11 @@ export class Config extends BaseConfig {
       sourceOptions: {
         [Sources.source]: {
           defaultAction: "execute"
+        }
+      },
+      kindOptions: {
+        [Kinds.colorscheme]: {
+          defaultAction: "set"
         }
       },
       filterParams: {
