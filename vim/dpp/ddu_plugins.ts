@@ -15,7 +15,8 @@ export default function getDDUPlugins (): Plugin[] {
     repo: 'Shougo/ddu-ui-ff',
     hooks_file: path.join(import.meta.dirname!, "hooks/ddu/ui-ff.vim")
   }, {
-    repo: 'Shougo/ddu-ui-filer'
+    repo: 'Shougo/ddu-ui-filer',
+    hooks_file: path.join(import.meta.dirname!, "hooks/ddu/ui-filer.vim")
   }];
 
   const sources: RemotePlugin[] = [{
@@ -30,6 +31,8 @@ export default function getDDUPlugins (): Plugin[] {
       repo: "shun/ddu-source-buffer"
     }, {
       repo: "Shougo/ddu-source-file_rec"
+    }, {
+      repo: "Shougo/ddu-source-file"
     }];
 
   const filters: RemotePlugin[] = [{
@@ -39,6 +42,10 @@ export default function getDDUPlugins (): Plugin[] {
   const kinds: RemotePlugin[] = [{
     repo: "Shougo/ddu-kind-file"
   }];
+
+  const columns: RemotePlugin[] = [{
+    repo: "Shougo/ddu-column-filename"
+  }]
 
   const otherPlugins: RemotePlugin[] = [{
     repo: "Shougo/ddu-commands.vim",
@@ -51,6 +58,7 @@ export default function getDDUPlugins (): Plugin[] {
     otherPlugins,
     filters,
     kinds,
+    columns,
   );
 
   return plugins.map(p => {

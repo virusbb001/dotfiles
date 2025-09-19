@@ -15,7 +15,7 @@ export class Config extends BaseConfig {
     const matcher_substring: MatcherSubstringParams = {
       highlightMatched: "Search"
     }
-    contextBuilder.setGlobal({
+    contextBuilder.patchGlobal({
       ui: "ff",
       sourceOptions: {
         [Sources.source]: {
@@ -29,6 +29,21 @@ export class Config extends BaseConfig {
       },
       filterParams: {
         matcher_substring
+      }
+    });
+
+    contextBuilder.patchLocal("filer", {
+      ui: "filer",
+      sources: [{name: "file", params: {}}],
+      sourceOptions: {
+        _: {
+          columns: ["filename"]
+        }
+      },
+      kindOptions: {
+        file: {
+          defaultAction: "open"
+        }
       }
     });
   }
