@@ -1,4 +1,7 @@
 import { BaseConfig, ConfigArguments } from "@shougo/ddu-vim/config";
+import { printError } from "@shougo/ddu-vim/utils";
+import { ActionFlags } from "@shougo/ddu-vim/types";
+import { type ActionData as KindActionData } from "@shougo/ddu-kind-file";
 import { MatcherSubstringParams } from "./types.ts";
 
 const Sources = Object.freeze({
@@ -6,7 +9,9 @@ const Sources = Object.freeze({
 });
 
 const Kinds = Object.freeze({
-  colorscheme: "colorscheme"
+  colorscheme: "colorscheme",
+  file: "file",
+  action: "action",
 });
 
 export class Config extends BaseConfig {
@@ -25,6 +30,35 @@ export class Config extends BaseConfig {
       kindOptions: {
         [Kinds.colorscheme]: {
           defaultAction: "set"
+        },
+        [Kinds.file]: {
+          actions: {
+            "term": {
+              description: "split and term. Only first item accept",
+              callback: async (args) => {
+                const denops = args.denops;
+                const actionData = args.items[0].action as KindActionData;
+                const isDirectory = actionData.isDirectory ?? false;
+                if (!isDirectory) {
+                  await printError(denops, "item should be directory");
+                  return ActionFlags.Redraw
+                }
+                const path = actionData.path;
+                if (!path) {
+                  await printError(denops, "path not found", actionData);
+                  return ActionFlags.Redraw
+                }
+                await denops.cmd("tab split")
+                await denops.cmd(`lcd ${path}`)
+                await denops.cmd("terminal")
+
+                return ActionFlags.None;
+              }
+            }
+          }
+        },
+        [Kinds.action]: {
+          defaultAction: "do"
         }
       },
       filterParams: {
