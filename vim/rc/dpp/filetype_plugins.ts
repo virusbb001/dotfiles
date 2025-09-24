@@ -72,13 +72,6 @@ export default function getFileTypePlugins(): Plugin[] {
       "repo": "tpope/vim-bundler"
     },
     {
-      "repo": "5t111111/denite-rails",
-      "on_ft": [
-        "ruby",
-        "eruby"
-      ]
-    },
-    {
       "repo": "kovisoft/slimv",
       "on_ft": [
         "lisp",
