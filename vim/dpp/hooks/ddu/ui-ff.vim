@@ -1,6 +1,8 @@
 " ddu-ff {{{
 nnoremap <buffer> <CR>
 \ <Cmd>call ddu#ui#do_action('itemAction')<CR>
+nnoremap <buffer> <Tab>
+      \ <Cmd>call ddu#ui#do_action('chooseAction')<CR>
 nnoremap <buffer> <Space>
 \ <Cmd>call ddu#ui#do_action('toggleSelectItem')<CR>
 nnoremap <buffer> *
