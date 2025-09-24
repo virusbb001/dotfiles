@@ -33,6 +33,8 @@ export default function getDDUPlugins (): Plugin[] {
       repo: "Shougo/ddu-source-file_rec"
     }, {
       repo: "Shougo/ddu-source-file"
+    }, {
+      repo: "4513ECHO/ddu-source-emoji"
     }];
 
   const filters: RemotePlugin[] = [{
@@ -41,7 +43,9 @@ export default function getDDUPlugins (): Plugin[] {
 
   const kinds: RemotePlugin[] = [{
     repo: "Shougo/ddu-kind-file"
-  }];
+  }, {
+      repo: "Shougo/ddu-kind-word"
+    }];
 
   const columns: RemotePlugin[] = [{
     repo: "Shougo/ddu-column-filename"
