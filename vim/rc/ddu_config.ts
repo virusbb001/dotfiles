@@ -23,6 +23,9 @@ export class Config extends BaseConfig {
     contextBuilder.patchGlobal({
       ui: "ff",
       sourceOptions: {
+        _: {
+          matchers: ["matcher_substring"]
+        },
         [Sources.source]: {
           defaultAction: "execute"
         }
