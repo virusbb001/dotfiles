@@ -7,15 +7,15 @@ import {
 import { LazyMakeStateResult } from "jsr:@shougo/dpp-ext-lazy@~2.0.1";
 import { globpath } from "jsr:@denops/std/function";
 
-import { RemotePlugin, addName } from "./util.ts";
+import { RemotePlugin, addName } from "./dpp/util.ts";
 
-import getDppPlugins from "./dpp_plugins.ts";
-import getLazyPlugins from "./lazy.ts";
-import getLSPPlugins from "./lsp_plugins.ts";
-import getTSPlugins from "./ts_plugins.ts";
-import getNvimPlugins from "./nvim_plugins.ts";
-import getDduPlugins from "./ddu_plugins.ts";
-import getFiletypePlugins from "./filetype_plugins.ts";
+import getDppPlugins from "./dpp/dpp_plugins.ts";
+import getLazyPlugins from "./dpp/lazy.ts";
+import getLSPPlugins from "./dpp/lsp_plugins.ts";
+import getTSPlugins from "./dpp/ts_plugins.ts";
+import getNvimPlugins from "./dpp/nvim_plugins.ts";
+import getDduPlugins from "./dpp/ddu_plugins.ts";
+import getFiletypePlugins from "./dpp/filetype_plugins.ts";
 
 function f(p: RemotePlugin[]): Plugin[] {
   return p.map(addName)

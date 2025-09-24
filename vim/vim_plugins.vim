@@ -20,7 +20,7 @@ const s:dotfiles_vim_dir=expand('<sfile>:p:h')
 let $DOTFILES_BASE_DIR = s:dotfiles_vim_dir
 const s:dpp_config = expand(s:dotfiles_vim_dir .. "/rc/dpp_config.ts")
 
-const s:plugins_data_json = expand(s:dotfiles_vim_dir .. "/rc/dpp_plugins.json")
+const s:plugins_data_json = expand(s:dotfiles_vim_dir .. "/rc/dpp/dpp_plugins.json")
 const s:plugins_data = json_decode(readfile(s:plugins_data_json))
 
 " no trail slash
