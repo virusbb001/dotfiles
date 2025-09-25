@@ -68,7 +68,6 @@ function s:completeMakeState ()
   endif
 endfunction
 
-autocmd User Dpp:makeStatePost call s:completeMakeState()
 
 filetype indent plugin on
 
@@ -80,10 +79,21 @@ augroup VirusVimPlugins
   autocmd!
 augroup END
 
-" TODO: source when lspsettings sourced
-execute 'luafile ' . expand(s:dotfiles_vim_dir . '/rc/lsp_settings.lua')
+autocmd VirusVimPlugins User Dpp:makeStatePost call s:completeMakeState()
+
+function! s:check_files ()
+  let filename = expand("<afile>:p")
+  if stridx(filename, s:dotfiles_vim_dir) == 0
+    call dpp#check_files()
+  endif
+endfunction
+
+autocmd VirusVimPlugins BufWritePost *.lua,*.vim,*.ts call s:check_files()
+
 colorscheme tokyonight-night
 
 if has('nvim')
+  " TODO: source when lspsettings sourced
+  execute 'luafile ' . expand(s:dotfiles_vim_dir . '/rc/lsp_settings.lua')
   lua require 'nvim_settings'
 endif
