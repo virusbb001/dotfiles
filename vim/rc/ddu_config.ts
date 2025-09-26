@@ -41,14 +41,15 @@ export class Config extends BaseConfig {
               callback: async (args) => {
                 const denops = args.denops;
                 const actionData = args.items[0].action as KindActionData;
-                const isDirectory = actionData.isDirectory ?? false;
-                if (!isDirectory) {
-                  await printError(denops, "item should be directory");
-                  return ActionFlags.Redraw
-                }
                 const path = actionData.path;
                 if (!path) {
                   await printError(denops, "path not found", actionData);
+                  return ActionFlags.Redraw
+                }
+                const isDirectory = actionData.isDirectory ?? (await Deno.stat(path)).isDirectory;
+                if (!isDirectory) {
+                  console.log(args.items[0])
+                  await printError(denops, "item should be directory");
                   return ActionFlags.Redraw
                 }
                 await denops.cmd("tab split")
