@@ -35,10 +35,14 @@ export default function getDDUPlugins (): Plugin[] {
       repo: "Shougo/ddu-source-file"
     }, {
       repo: "4513ECHO/ddu-source-emoji"
+    }, {
+      repo: "shutils/ddu-source-obsidian"
     }];
 
   const filters: RemotePlugin[] = [{
     repo: "Shougo/ddu-filter-matcher_substring",
+  }, {
+    repo: "Shougo/ddu-filter-converter_display_word"
   }]
 
   const kinds: RemotePlugin[] = [{
