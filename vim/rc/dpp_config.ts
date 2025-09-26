@@ -126,7 +126,7 @@ endif`
 
     // check files.
     const checkFiles = ([] as string[]).concat(
-      await globpath(denops, dirname, "*.ts", true, true),
+      await globpath(denops, dirname, "**/*.ts", true, true),
       hooks
     ).filter(v => typeof v === "string");
 
