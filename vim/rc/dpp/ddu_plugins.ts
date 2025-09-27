@@ -37,6 +37,8 @@ export default function getDDUPlugins(): Plugin[] {
     repo: "4513ECHO/ddu-source-emoji",
   }, {
     repo: "shutils/ddu-source-obsidian",
+  }, {
+    repo: "uga-rosa/ddu-source-lsp"
   }];
 
   const filters: RemotePlugin[] = [{
