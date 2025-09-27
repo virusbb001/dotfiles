@@ -67,6 +67,11 @@ export class Config extends BaseConfig {
       },
       filterParams: {
         matcher_substring
+      },
+      uiParams: {
+        filer: {
+          split: "vertical"
+        }
       }
     });
 
