@@ -14,6 +14,8 @@ local required = {
   'vim',
   'vimdoc',
   'yaml',
+  -- bennypowers/nvim-regexplainer
+  'regex'
 }
 -- convert from ts name to filetype
 local filetypemap = {
