@@ -1,11 +1,3 @@
-function virus_null_ls_settings ()
-  local null_ls = require('null-ls')
-  local sources = {
-  }
-
-  null_ls.setup({ sources = sources })
-end
-
 function _G.virus_lsp_settings ()
   -- lspconfig is not set when defined this function
 
