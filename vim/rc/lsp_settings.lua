@@ -75,6 +75,7 @@ function _G.virus_lsp_settings ()
     'jsonls',
     'cssls',
     'denols',
-    'ts_ls'
+    'ts_ls',
+    'markdown_oxide'
   })
 end
