@@ -1,9 +1,11 @@
+import { ensure, is } from "jsr:@core/unknownutil@4.3.0";
 import { BaseSource, GatherArguments } from "jsr:@shougo/ddu-vim/source";
 import { ActionFlags, Actions, BaseParams, Item, DduOptions } from "jsr:@shougo/ddu-vim/types";
 import xdg from "jsr:@404wolf/xdg-portable";
 import { join } from "jsr:@std/path";
 import { printError } from "jsr:@shougo/ddu-vim/utils";
 import type { ActionData } from "jsr:@shougo/ddu-kind-file";
+import { Denops } from "https://jsr.io/@denops/core/8.0.0/type.ts";
 
 interface ObsidianVault {
   path: string,
@@ -18,10 +20,13 @@ interface ObsidianVaultData {
 export class Source extends BaseSource<BaseParams> {
   override kind = "file";
 
-  async getObsidianVaults (): Promise<string[]> {
+  async getObsidianVaults (denops: Denops): Promise<string[]> {
     // referenced from https://github.com/Yakitrak/obsidian-cli/blob/5d259771173c5f24f66b95bb0a6516f4e4a4f908/pkg/config/obsidian_path.go#L8
-    const xdg_config = xdg.config();
-    const obsidian_json = join(xdg_config, "obsidian", "obsidian.json");
+    // but windows has saved in Roaming, not xdg.config
+    const config_dir = Deno.build.os.includes("win")
+    ? (Deno.env.get("APPDATA") ?? ensure(await denops.eval(`expand("~/AppData/Roaming")`), is.String)) // https://learn.microsoft.com/ja-jp/windows/deployment/usmt/usmt-recognized-environment-variables
+    : xdg.config();
+    const obsidian_json = join(config_dir, "obsidian", "obsidian.json");
     let obsidian;
     try {
       obsidian = JSON.parse(await Deno.readTextFile(obsidian_json)) as ObsidianVaultData;
@@ -76,11 +81,11 @@ export class Source extends BaseSource<BaseParams> {
     }
   };
 
-  override gather({ }: GatherArguments<BaseParams>): ReadableStream<Item<ActionData>[]> {
+  override gather({ denops }: GatherArguments<BaseParams>): ReadableStream<Item<ActionData>[]> {
 
     return new ReadableStream({
       start: async (controller) => {
-        const vaults = await this.getObsidianVaults();
+        const vaults = await this.getObsidianVaults(denops);
         const items = vaults.map((vault): Item<ActionData> => ({
           word: vault,
           action: {
