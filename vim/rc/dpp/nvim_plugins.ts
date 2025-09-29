@@ -1,12 +1,14 @@
 import { type Plugin } from "jsr:@shougo/dpp-vim@~3.1.0/types"
 import { addName, type RemotePlugin } from "./util.ts";
+import * as path from "jsr:@std/path";
 
 export default function getNvimPlugins (): Plugin[] {
   // plugins that other plugins depend
   const depends: RemotePlugin[] = [{
     repo: "MunifTanjim/nui.nvim"
   }, {
-    repo: "nvim-lua/plenary.nvim"
+    repo: "nvim-lua/plenary.nvim",
+    lazy: true
   }];
 
   const nvimOnly: RemotePlugin[] = [{
@@ -44,10 +46,12 @@ nmap <Leader>ldl <Plug>(Luadev-RunLine)
 nmap <Leader>ldr <Plug>(Luadev-Run)
 nmap <Leader>ldw <Plug>(Luadev-RunWord)
       `
+    }, {
+      repo: 'mason-org/mason.nvim',
+      hooks_file: path.join(import.meta.dirname!, "hooks/mason.nvim.lua"),
     }]
 
   return depends.concat(nvimOnly).map((v): Plugin => ({
-    ...addName(v),
-    lazy: true
+    ...addName(v)
   }));
 }
