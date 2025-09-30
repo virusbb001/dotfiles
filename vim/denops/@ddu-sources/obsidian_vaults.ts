@@ -17,15 +17,27 @@ interface ObsidianVaultData {
   vaults: Record<string, ObsidianVault>
 }
 
+/**
+ * referenced from https://github.com/Yakitrak/obsidian-cli/blob/5d259771173c5f24f66b95bb0a6516f4e4a4f908/pkg/config/obsidian_path.go#L8
+ * https://pkg.go.dev/os#UserConfigDir
+ */
+async function getUserConfigDir (denops: Denops): Promise<string> {
+  switch (Deno.build.os) {
+    case "windows":
+      // https://learn.microsoft.com/ja-jp/windows/deployment/usmt/usmt-recognized-environment-variables
+      return Deno.env.get("APPDATA") ?? ensure(await denops.eval(`expand("~/AppData/Roaming")`), is.String);
+    case "darwin":
+      return join(Deno.env.get("HOME")!, "Library", "Application Support")
+    default:
+      return xdg.config();
+  }
+}
+
 export class Source extends BaseSource<BaseParams> {
   override kind = "file";
 
   async getObsidianVaults (denops: Denops): Promise<string[]> {
-    // referenced from https://github.com/Yakitrak/obsidian-cli/blob/5d259771173c5f24f66b95bb0a6516f4e4a4f908/pkg/config/obsidian_path.go#L8
-    // but windows has saved in Roaming, not xdg.config
-    const config_dir = Deno.build.os === "windows"
-    ? (Deno.env.get("APPDATA") ?? ensure(await denops.eval(`expand("~/AppData/Roaming")`), is.String)) // https://learn.microsoft.com/ja-jp/windows/deployment/usmt/usmt-recognized-environment-variables
-    : xdg.config();
+    const config_dir = await getUserConfigDir(denops)
     const obsidian_json = join(config_dir, "obsidian", "obsidian.json");
     let obsidian;
     try {
