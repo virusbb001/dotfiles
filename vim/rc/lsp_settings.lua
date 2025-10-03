@@ -52,6 +52,29 @@ function _G.virus_lsp_settings ()
       buf_set_keymap('n', '<space>q', '<cmd>lua vim.diagnostic.setloclist()<CR>', opts)
       buf_set_keymap('n', '<space>f', '<cmd>lua vim.lsp.buf.formatting()<CR>', opts)
 
+      -- markdown-oxide
+      if client and client.name == "markdown_oxide" then
+        vim.api.nvim_buf_create_user_command(
+          0,
+          "Daily",
+          function (daily_args)
+            local input = daily_args.args
+            if input == "" then
+              input = "today"
+            end
+
+            client:exec_cmd({
+              command="jump",
+              arguments={input}
+            })
+          end,
+          {
+            desc = 'Open daily note',
+            nargs = "*"
+          }
+        )
+      end
+
     end,
   })
 
