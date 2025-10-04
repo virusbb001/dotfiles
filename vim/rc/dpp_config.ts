@@ -26,8 +26,14 @@ function f(p: RemotePlugin[]): Plugin[] {
 export class Config extends BaseConfig {
   override async config(args: ConfigArguments): Promise<ConfigReturn> {
     const { contextBuilder, denops } = args;
+    const githubAPIToken = await denops.eval(`get(g:, 'github_api_token', "")`);
     contextBuilder.setGlobal({
-      protocols: ["git"]
+      protocols: ["git"],
+      extParams: {
+        installer: {
+          githubAPIToken
+        }
+      }
     });
     const dppPlugins = await getDppPlugins();
 
