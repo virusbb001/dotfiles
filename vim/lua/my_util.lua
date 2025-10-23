@@ -31,7 +31,7 @@ end
 
 --[[
 If file is deno project, return nil.
-Otherwise, find package.json and return.
+Otherwise, find tsconfig.json or package.json and return.
 --]]
 local function detect_node_root_dir (bufnr, on_dir)
   local filename = vim.api.nvim_buf_get_name(bufnr)
@@ -39,7 +39,7 @@ local function detect_node_root_dir (bufnr, on_dir)
   if is_deno then
     return
   end
-  local root = util.root_pattern('package.json')(filename)
+  local root = util.root_pattern('tsconfig.json') or util.root_pattern('package.json')(filename)
   if root then
     on_dir(root)
   end
