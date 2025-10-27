@@ -39,7 +39,7 @@ local function detect_node_root_dir (bufnr, on_dir)
   if is_deno then
     return
   end
-  local root = util.root_pattern('tsconfig.json') or util.root_pattern('package.json')(filename)
+  local root = util.root_pattern('tsconfig.json')(filename) or util.root_pattern('package.json')(filename)
   if root then
     on_dir(root)
   end
