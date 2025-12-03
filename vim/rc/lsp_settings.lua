@@ -1,3 +1,70 @@
+local function setupDailyCommand ()
+  local server_name = "markdown_oxide"
+
+  local function get_markdown_oxide_client()
+    local buffer_clients = vim.lsp.get_clients({bufnr = 0})
+    ---@type (nil | vim.lsp.Client)
+    local buffer_oxide_client = vim.iter(buffer_clients):find(function(client)
+      return client.name == server_name
+    end)
+
+    if buffer_oxide_client then
+      print(buffer_oxide_client.id)
+      return buffer_oxide_client
+    end
+
+    local default_path = vim.g.obsidian_default_vault_path
+    if default_path == nil then
+      error("g:obsidian_default_vault_path should be defined")
+    end
+    ---@type vim.lsp.Config
+    local cfg_patch = {
+      root_dir = default_path,
+      cmd = { "/home/virus/src/github.com/Feel-ix-343/markdown-oxide/target/debug/markdown-oxide" }
+    }
+    local lsp_config = vim.tbl_deep_extend('keep',cfg_patch, vim.lsp.config.markdown_oxide)
+
+    local id = vim.lsp.start(lsp_config, {
+      attach = false
+    })
+    if id == nil then
+      error("vim.lsp.start returned nil")
+    end
+    local client = vim.lsp.get_client_by_id(id)
+    if client == nil then
+      error("failed to start " .. server_name)
+    end
+    return client
+  end
+
+  vim.api.nvim_create_user_command("Daily", function (daily_args)
+    local dpp = require("dpp")
+    -- load lspconfig to get markdon_oxide config
+    dpp.source({"nvim-lspconfig"})
+
+    local input = daily_args.args
+    if input == "" then
+      input = "today"
+    end
+    -- if buffer has attached markdown_oxide, use attached client
+    local client = get_markdown_oxide_client()
+
+    if client == nil then
+      print("client not found and failed to start")
+      return
+    end
+
+    client:exec_cmd({
+      command="jump",
+      arguments={input}
+    })
+  end, {
+  desc = 'Open daily note',
+  nargs = "*",
+  bang = true
+})
+end
+
 function _G.virus_lsp_settings ()
   -- lspconfig is not set when defined this function
 
@@ -53,6 +120,7 @@ function _G.virus_lsp_settings ()
       buf_set_keymap('n', '<space>f', '<cmd>lua vim.lsp.buf.formatting()<CR>', opts)
 
       -- markdown-oxide
+      --[[
       if client and client.name == "markdown_oxide" then
         vim.api.nvim_buf_create_user_command(
           0,
@@ -74,7 +142,7 @@ function _G.virus_lsp_settings ()
           }
         )
       end
-
+      ]]
     end,
   })
 
@@ -86,7 +154,8 @@ function _G.virus_lsp_settings ()
     }
   });
 
-  -- lsp settings
+  setupDailyCommand()
+
   vim.lsp.enable({
     'lua_ls',
     'rust_analyzer',
