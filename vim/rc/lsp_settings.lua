@@ -1,42 +1,49 @@
-local function setupDailyCommand ()
+---
+---wait markdown oxide client initialize.
+---don't use coroutine because on_init is called c thread,
+---caused attempt to yield across a c-call boundary
+---@param cb fun(client: vim.lsp.Client)
+---
+local function wait_markdown_oxide_client(cb)
   local server_name = "markdown_oxide"
+  local buffer_clients = vim.lsp.get_clients({bufnr = 0})
+  ---@type (nil | vim.lsp.Client)
+  local buffer_oxide_client = vim.iter(buffer_clients):find(function(client)
+    return client.name == server_name
+  end)
 
-  local function get_markdown_oxide_client()
-    local buffer_clients = vim.lsp.get_clients({bufnr = 0})
-    ---@type (nil | vim.lsp.Client)
-    local buffer_oxide_client = vim.iter(buffer_clients):find(function(client)
-      return client.name == server_name
-    end)
-
-    if buffer_oxide_client then
-      print(buffer_oxide_client.id)
-      return buffer_oxide_client
-    end
-
-    local default_path = vim.g.obsidian_default_vault_path
-    if default_path == nil then
-      error("g:obsidian_default_vault_path should be defined")
-    end
-    ---@type vim.lsp.Config
-    local cfg_patch = {
-      root_dir = default_path,
-      cmd = { "/home/virus/src/github.com/Feel-ix-343/markdown-oxide/target/debug/markdown-oxide" }
-    }
-    local lsp_config = vim.tbl_deep_extend('keep',cfg_patch, vim.lsp.config.markdown_oxide)
-
-    local id = vim.lsp.start(lsp_config, {
-      attach = false
-    })
-    if id == nil then
-      error("vim.lsp.start returned nil")
-    end
-    local client = vim.lsp.get_client_by_id(id)
-    if client == nil then
-      error("failed to start " .. server_name)
-    end
-    return client
+  if buffer_oxide_client then
+    cb(buffer_oxide_client)
   end
 
+  local default_path = vim.g.obsidian_default_vault_path
+  if default_path == nil then
+    error("g:obsidian_default_vault_path should be defined")
+  end
+
+  ---@type vim.lsp.Config
+  local cfg_patch = {
+    root_dir = default_path,
+    cmd = { "/home/virus/src/github.com/Feel-ix-343/markdown-oxide/target/debug/markdown-oxide" },
+    on_init = cb
+  }
+  local lsp_config = vim.tbl_deep_extend('keep',cfg_patch, vim.lsp.config.markdown_oxide)
+  local id = vim.lsp.start(lsp_config, {
+    attach = false
+  })
+  if id == nil then
+    error("vim.lsp.start returned nil")
+  end
+  local client = vim.lsp.get_client_by_id(id)
+  if client == nil then
+    error("failed to start " .. server_name)
+  end
+  if client.initialized then
+    cb(client)
+  end
+end
+
+local function setupDailyCommand ()
   vim.api.nvim_create_user_command("Daily", function (daily_args)
     local dpp = require("dpp")
     -- load lspconfig to get markdon_oxide config
@@ -47,23 +54,24 @@ local function setupDailyCommand ()
       input = "today"
     end
     -- if buffer has attached markdown_oxide, use attached client
-    local client = get_markdown_oxide_client()
+    wait_markdown_oxide_client(function(client)
+      if client == nil then
+        return
+      end
 
-    if client == nil then
-      print("client not found and failed to start")
-      return
-    end
-
-    client:exec_cmd({
-      command="jump",
-      arguments={input}
-    })
+      vim.lsp.log.warn("executing command jump")
+      client:exec_cmd({
+        command="jump",
+        arguments={input}
+      })
+    end)
   end, {
-  desc = 'Open daily note',
-  nargs = "*",
-  bang = true
-})
+    desc = 'Open daily note',
+    nargs = "*",
+    bang = true
+  })
 end
+setupDailyCommand()
 
 function _G.virus_lsp_settings ()
   -- lspconfig is not set when defined this function
@@ -154,13 +162,12 @@ function _G.virus_lsp_settings ()
     }
   });
 
-  setupDailyCommand()
 
   vim.lsp.enable({
     'lua_ls',
     'rust_analyzer',
     'pyright',
-    'angularls',
+    -- 'angularls',
     'eslint',
     'html',
     'clangd',
