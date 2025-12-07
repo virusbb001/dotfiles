@@ -39,6 +39,9 @@ export default function getDDUPlugins(): Plugin[] {
     repo: "shutils/ddu-source-obsidian",
   }, {
     repo: "uga-rosa/ddu-source-lsp"
+  }, {
+    repo: "4513ECHO/ddu-source-ghq",
+    if: `executable('ghq')`
   }];
 
   const filters: RemotePlugin[] = [{
