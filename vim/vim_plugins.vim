@@ -54,8 +54,7 @@ if dpp#min#load_state(s:dpp_base)
   \ | echohl None
   \ | call dpp#make_state(s:dpp_base, s:dpp_config)
 else
-  autocmd User DenopsReady
-  \ call dpp#check_files()
+  autocmd User DenopsReady call s:check_files()
 endif
 
 function s:completeMakeState ()
@@ -67,7 +66,6 @@ function s:completeMakeState ()
     call dpp#async_ext_action("installer", "install")
   endif
 endfunction
-
 
 filetype indent plugin on
 
@@ -81,14 +79,16 @@ augroup END
 
 autocmd VirusVimPlugins User Dpp:makeStatePost call s:completeMakeState()
 
-function! s:check_files ()
-  let filename = expand("<afile>:p")
-  if stridx(filename, s:dotfiles_vim_dir) == 0
-    call dpp#check_files()
+function! s:check_files (filename = v:null)
+  if a:filename != v:null && stridx(a:filename, s:dotfiles_vim_dir) != 0
+    return
+  endif
+  if !dpp#check_files()->empty()
+    call dpp#make_state()
   endif
 endfunction
 
-autocmd VirusVimPlugins BufWritePost *.lua,*.vim,*.ts call s:check_files()
+autocmd VirusVimPlugins BufWritePost *.lua,*.vim,*.ts call s:check_files(expand("<afile>:p"))
 
 colorscheme tokyonight-night
 
