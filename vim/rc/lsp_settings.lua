@@ -24,7 +24,6 @@ local function wait_markdown_oxide_client(cb)
   ---@type vim.lsp.Config
   local cfg_patch = {
     root_dir = default_path,
-    cmd = { "/home/virus/src/github.com/Feel-ix-343/markdown-oxide/target/debug/markdown-oxide" },
     on_init = cb
   }
   local lsp_config = vim.tbl_deep_extend('keep',cfg_patch, vim.lsp.config.markdown_oxide)
