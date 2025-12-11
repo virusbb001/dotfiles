@@ -1,11 +1,11 @@
-import { Plugin } from "jsr:@shougo/dpp-vim@3.1/types";
+import { Plugin } from "@shougo/dpp-vim/types";
 import {
   BaseConfig,
   ConfigArguments,
   ConfigReturn
-} from "jsr:@shougo/dpp-vim@~3.1.0/config";
-import { LazyMakeStateResult } from "jsr:@shougo/dpp-ext-lazy@~2.0.1";
-import { globpath } from "jsr:@denops/std/function";
+} from "@shougo/dpp-vim/config";
+import { LazyMakeStateResult } from "@shougo/dpp-ext-lazy";
+import { globpath } from "@denops/std/function";
 
 import { RemotePlugin, addName } from "./dpp/util.ts";
 

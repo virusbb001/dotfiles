@@ -1,6 +1,6 @@
-import { type Plugin } from "jsr:@shougo/dpp-vim@~3.1.0/types";
+import { type Plugin } from "@shougo/dpp-vim/types";
 import { addName, type RemotePlugin } from "./util.ts";
-import * as path from "jsr:@std/path";
+import { join } from "@std/path";
 
 export default function getDDUPlugins(): Plugin[] {
   const ddu: RemotePlugin = {
@@ -8,15 +8,15 @@ export default function getDDUPlugins(): Plugin[] {
     depends: "denops.vim",
     // may change source conditional
     on_source: "denops.vim",
-    hooks_file: path.join(import.meta.dirname!, "hooks/ddu.lua"),
+    hooks_file: join(import.meta.dirname!, "hooks/ddu.lua"),
   };
 
   const uis: RemotePlugin[] = [{
     repo: "Shougo/ddu-ui-ff",
-    hooks_file: path.join(import.meta.dirname!, "hooks/ddu/ui-ff.vim"),
+    hooks_file: join(import.meta.dirname!, "hooks/ddu/ui-ff.vim"),
   }, {
     repo: "Shougo/ddu-ui-filer",
-    hooks_file: path.join(import.meta.dirname!, "hooks/ddu/ui-filer.vim"),
+    hooks_file: join(import.meta.dirname!, "hooks/ddu/ui-filer.vim"),
   }];
 
   const sources: RemotePlugin[] = [{
@@ -38,10 +38,12 @@ export default function getDDUPlugins(): Plugin[] {
   }, {
     repo: "shutils/ddu-source-obsidian",
   }, {
-    repo: "uga-rosa/ddu-source-lsp"
+    repo: "uga-rosa/ddu-source-lsp",
   }, {
     repo: "4513ECHO/ddu-source-ghq",
-    if: `executable('ghq')`
+    if: `executable('ghq')`,
+  }, {
+    repo: "matsui54/ddu-source-help",
   }];
 
   const filters: RemotePlugin[] = [{
@@ -56,6 +58,8 @@ export default function getDDUPlugins(): Plugin[] {
     repo: "Shougo/ddu-kind-file",
   }, {
     repo: "Shougo/ddu-kind-word",
+  }, {
+    repo: "4513ECHO/ddu-kind-url",
   }];
 
   const columns: RemotePlugin[] = [{
