@@ -16,6 +16,7 @@ import getTSPlugins from "./dpp/ts_plugins.ts";
 import getNvimPlugins from "./dpp/nvim_plugins.ts";
 import getDduPlugins from "./dpp/ddu_plugins.ts";
 import getFiletypePlugins from "./dpp/filetype_plugins.ts";
+import getDdcPlugins from "./dpp/ddc_plugins.ts";
 
 function f(p: RemotePlugin[]): Plugin[] {
   return p.map(addName)
@@ -108,6 +109,7 @@ endif`
       nvimPlugins,
       getDduPlugins(),
       getFiletypePlugins(),
+      getDdcPlugins()
     );
 
     const [context, options] = await contextBuilder.get(args.denops);
