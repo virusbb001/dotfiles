@@ -6,7 +6,7 @@ export default function getTSPlugins (): Plugin[] {
   const main: RemotePlugin[] = [{
     repo: "nvim-treesitter/nvim-treesitter",
     rev: "main",
-    on_event: ['BufRead', 'CursorHold', 'FileType'],
+    on_event: ['BufRead', 'CursorHold'],
     hook_post_update: "TSUpdate",
     hooks_file: path.join(import.meta.dirname!, "hooks/treesitter.lua")
   }];
