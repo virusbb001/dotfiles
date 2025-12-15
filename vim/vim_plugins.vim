@@ -84,7 +84,17 @@ function! s:check_files (filename = v:null)
     return
   endif
   if !dpp#check_files()->empty()
-    call dpp#make_state()
+    let messagesopt_bak = &messagesopt
+    " Is there a better way?
+    set messagesopt+=wait:5000
+    set messagesopt-=hit-enter
+    set cmdheight+=1
+    echohl WarningMsg
+    echomsg "running dpp#make_state"
+    echohl None
+    let &messagesopt = messagesopt_bak
+    set cmdheight-=1
+    call dpp#make_state(s:dpp_base, s:dpp_config)
   endif
 endfunction
 
