@@ -9,7 +9,7 @@ export default function getSomePlugins(): Plugin[] {
     depends: ['denops.vim'],
     on_event: ['InsertEnter', 'CmdlineEnter'],
     lazy: true,
-    hooks_file: path.join(import.meta.dirname!, "hooks/ddc.vim")
+    hooks_file: path.join(import.meta.dirname!, "hooks/ddc.lua")
   }];
 
   const uis: RemotePlugin[] = [{

@@ -153,9 +153,10 @@ function _G.virus_lsp_settings ()
     end,
   })
 
+  local ddc_source_lsp = require("ddc_source_lsp");
   -- new version LSP settings
   vim.lsp.config('*', {
-    capabilities = lsp_status.capabilities,
+    capabilities = vim.tbl_deep_extend("force", lsp_status.capabilities, ddc_source_lsp.make_client_capabilities()),
     flags = {
       debounce_text_changes = 150,
     }

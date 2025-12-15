@@ -24,6 +24,7 @@ endfunction
       "format-ts-errors.nvim",
       "neodev.nvim",
       "schemastore.nvim",
+      "ddc-source-lsp"
     ],
     on_event: ["BufRead", "BufNewFile"],
     lua_source: `

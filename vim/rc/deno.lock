@@ -13,6 +13,7 @@
     "jsr:@lambdalisue/import-map-importer@~0.5.1": "0.5.1",
     "jsr:@lambdalisue/itertools@^1.1.2": "1.1.2",
     "jsr:@lambdalisue/unreachable@^1.0.1": "1.0.1",
+    "jsr:@shougo/ddc-vim@^10.1.0": "10.1.0",
     "jsr:@shougo/ddu-kind-file@1": "1.0.0",
     "jsr:@shougo/ddu-vim@11.0": "11.0.0",
     "jsr:@shougo/ddu-vim@^11.1.0": "11.1.0",
@@ -109,6 +110,16 @@
     },
     "@lambdalisue/unreachable@1.0.1": {
       "integrity": "24b0743775e92ea0d076beaf0869bfbe4708054ac570742628684fb35ccda0d4"
+    },
+    "@shougo/ddc-vim@10.1.0": {
+      "integrity": "082f5067bc43f34aab9bb23126cbd6a47384c3ffae84e8f5246dffe38dce9da4",
+      "dependencies": [
+        "jsr:@core/unknownutil@4.3",
+        "jsr:@denops/std@8.0",
+        "jsr:@lambdalisue/import-map-importer",
+        "jsr:@std/assert@~1.0.7",
+        "jsr:@std/path@1.1"
+      ]
     },
     "@shougo/ddu-kind-file@1.0.0": {
       "integrity": "aa5c1c23f460d7a44df5e367d9900b9fadebd7c06d9f52e7bcfd47458599d63c",
@@ -231,6 +242,7 @@
   "workspace": {
     "dependencies": [
       "jsr:@denops/std@8.2",
+      "jsr:@shougo/ddc-vim@^10.1.0",
       "jsr:@shougo/ddu-kind-file@1",
       "jsr:@shougo/ddu-vim@^11.1.0",
       "jsr:@shougo/dpp-ext-lazy@~2.0.1",
