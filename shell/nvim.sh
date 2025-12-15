@@ -21,7 +21,14 @@ nvim -u NONE -es -c "call rpcrequest(sockconnect(\"pipe\", \"$NVIM\", #{rpc: 1})
 alias :tabnew=':tabdrop'
 alias tabdrop=':tabdrop'
 
-complete -f :tabdrop
+if [ -n "$ZSH_VERSION" ]; then
+  function _:tabdrop () {
+    _files
+  }
+else
+  complete -f :tabdrop
+fi
+
 
 if [[ -z "$NVIM" ]]; then
   unset :tabnew :tabdrop tabdrop :cd
