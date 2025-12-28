@@ -16,7 +16,8 @@ export class Config extends BaseConfig {
         lsp: {
           isVolatile: true,
           mark: "lsp",
-          forceCompletionPattern: String.raw`\.\w*|:\w*|->\w*`
+          forceCompletionPattern: String.raw`\.\w*|:\w*|->\w*`,
+          dup: "force"
         }
       },
       sourceParams: {
