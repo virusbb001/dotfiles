@@ -13,5 +13,6 @@ pkgs,
     deno
     nil
     markdown-oxide
+    ghq
   ];
 }
