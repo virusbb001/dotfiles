@@ -14,5 +14,6 @@ pkgs,
     nil
     markdown-oxide
     ghq
+    zsh
   ];
 }
