@@ -2,17 +2,22 @@
   description = "my common home-manager settings";
 
   inputs = {
-    # flake-utils.url = "github:numtide/flake-utils";
-    # nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-unstable";
+    flake-utils.url = "github:numtide/flake-utils";
+    nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-unstable";
   };
 
-  outputs = { self, ...}: {};
-  # flake-utils.lib.eachDefaultSystem (
-  #   system: {
-  #     # 
-  #     myConfig = {
-  #       modules = [ ./nix/home.nix ];
-  #     };
-  #   }
-  # );
+  outputs = { nixpkgs, flake-utils, ...}:
+  flake-utils.lib.eachDefaultSystem (
+    system:
+    let
+      pkgs = nixpkgs.legacyPackages.${system};
+    in
+    {
+      devShells.default = pkgs.mkShell {
+        packages = with pkgs; [
+          lua-language-server
+        ];
+      };
+    }
+  );
 }
