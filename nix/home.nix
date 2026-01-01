@@ -15,5 +15,6 @@ pkgs,
     markdown-oxide
     ghq
     zsh
+    tree-sitter
   ];
 }
