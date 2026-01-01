@@ -226,6 +226,14 @@ case "${TERM}" in
   ;;
 esac
 
+# for neovim
+# print OSC 7 to change directory of neovim
+function print_osc7() {
+  printf "\033]7;file://$HOSTNAME/$PWD\033\\"
+}
+add-zsh-hook -Uz chpwd print_osc7
+
+
 if [[ ! -z "$VIRTUAL_ENV" ]] ; then
  echo "virtualenv"
  source "$VIRTUAL_ENV/bin/activate"
