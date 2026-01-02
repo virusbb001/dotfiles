@@ -16,5 +16,7 @@ pkgs,
     ghq
     zsh
     tree-sitter
+    clang-tools
+    lua-language-server
   ];
 }
