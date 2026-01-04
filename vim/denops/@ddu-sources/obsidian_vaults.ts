@@ -50,26 +50,67 @@ async function getUserConfigDir (denops: Denops): Promise<string> {
   }
 }
 
-export class Source extends BaseSource<BaseParams> {
+interface ObsidianConfigFile {
+  path: string;
+  /**
+   * set this prop when access win config from wsl vice versa
+   * Use `wslpath` command
+   */
+  convert?: "win2unix" | "unix2win";
+}
+
+interface SourceParams extends BaseParams {
+  /**
+   * Additional config file of obsidian.
+   * Use case: Add obsidian config of windows to access from neovim in WSL.
+   */
+  additionalConfigFiles: ObsidianConfigFile[];
+};
+
+export class Source extends BaseSource<SourceParams> {
   override kind = "file";
 
-  async getObsidianVaults (denops: Denops): Promise<VaultItem[]> {
-    const config_dir = await getUserConfigDir(denops)
-    const obsidian_json = join(config_dir, "obsidian", "obsidian.json");
+  async getObsidianVaults (
+    obsidian_json: ObsidianConfigFile
+  ): Promise<VaultItem[]> {
     let obsidian;
     try {
-      obsidian = JSON.parse(await Deno.readTextFile(obsidian_json)) as ObsidianVaultData;
+      obsidian = JSON.parse(await Deno.readTextFile(obsidian_json.path)) as ObsidianVaultData;
     } catch (e) {
       console.error(e);
       // todo: handle error
       return [];
     }
-    const vaults = Object.entries(obsidian?.vaults ?? {}).map<VaultItem>(([id, vault]) => ({
-      vault_id: id,
-      name: basename(vault.path),
-      path: vault.path
+    const vaults = await Promise.allSettled(Object.entries(obsidian?.vaults ?? {}).map<Promise<VaultItem>>(async ([id, vault]) => {
+      let path;
+      let command;
+      let result;
+      switch (obsidian_json.convert) {
+        case "win2unix":
+          command = new Deno.Command("wslpath", {
+            args: ["-u", vault.path]
+          });
+          result = await command.output()
+          path = new TextDecoder().decode(result.stdout);
+        break;
+        case "unix2win":
+          command = new Deno.Command("wslpath", {
+            args: ["-w", vault.path]
+          });
+          result = await command.output()
+          path = new TextDecoder().decode(result.stdout).trim();
+        break
+        default:
+          path = vault.path;
+      }
+
+      return ({
+        vault_id: id,
+        name: basename(path),
+        path: path
+      });
     }));
-    return vaults;
+    return vaults.filter(v => v.status === "fulfilled").map(v => v.value);
   }
 
   override actions: Actions<BaseParams> = {
@@ -131,13 +172,23 @@ export class Source extends BaseSource<BaseParams> {
     }
   };
 
-  override gather({ denops }: GatherArguments<BaseParams>): ReadableStream<Item<ActionData>[]> {
+  override gather({ denops, sourceParams }: GatherArguments<SourceParams>): ReadableStream<Item<ActionData>[]> {
 
     return new ReadableStream({
       start: async (controller) => {
-        const vaults = await this.getObsidianVaults(denops);
+        const config_dir = await getUserConfigDir(denops)
+        const obsidian_json = join(config_dir, "obsidian", "obsidian.json");
+        const configs = sourceParams.additionalConfigFiles.concat([{
+          path: obsidian_json
+        }]);
+        const gotVaults = await Promise.allSettled(configs.map(cfg => this.getObsidianVaults(cfg)));
+        const errors = gotVaults.filter(v => v.status === "rejected");
+        errors.forEach((e) => {
+          console.error(e.reason);
+        });
+        const vaults = gotVaults.filter(v => v.status === "fulfilled").map(v => v.value).reduce((a, b) => a.concat(b));
         const items = vaults.map((vault): Item<ActionData> => ({
-          word: vault.name,
+          word: `${vault.name} (${vault.vault_id})`,
           action: {
             path: vault.path,
             isDirectory: true,
@@ -151,7 +202,9 @@ export class Source extends BaseSource<BaseParams> {
     });
   }
 
-  override params(): BaseParams {
-    return {};
+  override params(): SourceParams {
+    return {
+      additionalConfigFiles: []
+    };
   }
 }
