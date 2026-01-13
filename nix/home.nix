@@ -19,5 +19,6 @@ pkgs,
     clang-tools
     lua-language-server
     ripgrep
+    textlint
   ];
 }
