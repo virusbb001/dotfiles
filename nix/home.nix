@@ -1,5 +1,4 @@
 {
-config,
 pkgs,
 ...
 }:
@@ -19,5 +18,6 @@ pkgs,
     tree-sitter
     clang-tools
     lua-language-server
+    ripgrep
   ];
 }
