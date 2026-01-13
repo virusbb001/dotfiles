@@ -47,9 +47,6 @@ nmap <Leader>ldr <Plug>(Luadev-Run)
 nmap <Leader>ldw <Plug>(Luadev-RunWord)
       `
     }, {
-      repo: 'mason-org/mason.nvim',
-      hooks_file: path.join(import.meta.dirname!, "hooks/mason.nvim.lua"),
-    }, {
       repo: 'linrongbin16/gitlinker.nvim',
       lua_source: `require('gitlinker').setup()`
     }]
