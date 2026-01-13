@@ -11,10 +11,10 @@ function check_file () {
   local filename="$1";
 
   if [ -e "$filename" ]; then
-    return 0;
-  else
     echo "${filename} already exists."
     return 1;
+  else
+    return 0;
   fi
 }
 
