@@ -20,5 +20,7 @@ pkgs,
     lua-language-server
     ripgrep
     textlint
+    # for serena
+    uv
   ];
 }
