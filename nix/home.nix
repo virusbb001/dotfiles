@@ -7,7 +7,6 @@ pkgs,
   programs.home-manager.enable = true;
 
   home.packages = with pkgs;[
-    nix
     git
     neovim
     deno
