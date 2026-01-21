@@ -35,5 +35,17 @@ return {
       ctx
     )
   end,
+  },
+  init_options = {
+    preferences = {
+      includeInlayParameterNameHints = "all",
+      includeInlayParameterNameHintsWhenArgumentMatchesName = true,
+      includeInlayFunctionParameterTypeHints = true,
+      includeInlayVariableTypeHints = false,
+      includeInlayVariableTypeHintsWhenTypeMatchesName = true,
+      includeInlayPropertyDeclarationTypeHints = true,
+      includeInlayFunctionLikeReturnTypeHints = true,
+      includeInlayEnumMemberValueHints = true
+    }
   }
 }
