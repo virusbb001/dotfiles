@@ -59,7 +59,8 @@ export class Config extends BaseConfig {
                 return ActionFlags.None;
               }
             }
-          }
+          },
+          defaultAction: "open"
         },
         [Kinds.action]: {
           defaultAction: "do"
