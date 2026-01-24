@@ -3,13 +3,14 @@
   "specifiers": {
     "jsr:@404wolf/xdg-portable@0.1": "0.1.0",
     "jsr:@std/internal@^1.0.10": "1.0.10",
+    "jsr:@std/path@*": "1.1.2",
     "jsr:@std/path@^1.0.8": "1.1.2"
   },
   "jsr": {
     "@404wolf/xdg-portable@0.1.0": {
       "integrity": "3a54d193601165deede0f84ab0a3e731ad8a1707ac4efa93c2a3db51ff270247",
       "dependencies": [
-        "jsr:@std/path"
+        "jsr:@std/path@^1.0.8"
       ]
     },
     "@std/internal@1.0.10": {
