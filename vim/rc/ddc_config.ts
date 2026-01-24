@@ -1,7 +1,10 @@
 import { BaseConfig, ConfigArguments } from "@shougo/ddc-vim/config";
+import { Params as LspSourceParams } from "jsr:@shougo/ddc-source-lsp";
 
 export class Config extends BaseConfig {
+  // deno-lint-ignore require-await
   override async config(args: ConfigArguments): Promise<void> {
+    const denops = args.denops;
     args.contextBuilder.patchGlobal({
       ui: "native",
       sources: ['around', 'lsp'],
@@ -26,8 +29,11 @@ export class Config extends BaseConfig {
         },
         lsp: {
           enableResolveItem: true,
-          enableAdditionalTextEdit: true
-        }
+          enableAdditionalTextEdit: true,
+          snippetEngine: async (body) => {
+            await denops.call("vsnip#anonymous", body)
+          }
+        } satisfies Partial<LspSourceParams>
       }
     });
   };

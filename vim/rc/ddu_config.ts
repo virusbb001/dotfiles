@@ -30,6 +30,14 @@ export class Config extends BaseConfig {
           defaultAction: "execute"
         }
       },
+      sourceParams: {
+        "obsidian_vaults": {
+          additionalConfigFiles: [{
+            path: "/mnt/c/Users/virus/AppData/Roaming/obsidian/obsidian.json",
+            convert: "win2unix"
+          }]
+        }
+      },
       kindOptions: {
         [Kinds.colorscheme]: {
           defaultAction: "set"

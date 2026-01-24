@@ -18,9 +18,13 @@ export default function getSomePlugins(): Plugin[] {
 
   const sources: RemotePlugin[] = [{
     repo: 'Shougo/ddc-source-lsp',
+    depends: ["vim-vsnip"] // todo: check really need this
   }, {
     repo: 'Shougo/ddc-source-around'
-  }];
+  }, {
+      repo: 'uga-rosa/ddc-source-vsnip',
+      depends: ["vim-vsnip"]
+    }];
 
   const matchers: RemotePlugin[] = [{
     repo: 'Shougo/ddc-matcher_head',
