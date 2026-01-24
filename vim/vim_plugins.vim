@@ -27,6 +27,8 @@ const s:plugins_data = json_decode(readfile(s:plugins_data_json))
 const s:dpp_base = expand(stdpath("cache") .. "/dpp")
 const s:dpp_github_repos = s:dpp_base .. "/repos/github.com"
 
+const s:dpp_name = has('nvim') ? "nvim" : "vim"
+
 function! InstallAndAddPlugin (github_repo)
   const dir = expand(s:dpp_github_repos .. "/" .. a:github_repo)
   if ! isdirectory(dir)
@@ -52,9 +54,13 @@ if dpp#min#load_state(s:dpp_base)
   \ : echohl Warning
   \ | echomsg "dpp load_state() is failed"
   \ | echohl None
-  \ | call dpp#make_state(s:dpp_base, s:dpp_config)
+  \ | call dpp#make_state(s:dpp_base, s:dpp_config, s:dpp_name)
 else
   autocmd User DenopsReady call s:check_files()
+  autocmd User DenopsReady
+        \ : if ! dpp#sync_ext_action('installer', 'getNotInstalled')->empty()
+        \ | call dpp#async_ext_action("installer", "install")
+        \ | endif
 endif
 
 function s:completeMakeState ()
@@ -94,7 +100,7 @@ function! s:check_files (filename = v:null)
     echohl None
     let &messagesopt = messagesopt_bak
     set cmdheight-=1
-    call dpp#make_state(s:dpp_base, s:dpp_config)
+    call dpp#make_state(s:dpp_base, s:dpp_config, s:dpp_name)
   endif
 endfunction
 
