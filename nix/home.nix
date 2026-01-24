@@ -19,7 +19,7 @@ pkgs,
     lua-language-server
     ripgrep
     textlint
-    ndv
+    nvd
     # for serena
     uv
   ];
