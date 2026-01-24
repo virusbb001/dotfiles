@@ -217,3 +217,4 @@ vim.api.nvim_create_autocmd({ "BufReadCmd" }, {
   pattern = { "deno:/*" },
   callback = virtual_text_document,
 })
+vim.lsp.inlay_hint.enable()
