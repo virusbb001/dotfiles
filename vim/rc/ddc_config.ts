@@ -6,7 +6,7 @@ export class Config extends BaseConfig {
   override async config(args: ConfigArguments): Promise<void> {
     const denops = args.denops;
     args.contextBuilder.patchGlobal({
-      ui: "native",
+      ui: "pum",
       sources: ['around', 'lsp'],
       sourceOptions: {
         _: {

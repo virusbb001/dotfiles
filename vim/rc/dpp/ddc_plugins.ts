@@ -4,16 +4,24 @@ import * as path from "@std/path";
 
 // TODO: rename
 export default function getSomePlugins(): Plugin[] {
+  const dirname = import.meta.dirname!;
   const core: RemotePlugin[] = [{
     repo: 'Shougo/ddc.vim',
     depends: ['denops.vim'],
     on_event: ['InsertEnter', 'CmdlineEnter'],
     lazy: true,
     hooks_file: path.join(import.meta.dirname!, "hooks/ddc.lua")
+  }, {
+    repo: 'Shougo/pum.vim',
+    lazy: true
   }];
 
   const uis: RemotePlugin[] = [{
     repo: 'Shougo/ddc-ui-native'
+  }, {
+    repo: 'Shougo/ddc-ui-pum',
+    depends: ["pum.vim"],
+    hooks_file: path.join(dirname, "hooks/pum.vim")
   }]
 
   const sources: RemotePlugin[] = [{

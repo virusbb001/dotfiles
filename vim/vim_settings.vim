@@ -137,8 +137,6 @@ tnoremap <S-Space> <Space>
 nmap <Space> <Plug>[Space]
 nnoremap <Plug>[Space] <Nop>
 
-imap <expr> <CR> pumvisible() ? "<C-Y>" : "<Enter>"
-
 if has('nvim')
   function! RotateTermBuffer(incnum) abort
     let l:chans = nvim_list_chans()
