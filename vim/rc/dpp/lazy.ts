@@ -31,6 +31,11 @@ export default function getLazyPlugins(): Plugin[] {
     repo: "previm/previm",
     on_cmd: "PrevimOpen",
     depends: "open-browser.vim",
+  }, {
+    repo: "olimorris/codecompanion.nvim",
+    depends: ["plenary.nvim", "nvim-treesitter"],
+    hooks_file: [path.join(dirname, "hooks/codecompanion.lua")],
+    on_cmd: ["CodeCompanionChat", "CodeCompanion", "CodeCompanionCmd"]
   }];
 
   const lazyPlugins = ([] as RemotePlugin[])
