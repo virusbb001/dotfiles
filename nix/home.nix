@@ -20,6 +20,7 @@ pkgs,
     ripgrep
     textlint
     nvd
+    direnv
     # for serena
     uv
   ];
