@@ -18,7 +18,6 @@ export default function getNvimPlugins (): Plugin[] {
     lazy: true,
     lua_post_source: `require("coverage").setup()`
   }, {
-
       repo: 'theHamsta/nvim_rocks',
       lazy: true,
       on_event: 'VimEnter',
@@ -49,6 +48,9 @@ nmap <Leader>ldw <Plug>(Luadev-RunWord)
     }, {
       repo: 'linrongbin16/gitlinker.nvim',
       lua_source: `require('gitlinker').setup()`
+    }, {
+      repo: 'NotAShelf/direnv.nvim',
+      lua_source: `require("direnv").setup({})`
     }]
 
   return depends.concat(nvimOnly).map((v): Plugin => ({
