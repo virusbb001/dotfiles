@@ -243,3 +243,7 @@ if which nvim >/dev/null 2>&1; then
   alias vim='nvim'
   export EDITOR="nvim"
 fi
+
+if which direnv >/dev/null 2>&1; then
+  eval "$(direnv hook zsh)"
+fi
