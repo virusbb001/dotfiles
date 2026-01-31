@@ -16,6 +16,12 @@ $path
 $ECLIPSE_HOME(N-/)
 )
 
+#nix single user
+nix_sh="~/.nix-profile/etc/profile.d/nix.sh"
+if [ -f $nix_sh ]; then
+  source $nix_sh
+fi
+
 if which go >/dev/null 2>&1; then
   path=($(go env GOPATH)/bin $path)
 fi
