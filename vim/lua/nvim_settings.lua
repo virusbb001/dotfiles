@@ -22,7 +22,7 @@ local function config()
           return
         end
         vim.api.nvim_buf_set_var(ev.buf, 'osc7_dir', dir)
-        vim.cmd.cd(dir)
+        vim.cmd.lcd(dir)
         --[[
         if vim.o.autochdir and vim.api.nvim_get_current_buf() == ev.buf then
         end
@@ -34,7 +34,7 @@ local function config()
     group = autogroup,
     callback = function()
       if vim.b.osc7_dir and vim.fn.isdirectory(vim.b.osc7_dir) == 1 then
-        vim.cmd.cd(vim.b.osc7_dir)
+        vim.cmd.lcd(vim.b.osc7_dir)
       end
     end
   })
