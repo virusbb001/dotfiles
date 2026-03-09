@@ -175,8 +175,10 @@ function _G.virus_lsp_settings ()
     'cssls',
     'denols',
     'ts_ls',
-    'markdown_oxide',
-    'nil_ls'
+    'gopls',
+    -- 'markdown_oxide',
+    'nil_ls',
+    'zk'
   })
 end
 
