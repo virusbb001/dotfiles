@@ -14,6 +14,7 @@ local required = {
   'vim',
   'vimdoc',
   'yaml',
+  'nix',
   -- bennypowers/nvim-regexplainer
   'regex'
 }
