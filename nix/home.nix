@@ -8,7 +8,6 @@ pkgs,
 
   home.packages = with pkgs;[
     git
-    neovim
     deno
     nil
     markdown-oxide
@@ -24,4 +23,8 @@ pkgs,
     # for serena
     uv
   ];
+
+  programs.neovim = {
+    enable = true;
+  };
 }
