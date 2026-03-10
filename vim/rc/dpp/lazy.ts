@@ -10,7 +10,7 @@ export default function getLazyPlugins(): Plugin[] {
   }, {
     repo: "vim-skk/skkeleton",
     on_map: { "ict": "<Plug>(skkeleton-" },
-    depends: ["skk-dict"],
+    depends: ["skk-dict", "denops.vim"],
     hooks_file: path.join(import.meta.dirname!, "hooks/skkeleton.vim"),
   }, {
     repo: "delphinus/skkeleton_indicator.nvim",
