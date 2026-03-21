@@ -19,3 +19,7 @@ git submodule init
 git submodule update
 nix develop --command ./installer.sh
 ```
+
+## Check diff of update
+
+`nvd diff ~/.local/state/nix/profiles/home-manager result`
