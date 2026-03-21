@@ -20,6 +20,7 @@ pkgs,
     textlint
     nvd
     direnv
+    jq
     # for serena
     uv
   ];
