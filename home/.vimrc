@@ -11,8 +11,8 @@ let s:dotfiles_dir = fnamemodify(resolve(expand('<sfile>:p')), ':h:h')
 
 let s:vim_files=[
    \'~/.config/home-manager/vim/local.vim',
-   \s:dotfiles_dir . 'vim/vim_settings.vim',
-   \s:dotfiles_dir . 'vim/vim_plugins.vim',
+   \s:dotfiles_dir . "/" . 'vim/vim_settings.vim',
+   \s:dotfiles_dir . "/" . 'vim/vim_plugins.vim',
    \'~/.vim/local_settings_after.vim',
    \]
 
