@@ -36,7 +36,7 @@ if ( &modifiable )
  set fileencoding=utf-8
 endif
 "開く
-set fileencodings=ucs-bom,utf-8,iso-2022-jp,cp932,euc-jp,default,latin
+set fileencodings=ucs-bom,utf-8,utf-16le,utf-16,iso-2022-jp,cp932,euc-jp,default,latin
 
 "<Tab>関連
 set tabstop=4
