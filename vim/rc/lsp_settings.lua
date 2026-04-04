@@ -42,7 +42,7 @@ local function wait_markdown_oxide_client(cb)
   end
 end
 
-local function setupDailyCommand ()
+local function setupDailyCommandForOxide ()
   vim.api.nvim_create_user_command("Daily", function (daily_args)
     local dpp = require("dpp")
     -- load lspconfig to get markdon_oxide config
@@ -70,6 +70,31 @@ local function setupDailyCommand ()
     bang = true
   })
 end
+
+-- Todayに固定
+local function dailyCommandForZk ()
+  local obj = vim.system({"zk", "daily-new", "-p"}, { text= true }):wait()
+  if obj.code ~= 0 then
+    vim.notify("Failed to get daily note path", vim.log.levels.ERROR)
+    vim.print(obj)
+    return
+  end
+  local path = vim.trim(obj.stdout)
+  vim.cmd.edit(path)
+end
+
+local function setupDailyCommandForZk ()
+  vim.api.nvim_create_user_command("Daily", dailyCommandForZk, {
+    desc = 'Open daily note',
+    nargs = "*",
+    bang = true
+  })
+end
+
+local function setupDailyCommand ()
+  setupDailyCommandForZk()
+end
+
 setupDailyCommand()
 
 function _G.virus_lsp_settings ()
