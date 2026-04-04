@@ -2,10 +2,7 @@
 
 scriptencoding utf-8
 
-" TODO: replace
-let s:dotfiles_dir = '~/dotfiles/'
-
-echomsg resolve(expand("<sfile>:p"))
+let s:dotfiles_dir = fnamemodify(resolve(expand('<sfile>:p')), ':h:h')
 
 " local_settings.vim: settings before loading plugin
 "   e.g.: python remote plugin
