@@ -113,3 +113,4 @@ if has('nvim')
   execute 'luafile ' . expand(s:dotfiles_vim_dir . '/rc/lsp_settings.lua')
   lua require 'nvim_settings'
 endif
+execute 'luafile ' . expand(s:dotfiles_vim_dir . '/rc/keymaps.lua')
