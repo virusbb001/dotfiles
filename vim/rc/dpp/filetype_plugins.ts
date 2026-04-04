@@ -1,6 +1,7 @@
 // import * as path from "jsr:@std/path";
 import { type Plugin } from "jsr:@shougo/dpp-vim@~3.1.0/types"
 import { addName, type RemotePlugin } from "./util.ts";
+import { join } from "@std/path";
 
 export default function getFileTypePlugins(): Plugin[] {
   // plugins that doesn't have plugin/*
@@ -22,7 +23,7 @@ export default function getFileTypePlugins(): Plugin[] {
       "typescriptreact",
       "xml"
     ],
-    "hook_source": "let g:user_emmet_settings = {\n\\ 'variables': {\n\\  'lang': 'ja',\n\\ },\n\\ 'vue': {\n\\  'filters': 'html',\n\\ }\n\\}\n"
+    hooks_file: join(import.meta.dirname!, "hooks/emmet.lua"),
   },
     {
       "repo": "nikvdp/ejs-syntax",
