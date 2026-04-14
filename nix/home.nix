@@ -21,6 +21,7 @@ pkgs,
     nvd
     direnv
     jq
+    # zk # I'm using forked version.
     # for serena
     uv
   ];
