@@ -19,3 +19,12 @@ function fix_tmpdir {
 if (Get-Command -ErrorAction SilentlyContinue fnm) {
   fnm env --use-on-cd --shell powershell | Out-String | Invoke-Expression
 }
+
+if (Get-Command -ErrorAction SilentlyContinue corepack) {
+  function yarn { corepack yarn $args }
+  function yarnpkg { corepack yarnpkg $args }
+  function pnpm { corepack pnpm $args }
+  function pnpx { corepack pnpx $args }
+  function npm { corepack npm $args }
+  function npx { corepack npx $args }
+}
