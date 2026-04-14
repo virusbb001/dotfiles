@@ -21,12 +21,13 @@ if (Test-Path env:XDG_CONFIG_HOME) {
   Set-Item env:XDG_CONFIG_HOME -value "$xdg_config_home"
 }
 
-# Copy Files
-
+$vimrc_stub = @"
+source $PSScriptRoot\home\.vimrc
+"@
 if (Test-Path "$home/_vimrc") {
   Write-Output "vimrc is already exists. skip"
 }else{
-  Copy-Item ($PSScriptRoot + "\home\.vimrc") "${home}\_vimrc"
+  $vimrc_stub | Out-File -FilePath "${home}\_vimrc" -Encoding utf8
 }
 
 if (Test-Path $profile) {
