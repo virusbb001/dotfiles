@@ -18,7 +18,11 @@ dap.configurations.cpp = {
     cwd = '${workspaceFolder}',
     stopOnEntry = false,
     args = {},
-    console = "integratedTerminal"
+    console = "integratedTerminal",
+    initCommands = {
+      --  https://lldb.llvm.org/use/map.html#ignore-a-function-when-doing-a-source-level-single-step-in
+      "settings set target.process.thread.step-avoid-regexp ^std::"
+    }
   }
 }
 -- `:h dap-terminal`
