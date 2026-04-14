@@ -38,6 +38,25 @@ local function config()
       end
     end
   })
+
+  -- wsl clipboard
+
+  -- `:h clipboard-wsl`
+
+  if vim.fn.has("wsl") and vim.g.clipboard == nil then
+    vim.g.clipboard = {
+      name= 'WslClipboard',
+      copy= {
+        ['+'] = 'clip.exe',
+        ['*'] = 'clip.exe',
+      },
+      paste= {
+        ['+'] = 'powershell.exe -NoLogo -NoProfile -c [Console]::Out.Write($(Get-Clipboard -Raw).tostring().replace("`r", ""))',
+        ['*'] = 'powershell.exe -NoLogo -NoProfile -c [Console]::Out.Write($(Get-Clipboard -Raw).tostring().replace("`r", ""))',
+      },
+      cache_enabled= 0,
+    }
+  end
 end
 
 config()
