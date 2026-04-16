@@ -22,8 +22,8 @@ pkgs,
     direnv
     jq
     # zk # I'm using forked version.
-    # for serena
-    uv
+    uv # for serena
+    vscode-langservers-extracted
   ];
 
   programs.neovim = {
