@@ -22,7 +22,7 @@ local function config()
           return
         end
         vim.api.nvim_buf_set_var(ev.buf, 'osc7_dir', dir)
-        vim.cmd.lcd(dir)
+        vim.cmd("silent lcd" .. dir)
         --[[
         if vim.o.autochdir and vim.api.nvim_get_current_buf() == ev.buf then
         end
