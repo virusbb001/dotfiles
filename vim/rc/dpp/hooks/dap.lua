@@ -7,6 +7,31 @@ dap.adapters.lldb = {
   name = "lldb"
 }
 
+dap.adapters.ruby = function (callback, config)
+  callback {
+    type = "server",
+    host = "127.0.0.1",
+    port = "${port}",
+    executable = {
+      command = "bundle",
+      args = {
+        "exec", "rdbg", "-n", "--open", "--port", "${port}",
+        "-c", "--", "bundle", "exec", config.command, config.script,
+      },
+    },
+  }
+end
+
+dap.adapters["js-debug"] = {
+  type = "server",
+  host = "localhost",
+  port = "${port}",
+  executable = {
+    command = "js-debug",
+    args = {"${port}"}
+  }
+}
+
 dap.configurations.cpp = {
   {
     name = "Launch",
@@ -25,6 +50,42 @@ dap.configurations.cpp = {
     }
   }
 }
+
+dap.configurations.ruby = {
+  {
+    type = "ruby",
+    name = "debug current file",
+    request = "attach",
+    localfs = true,
+    command = "ruby",
+    script = "${file}"
+  },
+  {
+    type = "ruby",
+    name = "debug current spec file",
+    request = "attach",
+    localfs = true,
+    command = "rspec",
+    script = "${file}"
+  }
+}
+
+local js_debug_config = {
+  {
+    type = "js-debug",
+    request = "launch",
+    name = "Launch file",
+    program = "${file}",
+    cwd ="${workspaceFolder}",
+    sourceMaps = true,
+    smartStep = true,
+    runtimeArgs = {"--import", "tsx"}
+  }
+}
+
+dap.configurations.javascript = js_debug_config
+dap.configurations.typescript = js_debug_config
+
 -- `:h dap-terminal`
 -- dap.defaults.fallback.terminal_win_cmd = '50vsplit new'
 -- }}}
