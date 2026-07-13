@@ -50,6 +50,7 @@ nmap <Leader>ldw <Plug>(Luadev-RunWord)
       lua_source: `require('gitlinker').setup()`
     }, {
       repo: 'NotAShelf/direnv.nvim',
+      if: 'executable("direnv")',
       lua_source: `require("direnv").setup({})`
     }]
 
