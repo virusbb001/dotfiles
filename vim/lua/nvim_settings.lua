@@ -43,7 +43,7 @@ local function config()
 
   -- `:h clipboard-wsl`
 
-  if vim.fn.has("wsl") and vim.g.clipboard == nil then
+  if vim.fn.has("wsl") == 1 and vim.g.clipboard == nil then
     vim.g.clipboard = {
       name= 'WslClipboard',
       copy= {
