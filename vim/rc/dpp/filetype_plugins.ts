@@ -163,6 +163,11 @@ export default function getFileTypePlugins(): Plugin[] {
     {
       "repo": "rust-lang/rust.vim",
       "on_ft": "rust"
+    },
+    {
+      "repo": "Julian/lean.nvim",
+      "on_ft": "lean",
+      "lua_source": `require("lean").setup({ mappings = true })`
     }
   ];
 
